@@ -3,6 +3,35 @@ import { prisma } from '../app'
 
 const channelsRouter = Router()
 
+// Get all channels
+channelsRouter.get('/channels', async (req, res) => {
+  const channels = await prisma.channel.findMany({
+    include: {
+      members: true
+    }
+  })
+  return channels
+})
+
+// Get user channels
+channelsRouter.get('/channels/:userId', async (req, res) => {
+  const userId = req.params.userId
+
+  const channels = await prisma.channel.findMany({
+    where: {
+      members: {
+        some: {
+          id: userId
+        }
+      }
+    }, include: {
+      members: true
+    }
+  })
+
+  return channels
+})
+
 // Create new channel
 channelsRouter.post('/channels', async (req, res) => {
   const {name, about} = req.body
