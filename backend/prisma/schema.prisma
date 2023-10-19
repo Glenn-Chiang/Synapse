@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(uuid())
+  username String
+  bio String
+  messages Message[]
+  directMessages DirectMessage[]
+  channels Channel[]
+  createdChannels Channel[] @relation("created")
+  chatsInitiated Chat[] @relation("member1")
+  chatsReceived Chat[] @relation("member2")
+}
+
+model Channel {
+  id String @id @default(uuid())
+  about String
+  createdAt DateTime @default(now())
+  messages Message[]
+  members User[]
+  creatorId String
+  creator User @relation("created", fields: [creatorId], references: [id])
+}
+
+model Message {
+  id String @id @default(uuid())
+  text String
+  timestamp DateTime @default(now())
+  senderId String
+  sender User @relation(fields: [senderId], references: [id])
+  channelId String
+  channel Channel @relation(fields: [channelId], references: [id])
+}
+
+model DirectMessage {
+  id String @id @default(uuid())
+  text String
+  timestamp DateTime @default(now())
+  senderId String
+  sender User @relation(fields: [senderId], references: [id])
+  chatId String
+  chat Chat @relation(fields: [chatId], references: [id])
+}
+
+model Chat {
+  id String @id @default(uuid())
+  messages DirectMessage[]
+  member1Id String
+  member2Id String
+  member1 User @relation("member1", fields: [member1Id], references: [id])
+  member2 User @relation("member2", fields: [member2Id], references: [id])
+  @@unique([member1Id, member2Id])
+}
