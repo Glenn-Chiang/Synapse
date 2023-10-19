@@ -12,8 +12,8 @@ datasource db {
 
 model User {
   id String @id @default(uuid())
-  username String
-  bio String
+  username String @db.VarChar(25)
+  bio String @db.VarChar(500)
   messages Message[]
   directMessages DirectMessage[]
   channels Channel[]
@@ -24,7 +24,8 @@ model User {
 
 model Channel {
   id String @id @default(uuid())
-  about String
+  name String @db.VarChar(25)
+  about String @db.VarChar(500)
   createdAt DateTime @default(now())
   messages Message[]
   members User[]
