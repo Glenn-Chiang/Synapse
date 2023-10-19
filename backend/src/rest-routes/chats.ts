@@ -13,7 +13,42 @@ chatsRouter.get("/users/:userId/chats", async (req, res) => {
     },
   });
 
-  res.json(chats)
+  res.json(chats);
+});
+
+// Get a chat by its memberIds
+chatsRouter.get("/chats", async (req, res) => {
+  if (
+    !req.query.member1Id ||
+    !req.query.member2Id ||
+    typeof req.query.member1Id !== "string" ||
+    typeof req.query.member2Id !== "string"
+  ) {
+    return res.status(400).json("invalid query params");
+  }
+
+  const member1Id = req.query.member1Id;
+  const member2Id = req.query.member2Id;
+
+  const chat = await prisma.chat.findUnique({
+    where: {
+      member1Id_member2Id: {
+        member1Id,
+        member2Id,
+      },
+    },
+    include: {
+      messages: {
+        include: {
+          sender: true,
+        },
+      },
+      member1: true,
+      member2: true,
+    },
+  });
+
+  res.json(chat);
 });
 
 export { chatsRouter };
