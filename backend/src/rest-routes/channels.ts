@@ -10,7 +10,7 @@ channelsRouter.get('/channels', async (req, res) => {
       members: true
     }
   })
-  return channels
+  return res.json(channels)
 })
 
 // Get user channels
@@ -29,7 +29,7 @@ channelsRouter.get('/channels/:userId', async (req, res) => {
     }
   })
 
-  return channels
+  return res.json(channels)
 })
 
 // Create new channel
@@ -54,3 +54,5 @@ channelsRouter.post('/channels', async (req, res) => {
 
   return channel
 })
+
+export {channelsRouter}
