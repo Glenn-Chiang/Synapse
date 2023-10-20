@@ -3,10 +3,13 @@
 @tailwind utilities;
 
 @layer base {
+    body {
+        @apply bg-slate-900 text-white
+    }
     h1 {
         @apply text-xl font-medium
     }
     input, textarea {
-        @apply p-2 rounded-md border-2
+        @apply p-2 rounded-md bg-slate-800
     }
 }

@@ -18,13 +18,14 @@ export default function CreateChannelPage() {
 
   const [isPending, setIsPending] = useState(false);
 
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<null|string>(null);
 
   const onSubmit: SubmitHandler<FormFields> = async (formFields) => {
     setIsPending(true);
     try {
-      const res = await fetch(`${process.env}/channels`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/channels`, {
         method: "POST",
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(formFields),
       });
 
@@ -38,6 +39,7 @@ export default function CreateChannelPage() {
 
     } catch (error) {
       console.log(error);
+      setError((error as Error).message)
     }
     setIsPending(false);
   };

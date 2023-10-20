@@ -31,7 +31,7 @@ export default async function Home() {
           ))}
         </ul>
       ) : (
-        <div className="py-2">You haven&apos;t joined any channels</div>
+        <div className="py-2 text-slate-500">You haven&apos;t joined any channels</div>
       )}
     </main>
   );

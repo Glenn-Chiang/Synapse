@@ -11,7 +11,7 @@ export const SubmitButton = ({ children, isPending }: SubmitButtonProps) => {
   return (
     <button
       disabled={isPending}
-      className={`bg-sky-500 shadow text-white rounded-md p-2 hover:shadow-sky-500 hover:shadow flex gap-2 items-center ${
+      className={`bg-sky-500 shadow text-white text-center rounded-md p-2 hover:shadow-sky-500 hover:shadow flex gap-2 justify-center items-center ${
         isPending && "cursor-not-allowed opacity-50"
       }`}
     >

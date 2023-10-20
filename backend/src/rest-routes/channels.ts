@@ -15,8 +15,8 @@ channelsRouter.get("/channels", async (req, res) => {
 
 // Get user channels
 channelsRouter.get("/users/:userId/channels", async (req, res) => {
+  
   const userId = req.params.userId;
-
   const channels = await prisma.channel.findMany({
     where: {
       members: {
@@ -45,11 +45,7 @@ channelsRouter.post("/channels", async (req, res) => {
     return res.status(400).send("invalid about");
   }
 
-  if (!iconUrl || typeof iconUrl !== "string") {
-    return res.status(400).send("invalid iconUrl");
-  }
-
-  const userId = "1"; // todo
+  const userId = "af40e844-f096-4f8f-8bf3-0e3dcdac84e1"; // todo
 
   const channel = await prisma.channel.create({
     data: {
