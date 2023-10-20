@@ -29,8 +29,8 @@ export default function CreateChannelPage() {
       });
 
       if (!res.ok) {
-        const errorMessage = await res.text()
-        throw new Error(errorMessage)
+        const errorMessage = await res.text();
+        throw new Error(errorMessage);
       }
     } catch (error) {
       console.log(error);
@@ -48,15 +48,33 @@ export default function CreateChannelPage() {
       <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-2">
           <label htmlFor="name">Name</label>
-          <input id="name" />
+          <input
+            id="name"
+            {...register("name", {
+              required: "Name is required",
+              maxLength: {
+                value: 25,
+                message: "Channel name cannot be longer than 25 characters",
+              },
+            })}
+          />
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="about">About</label>
-          <textarea id="about" />
+          <textarea
+            id="about"
+            {...register("about", {
+              required: true,
+              maxLength: {
+                value: 500,
+                message: "Channel about cannot be longer than 500 characters",
+              },
+            })}
+          />
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="icon">Icon URL</label>
-          <input id="icon" />
+          <input id="icon" {...register("iconUrl")} />
         </div>
         <SubmitButton isPending={isPending}>Create</SubmitButton>
         {error && <ErrorMessage>{error}</ErrorMessage>}
