@@ -17,10 +17,19 @@ model User {
   avatarUrl String?
   messages Message[]
   directMessages DirectMessage[]
-  channels Channel[]
+  channels UserChannel[]
   createdChannels Channel[] @relation("created")
   chatsInitiated Chat[] @relation("member1")
   chatsReceived Chat[] @relation("member2")
+}
+
+model UserChannel {
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  channelId String
+  channel Channel @relation(fields: [channelId], references: [id])
+  dateJoined DateTime @default(now())
+  @@id([userId, channelId])
 }
 
 model Channel {
@@ -30,7 +39,7 @@ model Channel {
   createdAt DateTime @default(now())
   iconUrl String? @default("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0UcnHUiJ0s_BfieUWxwoLDk2Ji4xCJ30WVhE5690-7JtoCO6gOrMZpiHqHk_f6ftmSJk&usqp=CAU")
   messages Message[]
-  members User[]
+  members UserChannel[]
   creatorId String
   creator User @relation("created", fields: [creatorId], references: [id])
 }
