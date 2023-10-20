@@ -32,6 +32,10 @@ export default function CreateChannelPage() {
         const errorMessage = await res.text();
         throw new Error(errorMessage);
       }
+
+      console.log("Channel created")
+      router.push('/')
+
     } catch (error) {
       console.log(error);
     }
@@ -39,6 +43,7 @@ export default function CreateChannelPage() {
   };
 
   const router = useRouter();
+
   return (
     <section className="flex flex-col gap-4 relative">
       <h1>Create a channel</h1>
