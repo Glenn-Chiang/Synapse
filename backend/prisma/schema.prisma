@@ -11,7 +11,7 @@ datasource db {
 }
 
 model User {
-  id String @id @default(uuid())
+  id Int @default(autoincrement()) @id
   username String @db.VarChar(25)
   bio String? @db.VarChar(500) @default("")
   avatarUrl String? @default("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqzQ_T2DGHe-3tHk9z7fqeYzLJ2Tn9vszRmH1TOpZjxynAFhO7ciB10Nh5d-b5_yUFTC8&usqp=CAU")
@@ -24,51 +24,51 @@ model User {
 }
 
 model UserChannel {
-  userId String
+  userId Int
   user User @relation(fields: [userId], references: [id])
-  channelId String
+  channelId Int
   channel Channel @relation(fields: [channelId], references: [id])
   dateJoined DateTime @default(now())
   @@id([userId, channelId])
 }
 
 model Channel {
-  id String @id @default(uuid())
+  id Int @default(autoincrement()) @id
   name String @db.VarChar(25)
   about String @db.VarChar(500)
   createdAt DateTime @default(now())
   iconUrl String? @default("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0UcnHUiJ0s_BfieUWxwoLDk2Ji4xCJ30WVhE5690-7JtoCO6gOrMZpiHqHk_f6ftmSJk&usqp=CAU")
   messages Message[]
   members UserChannel[]
-  creatorId String
+  creatorId Int
   creator User @relation("created", fields: [creatorId], references: [id])
 }
 
 model Message {
-  id String @id @default(uuid())
+  id Int @default(autoincrement()) @id
   text String
   timestamp DateTime @default(now())
-  senderId String
+  senderId Int
   sender User @relation(fields: [senderId], references: [id])
-  channelId String
+  channelId Int
   channel Channel @relation(fields: [channelId], references: [id])
 }
 
 model DirectMessage {
-  id String @id @default(uuid())
+  id Int @default(autoincrement()) @id
   text String
   timestamp DateTime @default(now())
-  senderId String
+  senderId Int
   sender User @relation(fields: [senderId], references: [id])
-  chatId String
+  chatId Int
   chat Chat @relation(fields: [chatId], references: [id])
 }
 
 model Chat {
-  id String @id @default(uuid())
+  id Int @default(autoincrement()) @id
   messages DirectMessage[]
-  member1Id String
-  member2Id String
+  member1Id Int
+  member2Id Int
   member1 User @relation("member1", fields: [member1Id], references: [id])
   member2 User @relation("member2", fields: [member2Id], references: [id])
   @@unique([member1Id, member2Id])

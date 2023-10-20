@@ -5,7 +5,7 @@ const directMessagesRouter = Router();
 
 // Get all DMs in a chat by chatId
 directMessagesRouter.get("/chats/:chatId/messages", async (req, res) => {
-  const chatId = req.params.chatId;
+  const chatId = Number(req.params.chatId);
 
   const messages = await prisma.directMessage.findMany({
     where: {

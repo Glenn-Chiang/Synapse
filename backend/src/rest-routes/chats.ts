@@ -5,7 +5,7 @@ const chatsRouter = Router();
 
 // Get all chats involving a user
 chatsRouter.get("/users/:userId/chats", async (req, res) => {
-  const userId = req.params.userId;
+  const userId = Number(req.params.userId);
 
   const chats = await prisma.chat.findMany({
     where: {
@@ -27,8 +27,8 @@ chatsRouter.get("/chats", async (req, res) => {
     return res.status(400).json("invalid query params");
   }
 
-  const member1Id = req.query.member1Id;
-  const member2Id = req.query.member2Id;
+  const member1Id = Number(req.query.member1Id);
+  const member2Id = Number(req.query.member2Id);
 
   const chat = await prisma.chat.findUnique({
     where: {

@@ -3,11 +3,11 @@ import { prisma } from '../app'
 
 interface MessageData {
   text: string,
-  channelId: string,
-  senderId: string
+  channelId: number,
+  senderId: number
 }
 
-type MessageCallback = (channelId: string) => void
+type MessageCallback = (channelId: number) => void
 
 export const registerMessageHandlers = (socket: Socket) => {
   const handleCreate = async ({text, channelId, senderId}: MessageData, messageCallback: MessageCallback) => {
@@ -26,6 +26,6 @@ export const registerMessageHandlers = (socket: Socket) => {
 }
 
 // Alert the client to revalidate messages. Note that we don't actually need to send the message payload back to the client.
-const emitToClient = async (socket: Socket, channelId: string) => {
-  socket.to(channelId).emit('message', channelId)
+const emitToClient = async (socket: Socket, channelId: number) => {
+  socket.to(channelId.toString()).emit('message', channelId)
 }

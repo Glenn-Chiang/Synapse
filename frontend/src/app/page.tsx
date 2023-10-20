@@ -3,8 +3,13 @@ import { getCurrentUser } from "@/lib/auth";
 import Link from "next/link";
 import { Channel } from "../types";
 
+export const revalidate = 0
+
 const getChannels = async (userId: string): Promise<Channel[]> => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/users/${userId}/channels`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/users/${userId}/channels`,
+    { next: { tags: ["channels"] } }
+  );
   const channels: Channel[] = await res.json();
   return channels;
 };
@@ -17,10 +22,13 @@ export default async function Home() {
     <main>
       <h1 className="py-2">Channels</h1>
       <div className="py-2 flex gap-4 items-center font-medium">
-        <Link href={'/channels/create'} className="bg-sky-500 p-2 text-white rounded-md shadow hover:shadow-sky-500 hover:shadow">
+        <Link
+          href={"/channels/create"}
+          className="bg-sky-500 p-2 text-white rounded-md shadow hover:shadow-sky-500 hover:shadow"
+        >
           Create channel
         </Link>
-        <Link href={'/channels'} className="text-sky-500 hover:text-sky-400">
+        <Link href={"/channels"} className="text-sky-500 hover:text-sky-400">
           Explore channels
         </Link>
       </div>
@@ -31,7 +39,9 @@ export default async function Home() {
           ))}
         </ul>
       ) : (
-        <div className="py-2 text-slate-500">You haven&apos;t joined any channels</div>
+        <div className="py-2 text-slate-500">
+          You haven&apos;t joined any channels
+        </div>
       )}
     </main>
   );

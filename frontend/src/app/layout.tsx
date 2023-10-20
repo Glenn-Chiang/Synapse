@@ -6,8 +6,11 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
+
+export const revalidate = 0
 
 export const metadata: Metadata = {
   title: "Synapse",
@@ -33,7 +36,7 @@ function Topbar() {
     <nav className="w-screen h-16 shadow p-4 fixed top-0 left-0 font-medium flex items-center text-xl">
       <div className="flex gap-2 items-center">
         <FontAwesomeIcon icon={faBars} />
-        Synapse
+        <Link href={'/'}>Synapse</Link>
       </div>
     </nav>
   );

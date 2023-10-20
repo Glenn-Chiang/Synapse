@@ -10,6 +10,7 @@ channelsRouter.get("/channels", async (req, res) => {
       members: true,
     },
   });
+  console.log(channels)
   return res.json(channels);
 });
 
@@ -21,7 +22,7 @@ channelsRouter.get("/users/:userId/channels", async (req, res) => {
     where: {
       members: {
         some: {
-          userId
+          userId: Number(userId)
         },
       },
     },
@@ -45,7 +46,7 @@ channelsRouter.post("/channels", async (req, res) => {
     return res.status(400).send("invalid about");
   }
 
-  const userId = "af40e844-f096-4f8f-8bf3-0e3dcdac84e1"; // todo
+  const userId = 1 //todo
 
   const channel = await prisma.channel.create({
     data: {

@@ -5,7 +5,7 @@ const messagesRouter = Router();
 
 // Get all messages in channel
 messagesRouter.get("/channels/:channelId/messages", async (req, res) => {
-  const channelId = req.params.channelId;
+  const channelId = Number(req.params.channelId);
 
   const messages = await prisma.message.findMany({
     where: {

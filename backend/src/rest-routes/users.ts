@@ -14,7 +14,7 @@ usersRouter.get("/users/:userId", async (req, res) => {
   const userId = req.params.userId;
   const user = await prisma.user.findMany({
     where: {
-      id: userId,
+      id: Number(userId),
     },
   });
   res.json(user);
