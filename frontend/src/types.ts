@@ -1,19 +1,23 @@
-interface User {
-  id: number;
+export interface User {
+  id: string;
   username: string;
-
+  bio: string;
+  avatarUrl?: string;
 }
 
-interface Chat {
+export interface Chat {
   id: number;
-  users: User[]
+  users: User[];
 }
 
-interface Channel {
-  id: number;
-  members: User[]
+export interface Channel {
+  id: string;
+  name: string;
+  about: string;
+  iconUrl?: string;
+  createdAt: Date;
+  creatorId: string;
+  members: User[];
 }
 
-interface Message {
-
-}
+export interface Message {}

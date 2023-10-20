@@ -4,6 +4,6 @@ configDotenv()
 
 const PORT = process.env.PORT
 
-server.listen(() => {
+server.listen(PORT, () => {
   console.log('Server running on PORT:', PORT)
 })

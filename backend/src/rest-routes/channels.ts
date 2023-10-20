@@ -14,7 +14,7 @@ channelsRouter.get('/channels', async (req, res) => {
 })
 
 // Get user channels
-channelsRouter.get('/channels/:userId', async (req, res) => {
+channelsRouter.get('/users/:userId/channels', async (req, res) => {
   const userId = req.params.userId
 
   const channels = await prisma.channel.findMany({
