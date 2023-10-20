@@ -11,11 +11,11 @@ export const SubmitButton = ({ children, isPending }: SubmitButtonProps) => {
   return (
     <button
       disabled={isPending}
-      className={`bg-sky-500 shadow text-white rounded-md p-2 hover:shadow-sky-500 hover:shadow ${
+      className={`bg-sky-500 shadow text-white rounded-md p-2 hover:shadow-sky-500 hover:shadow flex gap-2 items-center ${
         isPending && "cursor-not-allowed opacity-50"
       }`}
     >
-      {isPending && <FontAwesomeIcon icon={faSpinner} />}
+      {isPending && <FontAwesomeIcon icon={faSpinner} className="animate-spin"/>}
       {children}
     </button>
   );
