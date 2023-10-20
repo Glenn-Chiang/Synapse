@@ -15,15 +15,23 @@ export default async function Home() {
 
   return (
     <main>
-      <h1>Channels</h1>
+      <h1 className="py-2">Channels</h1>
+      <div className="py-2 flex gap-4 items-center font-medium">
+        <Link href={'/channels/create'} className="bg-sky-500 p-2 text-white rounded-md shadow hover:shadow-sky-500 hover:shadow">
+          Create channel
+        </Link>
+        <Link href={'/explore-channels'} className="text-sky-500 hover:text-sky-400">
+          Explore channels
+        </Link>
+      </div>
       {channels.length > 0 ? (
-        <ul className="py-4 flex flex-col gap-4">
+        <ul className="py-2 flex flex-col gap-4">
           {channels.map((channel) => (
             <ChannelItem key={channel.id} channel={channel} />
           ))}
         </ul>
       ) : (
-        <div className="py-4">You haven&apos;t joined any channels</div>
+        <div className="py-2">You haven&apos;t joined any channels</div>
       )}
     </main>
   );

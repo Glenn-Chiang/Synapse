@@ -6,4 +6,7 @@
     h1 {
         @apply text-xl font-medium
     }
+    input, textarea {
+        @apply p-2 rounded-md border-2
+    }
 }

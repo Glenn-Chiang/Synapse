@@ -30,7 +30,7 @@ export default function RootLayout({
 
 function Topbar() {
   return (
-    <nav className="w-screen h-16 shadow p-4 fixed top-0 left-0 font-medium flex items-center">
+    <nav className="w-screen h-16 shadow p-4 fixed top-0 left-0 font-medium flex items-center text-xl">
       <div className="flex gap-2 items-center">
         <FontAwesomeIcon icon={faBars} />
         Synapse
