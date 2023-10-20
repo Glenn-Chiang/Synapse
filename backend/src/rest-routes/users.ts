@@ -20,4 +20,18 @@ usersRouter.get("/users/:userId", async (req, res) => {
   res.json(user);
 });
 
+// Create new user
+usersRouter.post("/users", async (req, res) => {
+  const { username } = req.body;
+  if (!username || typeof username !== "string") {
+    return res.status(400).send("invalid username");
+  }
+  await prisma.user.create({
+    data: {
+      username,
+    },
+  });
+  console.log("User created");
+});
+
 export { usersRouter };
