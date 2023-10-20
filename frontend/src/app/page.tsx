@@ -4,7 +4,7 @@ import { Channel } from "../types";
 import Link from "next/link";
 
 const getChannels = async (userId: string): Promise<Channel[]> => {
-  const res = await fetch(`${process.env.BASE_URL}/users/${userId}/channels`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/users/${userId}/channels`);
   const channels: Channel[] = await res.json();
   return channels;
 };

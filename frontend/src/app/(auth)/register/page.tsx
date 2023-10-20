@@ -38,12 +38,14 @@ export default function RegisterPage() {
         throw new Error(errorMessage);
       }
 
-      console.log("registered")
+      const username = await res.json()
+      console.log("Registered as", username)
       router.push('/')
     } catch (error) {
       console.error(error);
       setError((error as Error).message);
     }
+    setIsPending(false)
   };
 
   return (
