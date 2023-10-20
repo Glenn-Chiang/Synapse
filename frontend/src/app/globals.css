@@ -4,12 +4,15 @@
 
 @layer base {
     body {
-        @apply bg-slate-900 text-white
+        @apply bg-slate-950 text-white
     }
     h1 {
         @apply text-xl font-medium
     }
+    h2 {
+        @apply text-lg font-medium
+    }
     input, textarea {
-        @apply p-2 rounded-md bg-slate-800
+        @apply p-2 rounded-md bg-slate-900
     }
 }

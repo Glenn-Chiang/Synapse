@@ -1,7 +1,7 @@
+import { ChannelItem } from "@/components/ChannelItem";
 import { getCurrentUser } from "@/lib/auth";
-import Image from "next/image";
-import { Channel } from "../types";
 import Link from "next/link";
+import { Channel } from "../types";
 
 const getChannels = async (userId: string): Promise<Channel[]> => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/users/${userId}/channels`);
@@ -20,7 +20,7 @@ export default async function Home() {
         <Link href={'/channels/create'} className="bg-sky-500 p-2 text-white rounded-md shadow hover:shadow-sky-500 hover:shadow">
           Create channel
         </Link>
-        <Link href={'/explore-channels'} className="text-sky-500 hover:text-sky-400">
+        <Link href={'/channels'} className="text-sky-500 hover:text-sky-400">
           Explore channels
         </Link>
       </div>
@@ -34,13 +34,5 @@ export default async function Home() {
         <div className="py-2 text-slate-500">You haven&apos;t joined any channels</div>
       )}
     </main>
-  );
-}
-
-function ChannelItem({ channel }: { channel: Channel }) {
-  return (
-    <Link href={`/channels/${channel.id}`}>
-      <h2>{channel.name}</h2>
-    </Link>
   );
 }
