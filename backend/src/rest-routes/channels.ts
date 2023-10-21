@@ -27,6 +27,11 @@ channelsRouter.get("/users/:userId/channels", async (req, res) => {
     },
     include: {
       members: true,
+      messages: {
+        include: {
+          sender: true,
+        },
+      },
     },
   });
 

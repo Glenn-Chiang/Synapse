@@ -2,6 +2,7 @@ import { ChannelItem } from "@/components/ChannelItem";
 import { getCurrentUser } from "@/lib/auth";
 import Link from "next/link";
 import { Channel } from "../types";
+import { ChannelPreview } from "@/components/ChannelPreview";
 
 export const revalidate = 0
 
@@ -35,7 +36,7 @@ export default async function Home() {
       {channels.length > 0 ? (
         <ul className="py-2 flex flex-col gap-4">
           {channels.map((channel) => (
-            <ChannelItem key={channel.id} channel={channel} />
+            <ChannelPreview key={channel.id} channel={channel} />
           ))}
         </ul>
       ) : (
