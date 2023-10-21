@@ -21,7 +21,11 @@ app.use(morgan("dev"));
 app.use(channelsRouter, chatsRouter, messagesRouter, directMessagesRouter, usersRouter)
 
 const server = createServer(app)
-const io = new Server(server)
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000" //frontend server
+  }
+})
 
 io.on('connection', async (socket) => {
   console.log('Client connected')
