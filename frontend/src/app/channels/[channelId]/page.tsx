@@ -42,7 +42,7 @@ export default async function ChannelPage({
 
 const Messages = ({ messages }: { messages: Message[] }) => {
   return (
-    <ul className="py-4 mt-16 mb-10">
+    <ul className="py-4 mt-16 mb-10 flex flex-col gap-4">
       {messages.map((message) => (
         <MessageItem key={message.id} message={message} />
       ))}
