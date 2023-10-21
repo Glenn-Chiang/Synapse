@@ -21,21 +21,27 @@ export default async function ChannelPage({
 
   return (
     <main>
-      <header className="flex justify-between bg-slate-900 p-2 items-center rounded-md">
-        <button className="rounded-full hover:bg-slate-800 w-10 h-10">
-          <FontAwesomeIcon icon={faArrowLeft} />
-        </button>
-        <div className="flex gap-4 items-center">
-          <ChannelIcon iconUrl={channel.iconUrl}/>
-          <div className="flex flex-col items-center">
-            <h1>{channel.name}</h1>
-            <div className="text-slate-500">{channel.members.length} members</div>
-          </div>
-        </div>
-        <button className="rounded-full hover:bg-slate-800 w-10 h-10">
-          <FontAwesomeIcon icon={faEllipsisV} />
-        </button>
-      </header>
+      <ChannelHeader channel={channel} />
     </main>
   );
 }
+
+const ChannelHeader = ({ channel }: { channel: Channel }) => {
+  return (
+    <header className="flex justify-between p-2 items-center border-b border-slate-500">
+      <button className="rounded-full hover:bg-slate-800 w-10 h-10">
+        <FontAwesomeIcon icon={faArrowLeft} />
+      </button>
+      <div className="flex gap-4 items-center">
+        <ChannelIcon iconUrl={channel.iconUrl} />
+        <div className="flex flex-col items-center">
+          <h1>{channel.name}</h1>
+          <div className="text-slate-500">{channel.members.length} members</div>
+        </div>
+      </div>
+      <button className="rounded-full hover:bg-slate-800 w-10 h-10">
+        <FontAwesomeIcon icon={faEllipsisV} />
+      </button>
+    </header>
+  );
+};
