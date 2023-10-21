@@ -7,6 +7,7 @@ config.autoAddCss = false;
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import { socket } from "@/lib/socket";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,11 +17,16 @@ export const metadata: Metadata = {
   title: "Synapse",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // Establish socket connection
+  if (!socket.connected) {
+    socket.connect()
+    console.log('Socket connected')
+  }
   return (
     <html lang="en">
       <body className={inter.className}>
