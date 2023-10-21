@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { socket } from "@/lib/socket";
+import { SocketProvider } from '@/components/SocketProvider';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,17 +23,14 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Establish socket connection
+  // // Establish socket connection
   if (!socket.connected) {
     socket.connect()
-    console.log('Socket connected')
-    socket.on('message', () => {
-      console.log('message received')
-    })
   }
   return (
     <html lang="en">
       <body className={inter.className}>
+        <SocketProvider/>
         <Topbar />
         <div className="mt-16 p-4 max-w-full">{children}</div>
       </body>
