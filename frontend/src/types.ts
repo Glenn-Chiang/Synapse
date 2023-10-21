@@ -24,7 +24,7 @@ export interface Channel {
 export interface Message {
   id: number;
   text: string;
-  timestamp: Date;
+  timestamp: string;
   channelId: number;
   senderId: number;
   sender: User

@@ -8,11 +8,11 @@ import Link from "next/link";
 export default async function ChannelLayout({
   params,
   children,
-  info
+  info,
 }: {
   params: { channelId: string };
   children: React.ReactNode;
-  info: React.ReactNode
+  info: React.ReactNode;
 }) {
   const channelId = Number(params.channelId);
   const channel = await getChannel(channelId);
@@ -20,8 +20,10 @@ export default async function ChannelLayout({
   return (
     <main className="">
       <ChannelHeader channel={channel} />
-      {info}
-      {children}
+      <div className="top-16">
+        {info}
+        {children}
+      </div>
     </main>
   );
 }

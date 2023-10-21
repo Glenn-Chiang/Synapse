@@ -1,5 +1,6 @@
 "use client";
 
+import { formatDate } from "@/lib/formatDate";
 import { Message } from "@/types";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
@@ -16,7 +17,7 @@ const MessageItem = ({ message }: { message: Message }) => {
         <div className="flex gap-2 items-center">
           <span className="text-sky-500">{message.sender.username}</span>
           <span className="text-slate-500">
-            {new Date(message.timestamp).toLocaleString()}
+            {formatDate(message.timestamp)}
           </span>
         </div>
         <div className="break-words py-2">{message.text}</div>
