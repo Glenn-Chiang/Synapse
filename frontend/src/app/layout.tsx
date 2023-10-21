@@ -31,7 +31,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Topbar />
-        <div className="mt-16 p-4">{children}</div>
+        <div className="mt-16 p-4 max-w-full">{children}</div>
       </body>
     </html>
   );

@@ -8,16 +8,18 @@ const MessageItem = ({ message }: { message: Message }) => {
   const messageRef = useRef<HTMLElement>(null);
   useEffect(() => {
     messageRef.current?.scrollIntoView();
-  });
+  }, []);
   return (
-    <article ref={messageRef} className="flex gap-2 items-start p-2">
+    <article ref={messageRef} className="flex gap-2 items-start p-2 max-w-full">
       <AvatarIcon url={message.sender.avatarUrl} />
-      <div>
+      <div className="max-w-full">
         <div className="flex gap-2 items-center">
           <span className="text-sky-500">{message.sender.username}</span>
-          <span className="text-slate-500">{new Date(message.timestamp).toLocaleString()}</span>
+          <span className="text-slate-500">
+            {new Date(message.timestamp).toLocaleString()}
+          </span>
         </div>
-        {message.text}
+        <div className="break-words py-2">{message.text}</div>
       </div>
     </article>
   );

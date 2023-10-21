@@ -52,7 +52,7 @@ const Messages = ({ messages }: { messages: Message[] }) => {
 
 const ChannelHeader = ({ channel }: { channel: Channel }) => {
   return (
-    <header className="fixed top-16 left-0 w-full flex justify-between p-2 items-center border-b border-slate-500 z-10 bg-slate-950">
+    <header className="fixed top-16 left-0 w-full flex justify-between p-2 items-center border-b border-slate-500 z-10 bg-slate-950 opacity-95">
       <button className="rounded-full hover:bg-slate-800 w-10 h-10">
         <FontAwesomeIcon icon={faArrowLeft} />
       </button>
