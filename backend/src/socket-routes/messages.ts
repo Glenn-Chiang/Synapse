@@ -29,4 +29,5 @@ export const registerMessageHandlers = (socket: Socket) => {
 // Note that we don't actually need to send the message payload back to the client.
 const emitToClient = async (socket: Socket, channelId: number) => {
   socket.to(channelId.toString()).emit('message', channelId)
+  console.log('Message emitted to channel:', channelId)
 }
