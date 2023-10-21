@@ -6,6 +6,7 @@ import { InputBar } from "./InputBar";
 import { sendMessage } from "@/app/actions/messages";
 import { getCurrentUser } from "@/lib/auth";
 import { Message } from "../../../types";
+import { MessageItem } from "@/components/MessageItem";
 
 const getChannel = async (channelId: number) => {
   const res = await fetch(
@@ -26,7 +27,7 @@ export default async function ChannelPage({
   const currentUserId = getCurrentUser();
 
   const handleSendMessage = async (text: string) => {
-    'use server'
+    "use server";
     await sendMessage(text, channelId, currentUserId);
   };
 
@@ -41,7 +42,7 @@ export default async function ChannelPage({
 
 const Messages = ({ messages }: { messages: Message[] }) => {
   return (
-    <ul>
+    <ul className="py-4 mt-16 mb-10">
       {messages.map((message) => (
         <MessageItem key={message.id} message={message} />
       ))}
@@ -49,13 +50,9 @@ const Messages = ({ messages }: { messages: Message[] }) => {
   );
 };
 
-const MessageItem = ({ message }: { message: Message }) => {
-  return <article>{message.text}</article>;
-};
-
 const ChannelHeader = ({ channel }: { channel: Channel }) => {
   return (
-    <header className="flex justify-between p-2 items-center border-b border-slate-500">
+    <header className="fixed top-16 left-0 w-full flex justify-between p-2 items-center border-b border-slate-500 z-10 bg-slate-950">
       <button className="rounded-full hover:bg-slate-800 w-10 h-10">
         <FontAwesomeIcon icon={faArrowLeft} />
       </button>

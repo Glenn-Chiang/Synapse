@@ -15,7 +15,7 @@ const InputBar = ({ handleSend }: InputBarProps) => {
   }
 
   return (
-    <div className="fixed bottom-4 left-0 w-full flex justify-center">
+    <div className="fixed bottom-0 left-0 w-full flex justify-center z-10 bg-slate-950 py-4">
       <input
         autoFocus
         onKeyDown={handleKeydown}
