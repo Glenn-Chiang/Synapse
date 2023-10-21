@@ -3,11 +3,14 @@ import { Channel } from "@/types";
 import { faArrowLeft, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { InputBar } from "./InputBar";
+import { sendMessage } from "@/app/actions/messages";
+import { getCurrentUser } from "@/lib/auth";
+import { Message } from "../../../types";
 
 const getChannel = async (channelId: number) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/channels/${channelId}`,
-    { next: { tags: ["channels", channelId.toString()] } }
+    { next: { tags: [`channels/${channelId}`] } }
   );
   const channel: Channel = await res.json();
   return channel;
@@ -20,18 +23,35 @@ export default async function ChannelPage({
 }) {
   const channelId = Number(params.channelId);
   const channel = await getChannel(channelId);
+  const currentUserId = getCurrentUser();
 
-  const sendMessage = async (text: string) => {
+  const handleSendMessage = async (text: string) => {
     'use server'
-  }
+    await sendMessage(text, channelId, currentUserId);
+  };
 
   return (
     <main className="">
       <ChannelHeader channel={channel} />
-      <InputBar handleSend={sendMessage}/>
+      <Messages messages={channel.messages} />
+      <InputBar handleSend={handleSendMessage} />
     </main>
   );
 }
+
+const Messages = ({ messages }: { messages: Message[] }) => {
+  return (
+    <ul>
+      {messages.map((message) => (
+        <MessageItem key={message.id} message={message} />
+      ))}
+    </ul>
+  );
+};
+
+const MessageItem = ({ message }: { message: Message }) => {
+  return <article>{message.text}</article>;
+};
 
 const ChannelHeader = ({ channel }: { channel: Channel }) => {
   return (
