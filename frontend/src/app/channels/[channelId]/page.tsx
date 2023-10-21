@@ -2,10 +2,12 @@ import { ChannelIcon } from "@/components/ChannelIcon";
 import { Channel } from "@/types";
 import { faArrowLeft, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { InputBar } from "./InputBar";
 
 const getChannel = async (channelId: number) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/channels/${channelId}`
+    `${process.env.NEXT_PUBLIC_BASE_URL}/channels/${channelId}`,
+    { next: { tags: ["channels", channelId.toString()] } }
   );
   const channel: Channel = await res.json();
   return channel;
@@ -19,20 +21,16 @@ export default async function ChannelPage({
   const channelId = Number(params.channelId);
   const channel = await getChannel(channelId);
 
+  const sendMessage = async (text: string) => {
+    'use server'
+  }
+
   return (
     <main className="">
       <ChannelHeader channel={channel} />
-      <InputBar/>
+      <InputBar handleSend={sendMessage}/>
     </main>
   );
-}
-
-const InputBar = () => {
-  return (
-    <div className="fixed bottom-4 left-0 w-full flex justify-center">
-      <input className=" w-4/5 rounded-full px-4" placeholder="Type a message..."/>
-    </div>
-  )
 }
 
 const ChannelHeader = ({ channel }: { channel: Channel }) => {
