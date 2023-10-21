@@ -20,10 +20,19 @@ export default async function ChannelPage({
   const channel = await getChannel(channelId);
 
   return (
-    <main>
+    <main className="">
       <ChannelHeader channel={channel} />
+      <InputBar/>
     </main>
   );
+}
+
+const InputBar = () => {
+  return (
+    <div className="fixed bottom-4 left-0 w-full flex justify-center">
+      <input className=" w-4/5 rounded-full px-4" placeholder="Type a message..."/>
+    </div>
+  )
 }
 
 const ChannelHeader = ({ channel }: { channel: Channel }) => {
