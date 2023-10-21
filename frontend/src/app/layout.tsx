@@ -26,6 +26,9 @@ export default async function RootLayout({
   if (!socket.connected) {
     socket.connect()
     console.log('Socket connected')
+    socket.on('message', () => {
+      console.log('message received')
+    })
   }
   return (
     <html lang="en">
