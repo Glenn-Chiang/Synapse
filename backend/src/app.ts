@@ -11,6 +11,7 @@ import { messagesRouter } from "./rest-routes/messages";
 import { directMessagesRouter } from "./rest-routes/direct-messages";
 import { usersRouter } from "./rest-routes/users";
 import { registerMessageHandlers } from "./socket-routes/messages";
+import { connectToChannels } from "./socket-routes/channels";
 
 export const prisma = new PrismaClient()
 
@@ -29,6 +30,7 @@ const io = new Server(server, {
 
 io.on('connection', async (socket) => {
   console.log('Client connected')
+  await connectToChannels(socket)
   registerMessageHandlers(socket)
 })
 
