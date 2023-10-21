@@ -5,7 +5,7 @@ import { Channel } from "../types";
 
 export const revalidate = 0
 
-const getChannels = async (userId: string): Promise<Channel[]> => {
+const getChannels = async (userId: number): Promise<Channel[]> => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/users/${userId}/channels`,
     { next: { tags: ["channels"] } }
@@ -29,7 +29,7 @@ export default async function Home() {
           Create channel
         </Link>
         <Link href={"/channels"} className="text-sky-500 hover:text-sky-400">
-          Explore channels
+          Browse channels
         </Link>
       </div>
       {channels.length > 0 ? (

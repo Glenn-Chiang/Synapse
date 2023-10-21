@@ -15,7 +15,7 @@ export default async function ExploreChannels() {
 
   return (
     <main className="flex flex-col gap-4">
-      <h1 className="text-center">Explore channels</h1>
+      <h1 className="text-center">Browse channels</h1>
       <ul className="flex flex-col gap-4 items-center">
         {channels.map((channel) => (
           <ChannelItem key={channel.id} channel={channel} />
