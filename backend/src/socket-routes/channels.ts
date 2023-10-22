@@ -38,5 +38,23 @@ export const registerChannelHandlers = (socket: Socket) => {
     callback()
   };
 
+  const handleLeave = async (
+    userId: number,
+    channelId: number,
+    callback: () => void
+  ) => {
+    await prisma.userChannel.delete({
+      where: {
+        userId_channelId: {
+          userId, channelId
+        }
+      }
+    })
+
+    console.log(`User ${userId} has left channel ${channelId}`)
+    callback()
+  }
+
   socket.on("join-channel", handleJoin);
+  socket.on("leave-channel", handleLeave);
 };
