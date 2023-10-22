@@ -25,6 +25,11 @@ export default async function ChannelMain({
     });
   };
 
+  const handleTypeMessage = async () => {
+    "use server"
+    socket.emit("typing", currentUserId, channelId);
+  }
+
   if (!userIsMember) {
     return (
       <JoinChannel/>
@@ -34,7 +39,7 @@ export default async function ChannelMain({
   return (
     <section>
       <Messages messages={channel.messages} />
-      <InputBar handleSend={handleSendMessage} />
+      <InputBar handleSend={handleSendMessage} handleChange={handleTypeMessage}/>
       <TypingListener/>
     </section>
   );

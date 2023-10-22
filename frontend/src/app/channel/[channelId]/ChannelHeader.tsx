@@ -19,7 +19,7 @@ const ChannelHeader = ({ channel }: { channel: Channel }) => {
         <FontAwesomeIcon icon={faArrowLeft} />
       </button>
       <Link
-        href={`/channels/${channel.id}/info`}
+        href={`/channel/${channel.id}/info`}
         className="flex gap-4 items-center"
       >
         <ChannelIcon iconUrl={channel.iconUrl} />

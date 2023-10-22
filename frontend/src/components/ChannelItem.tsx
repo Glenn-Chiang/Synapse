@@ -1,13 +1,11 @@
-import Link from "next/link";
 import { Channel } from "@/types";
-import Image from "next/image";
+import Link from "next/link";
 import { ChannelIcon } from "./ChannelIcon";
-import ChannelLayout from "@/app/channels/[channelId]/layout";
 
 function ChannelItem({ channel }: { channel: Channel }) {
   return (
     <Link
-      href={`/channels/${channel.id}`}
+      href={`/channel/${channel.id}`}
       className="flex gap-4 items-start p-4 rounded-md bg-slate-900 hover:bg-slate-800 transition w-full"
     >
       <ChannelIcon iconUrl={channel.iconUrl} />
@@ -27,3 +25,4 @@ function ChannelItem({ channel }: { channel: Channel }) {
 }
 
 export { ChannelItem };
+
