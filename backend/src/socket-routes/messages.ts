@@ -24,20 +24,15 @@ export const registerMessageHandlers = (socket: Socket) => {
     console.log(message);
 
     messageCallback(); // Send acknowledgement to the client who emitted the event
-    emitToClient(socket, channelId); // Emit event to clients in the same room as sender
-  };
 
+    socket.to(channelId.toString()).emit("message", channelId); // Emit event to clients in the same room as sender
+    console.log("Message emitted to channel:", channelId);
+  };
   socket.on("send-message", handleCreate);
 
-  const handleTyping = async (userId: number, channelId: number) => {
+  // User is typing
+  socket.on("typing", async (userId: number, channelId: number) => {
     console.log(`User ${userId} is typing in channel ${channelId}`);
-  };
-  socket.on("typing", handleTyping);
-};
-
-// Alert the client to revalidate messages in specified channel
-// Note that we don't actually need to send the message payload back to the client.
-const emitToClient = async (socket: Socket, channelId: number) => {
-  socket.to(channelId.toString()).emit("message", channelId);
-  console.log("Message emitted to channel:", channelId);
+    socket.to(channelId.toString()).emit("typing", userId, channelId);
+  });
 };

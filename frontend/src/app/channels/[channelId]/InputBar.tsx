@@ -23,7 +23,6 @@ const InputBar = ({ handleSend }: InputBarProps) => {
   const channelId = Number(useParams().channelId);
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    console.log('i am fucking typing')
     socket.emit("typing", userId, channelId);
   };
 

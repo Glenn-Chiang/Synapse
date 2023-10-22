@@ -6,6 +6,7 @@ import { Message } from "@/types";
 import { revalidatePath } from "next/cache";
 import { InputBar } from "./InputBar";
 import { JoinChannel } from "./JoinChannel";
+import { TypingListener } from "./TypingListener";
 
 export default async function ChannelMain({
   params,
@@ -34,6 +35,7 @@ export default async function ChannelMain({
     <section>
       <Messages messages={channel.messages} />
       <InputBar handleSend={handleSendMessage} />
+      <TypingListener/>
     </section>
   );
 }
