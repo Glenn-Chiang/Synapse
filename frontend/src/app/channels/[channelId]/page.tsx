@@ -1,9 +1,10 @@
-import { InputBar } from "./InputBar";
-import { sendMessage } from "@/api/messages";
-import { getCurrentUser } from "@/lib/auth";
-import { MessageItem } from "@/components/MessageItem";
 import { getChannel } from "@/api/channels";
+import { MessageItem } from "@/components/MessageItem";
+import { getCurrentUser } from "@/lib/auth";
+import { socket } from "@/lib/socket";
 import { Message } from "@/types";
+import { revalidatePath } from "next/cache";
+import { InputBar } from "./InputBar";
 import { JoinChannel } from "./JoinChannel";
 
 export default async function ChannelMain({
@@ -17,8 +18,10 @@ export default async function ChannelMain({
   const userIsMember = !!channel.members.find(member => member.userId === currentUserId)
 
   const handleSendMessage = async (text: string) => {
-    "use server";
-    await sendMessage(text, channelId, currentUserId);
+    "use server"
+    socket.emit("send-message", { text, channelId, senderId: currentUserId }, () => {
+      console.log("message acknowledged")
+    });
   };
 
   if (!userIsMember) {
