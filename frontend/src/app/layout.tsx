@@ -32,7 +32,7 @@ export default async function RootLayout({
       <body >
         <MessageListener/>
         <Topbar />
-        <div className="mt-16 p-4 max-w-full">{children}</div>
+        <div className="mt-16 p-4 sm:px-10">{children}</div>
       </body>
     </html>
   );

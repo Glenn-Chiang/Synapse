@@ -1,7 +1,7 @@
 import { ChannelItem } from "@/components/ChannelItem";
 import { getCurrentUser } from "@/lib/auth";
 import Link from "next/link";
-import { Channel } from "../types";
+import { Channel } from "../../types";
 import { ChannelPreview } from "@/components/ChannelPreview";
 
 export const revalidate = 0;
@@ -15,13 +15,12 @@ const getChannels = async (userId: number): Promise<Channel[]> => {
   return channels;
 };
 
-export default async function Home() {
+export default async function MyChannels() {
   const userId = getCurrentUser();
   const channels = await getChannels(userId);
 
   return (
     <main>
-      <h1 className="py-2">Channels</h1>
       <div className="py-2 flex gap-4 items-center font-medium">
         <Link
           href={"/channels/create"}
