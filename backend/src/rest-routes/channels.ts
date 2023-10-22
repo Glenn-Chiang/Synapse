@@ -101,16 +101,58 @@ channelsRouter.post("/channels", async (req, res) => {
   });
 
   console.log("Channel created");
-  return res.json(channel);
+  res.json(channel);
 });
 
-channelsRouter.post(`/channels/:channelId/members`, async (req, res) => {
+// Update channel about
+channelsRouter.patch("channels/:channelId/about", async (req, res) => {
+  const channelId = Number(req.params.channelId);
+  const { about } = req.body;
+
+  if (typeof about !== "string" || about.length > 500) {
+    return res.status(400).send("invalid about");
+  }
+
+  const channel = await prisma.channel.update({
+    where: {
+      id: channelId,
+    },
+    data: {
+      about,
+    },
+  });
+
+  console.log("Channel about updated");
+  res.json(channel);
+});
+
+// Update channel icon
+channelsRouter.patch("channels/:channelId/icon", async (req, res) => {
+  const channelId = Number(req.params.channelId);
+  const { iconUrl } = req.body;
+
+  if (typeof iconUrl !== "string") {
+    return res.status(400).send("invalid iconUrl");
+  }
+
+  const channel = await prisma.channel.update({
+    where: {
+      id: channelId,
+    },
+    data: {
+      iconUrl,
+    },
+  });
+
+  console.log("Channel icon updated");
+  res.json(channel);
+});
+
+// Join channel
+channelsRouter.post("/channels/:channelId/members", async (req, res) => {
   const channelId = req.params.channelId;
   const userId = req.query.userId;
 
-  if (!channelId) {
-    return res.status(400).send("invalid or missing channelId");
-  }
   if (!userId) {
     return res.status(400).send("userId is missing");
   }
@@ -126,6 +168,7 @@ channelsRouter.post(`/channels/:channelId/members`, async (req, res) => {
   res.status(201).send(`User ${userId} has joined channel ${channelId}`);
 });
 
+// Leave channel
 channelsRouter.delete(`/channels/:channelId/members`, async (req, res) => {
   const channelId = req.params.channelId;
   const userId = req.query.userId;

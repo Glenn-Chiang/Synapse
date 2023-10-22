@@ -47,11 +47,13 @@ export default function CreateChannelPage() {
   const router = useRouter();
 
   return (
-    <section className="flex flex-col gap-4 relative">
-      <h1>Create a channel</h1>
-      <button className="absolute top-1 right-1" onClick={() => router.back()}>
-        <FontAwesomeIcon icon={faX} />
-      </button>
+    <section className="flex flex-col gap-4 sm:p-4 relative">
+      <div className="flex justify-between">
+        <h1>Create a channel</h1>
+        <button onClick={() => router.back()} className="rounded-full hover:bg-slate-900 w-10 h-10 -mr-2 -mt-2">
+          <FontAwesomeIcon icon={faX} />
+        </button>
+      </div>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-2">
           <label htmlFor="name">Name</label>
