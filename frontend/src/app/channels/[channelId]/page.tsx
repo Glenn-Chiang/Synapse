@@ -14,7 +14,6 @@ export default async function ChannelMain({
   const channelId = Number(params.channelId);
   const channel = await getChannel(channelId);
   const currentUserId = getCurrentUser();
-
   const userIsMember = !!channel.members.find(member => member.userId === currentUserId)
 
   const handleSendMessage = async (text: string) => {

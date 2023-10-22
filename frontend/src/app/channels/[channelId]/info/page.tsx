@@ -5,6 +5,7 @@ import { Member } from "../../../../types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { LeaveChannel } from "./LeaveChannel";
+import { getCurrentUser } from "@/lib/auth";
 
 export default async function ChannelInfo({
   params,
@@ -13,6 +14,11 @@ export default async function ChannelInfo({
 }) {
   const channelId = Number(params.channelId);
   const channel = await getChannel(channelId);
+
+  const currentUserId = getCurrentUser();
+  const userIsMember = !!channel.members.find(
+    (member) => member.userId === currentUserId
+  );
 
   return (
     <section className="flex flex-col gap-4 py-4">
@@ -54,7 +60,7 @@ export default async function ChannelInfo({
           ))}
         </ul>
       </section>
-      <LeaveChannel/>
+      {userIsMember && <LeaveChannel />}
     </section>
   );
 }
