@@ -15,4 +15,7 @@
     input, textarea {
         @apply p-2 rounded-md bg-slate-900
     }
+    button {
+        @apply transition
+    }
 }

@@ -4,6 +4,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { MessageItem } from "@/components/MessageItem";
 import { getChannel } from "@/api/channels";
 import { Message } from "@/types";
+import { JoinChannel } from "./JoinChannel";
 
 export default async function ChannelMain({
   params,
@@ -23,12 +24,7 @@ export default async function ChannelMain({
 
   if (!userIsMember) {
     return (
-      <section className="flex flex-col gap-4 justify-center items-center fixed top-1/2 inset-x-0">
-        Join channel to start chatting!
-        <button className="bg-sky-600 p-2 rounded-md w-20 shadow-sky-600 shadow font-medium">
-          JOIN
-        </button>
-      </section>
+      <JoinChannel/>
     )
   }
 
