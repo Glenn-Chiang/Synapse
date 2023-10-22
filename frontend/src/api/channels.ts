@@ -6,37 +6,50 @@ import { revalidatePath } from "next/cache";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const getChannel = async (channelId: number) => {
-  const res = await fetch(`${BASE_URL}/channels/${channelId}`, {cache: 'no-store'})
+  const res = await fetch(`${BASE_URL}/channels/${channelId}`, {
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    const errorMessage = await res.text();
+    throw new Error(errorMessage);
+  }
   const channel: Channel = await res.json();
   return channel;
 };
 
-const joinChannel = async (channelId: number, userId: number) => {
-  const res = await fetch(
-    `${BASE_URL}/channels/${channelId}/members?userId=${userId}`,
-    {
-      method: "POST",
-    }
-  );
+const createChannel = async (formFields: {
+  name: string;
+  about: string;
+  iconUrl: string;
+}) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/channels`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formFields),
+  });
+
   if (!res.ok) {
     const errorMessage = await res.text();
     throw new Error(errorMessage);
   }
-  revalidatePath("/");
+  return;
 };
 
-const leaveChannel = async (channelId: number, userId: number) => {
-  const res = await fetch(
-    `${BASE_URL}/channels/${channelId}/members?userId=${userId}`,
-    {
-      method: "DELETE",
-    }
-  );
+const editChannel = async (
+  channelId: number,
+  about: string,
+  iconUrl: string
+) => {
+  const res = await fetch(`${BASE_URL}/channels/${channelId}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ about, iconUrl }),
+  });
   if (!res.ok) {
     const errorMessage = await res.text();
     throw new Error(errorMessage);
   }
-  revalidatePath("/");
+  return;
 };
 
-export { getChannel, joinChannel, leaveChannel };
+export { getChannel, editChannel, createChannel };

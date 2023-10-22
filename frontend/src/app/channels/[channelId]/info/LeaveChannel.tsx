@@ -4,6 +4,7 @@ import { SubmitButton } from "@/components/buttons";
 import { getCurrentUser } from "@/lib/auth";
 import { socket } from "@/lib/socket";
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
+import { Modal } from "@/components/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams, useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -55,15 +56,6 @@ const LeaveChannelModal = ({ close }: { close: () => void }) => {
   );
 };
 
-const Modal = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <div className="z-20 fixed top-0 left-0 w-screen h-screen bg-slate-950 bg-opacity-80 justify-center items-center flex">
-      <div className="bg-slate-900 bg-opacity-100 p-4 rounded-md flex flex-col gap-4">
-        {children}
-      </div>
-    </div>
-  );
-};
 
 export { LeaveChannel };
 

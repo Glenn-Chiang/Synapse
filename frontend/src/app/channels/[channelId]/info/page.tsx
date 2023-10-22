@@ -3,6 +3,7 @@ import { getCurrentUser } from "@/lib/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { Member } from "../../../../types";
+import { EditChannel } from "./EditChannel";
 import { LeaveChannel } from "./LeaveChannel";
 
 export default async function ChannelInfo({
@@ -17,10 +18,11 @@ export default async function ChannelInfo({
   const userIsMember = !!channel.members.find(
     (member) => member.userId === currentUserId
   );
+  const userIsCreator = currentUserId === channel.creatorId
 
   return (
     <section className="flex flex-col gap-4 py-4 sm:p-4">
-      <section className="flex gap-4">
+      <section className="flex gap-4 relative">
         <div>
           <Image
             src={
@@ -41,7 +43,9 @@ export default async function ChannelInfo({
             <span>{new Date(channel.createdAt).toLocaleDateString()}</span>
           </div>
         </div>
+        {userIsCreator && <EditChannel channel={channel}/>}
       </section>
+
       <section>
         <h2 className="text-sky-500">
           Members <span>({channel.members.length})</span>

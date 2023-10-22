@@ -23,7 +23,7 @@ export interface Channel {
   about: string;
   iconUrl?: string;
   createdAt: string;
-  creatorId: string;
+  creatorId: number;
   members: Member[];
   messages: Message[];
 }

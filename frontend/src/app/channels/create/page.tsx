@@ -1,5 +1,6 @@
 "use client";
 
+import { createChannel } from "@/api/channels";
 import { ErrorMessage } from "@/components/ErrorMessage";
 import { SubmitButton } from "@/components/buttons";
 import { faX } from "@fortawesome/free-solid-svg-icons";
@@ -18,28 +19,17 @@ export default function CreateChannelPage() {
 
   const [isPending, setIsPending] = useState(false);
 
-  const [error, setError] = useState<null|string>(null);
+  const [error, setError] = useState<null | string>(null);
 
   const onSubmit: SubmitHandler<FormFields> = async (formFields) => {
     setIsPending(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/channels`, {
-        method: "POST",
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(formFields),
-      });
-
-      if (!res.ok) {
-        const errorMessage = await res.text();
-        throw new Error(errorMessage);
-      }
-
-      console.log("Channel created")
-      router.push('/')
-
+      await createChannel(formFields);
+      console.log("Channel created");
+      router.push("/");
     } catch (error) {
       console.log(error);
-      setError((error as Error).message)
+      setError((error as Error).message);
     }
     setIsPending(false);
   };
@@ -50,7 +40,10 @@ export default function CreateChannelPage() {
     <section className="flex flex-col gap-4 sm:p-4 relative">
       <div className="flex justify-between">
         <h1>Create a channel</h1>
-        <button onClick={() => router.back()} className="rounded-full hover:bg-slate-900 w-10 h-10 -mr-2 -mt-2">
+        <button
+          onClick={() => router.back()}
+          className="rounded-full hover:bg-slate-900 w-10 h-10 -mr-2 -mt-2"
+        >
           <FontAwesomeIcon icon={faX} />
         </button>
       </div>

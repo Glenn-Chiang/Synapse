@@ -105,32 +105,13 @@ channelsRouter.post("/channels", async (req, res) => {
 });
 
 // Update channel about
-channelsRouter.patch("channels/:channelId/about", async (req, res) => {
+channelsRouter.patch("/channels/:channelId", async (req, res) => {
   const channelId = Number(req.params.channelId);
-  const { about } = req.body;
+  const { about, iconUrl } = req.body;
 
   if (typeof about !== "string" || about.length > 500) {
     return res.status(400).send("invalid about");
   }
-
-  const channel = await prisma.channel.update({
-    where: {
-      id: channelId,
-    },
-    data: {
-      about,
-    },
-  });
-
-  console.log("Channel about updated");
-  res.json(channel);
-});
-
-// Update channel icon
-channelsRouter.patch("channels/:channelId/icon", async (req, res) => {
-  const channelId = Number(req.params.channelId);
-  const { iconUrl } = req.body;
-
   if (typeof iconUrl !== "string") {
     return res.status(400).send("invalid iconUrl");
   }
@@ -140,11 +121,11 @@ channelsRouter.patch("channels/:channelId/icon", async (req, res) => {
       id: channelId,
     },
     data: {
-      iconUrl,
+      about, iconUrl
     },
   });
 
-  console.log("Channel icon updated");
+  console.log("Channel about updated");
   res.json(channel);
 });
 
