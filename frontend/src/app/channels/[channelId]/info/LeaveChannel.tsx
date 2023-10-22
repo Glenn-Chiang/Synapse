@@ -1,14 +1,12 @@
 "use client";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOut } from "@fortawesome/free-solid-svg-icons";
-import React, { useState } from "react";
 import { SubmitButton } from "@/components/buttons";
-import { socket } from "@/lib/socket";
 import { getCurrentUser } from "@/lib/auth";
+import { socket } from "@/lib/socket";
+import { faSignOut } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams, useRouter } from "next/navigation";
-import { revalidatePath } from "next/cache";
-import { leaveChannel } from "@/api/channels";
+import React, { useState } from "react";
 
 const LeaveChannel = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -36,12 +34,9 @@ const LeaveChannelModal = ({ close }: { close: () => void }) => {
 
   const handleLeaveChannel = async () => {
     setIsPending(true);
-    await leaveChannel(channelId, currentUserId)
-    // socket.emit("leave-channel", userId, channelId, () => {
-    //   router.refresh();
-    //   router.push('/')
-    // });
-    // router.push('/')
+    socket.emit("leave-channel", currentUserId, channelId, () => {
+      router.push('/')
+    });
   };
 
   return (
@@ -70,3 +65,4 @@ const Modal = ({ children }: { children: React.ReactNode }) => {
 };
 
 export { LeaveChannel };
+

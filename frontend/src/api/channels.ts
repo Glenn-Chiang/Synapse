@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const getChannel = async (channelId: number) => {
-  const res = await fetch(`${BASE_URL}/channels/${channelId}`)
+  const res = await fetch(`${BASE_URL}/channels/${channelId}`, {cache: 'no-store'})
   const channel: Channel = await res.json();
   return channel;
 };
