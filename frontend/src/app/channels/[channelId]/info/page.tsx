@@ -1,11 +1,9 @@
 import { getChannel } from "@/api/channels";
+import { getCurrentUser } from "@/lib/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { Member } from "../../../../types";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { LeaveChannel } from "./LeaveChannel";
-import { getCurrentUser } from "@/lib/auth";
 
 export default async function ChannelInfo({
   params,

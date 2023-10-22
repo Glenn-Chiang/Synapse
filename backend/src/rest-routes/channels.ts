@@ -53,17 +53,17 @@ channelsRouter.get("/channels/:channelId", async (req, res) => {
       },
       members: {
         include: {
-          user: true
-        }
+          user: true,
+        },
       },
     },
   });
 
   if (!channel) {
-    return res.status(404).send('channel not found')
+    return res.status(404).send("channel not found");
   }
-  
-  return res.json(channel)
+
+  return res.json(channel);
 });
 
 // Create new channel
@@ -102,6 +102,52 @@ channelsRouter.post("/channels", async (req, res) => {
 
   console.log("Channel created");
   return res.json(channel);
+});
+
+channelsRouter.post(`/channels/:channelId/members`, async (req, res) => {
+  const channelId = req.params.channelId;
+  const userId = req.query.userId;
+
+  if (!channelId) {
+    return res.status(400).send("invalid or missing channelId");
+  }
+  if (!userId) {
+    return res.status(400).send("userId is missing");
+  }
+
+  await prisma.userChannel.create({
+    data: {
+      userId: Number(userId),
+      channelId: Number(channelId),
+    },
+  });
+
+  console.log(`User ${userId} has joined channel ${channelId}`);
+  res.status(201).send(`User ${userId} has joined channel ${channelId}`);
+});
+
+channelsRouter.delete(`/channels/:channelId/members`, async (req, res) => {
+  const channelId = req.params.channelId;
+  const userId = req.query.userId;
+
+  if (!channelId) {
+    return res.status(400).send("invalid or missing channelId");
+  }
+  if (!userId) {
+    return res.status(400).send("userId is missing");
+  }
+
+  await prisma.userChannel.delete({
+    where: {
+      userId_channelId: {
+        userId: Number(userId),
+        channelId: Number(channelId),
+      },
+    },
+  });
+
+  console.log(`User ${userId} has left channel ${channelId}`);
+  res.status(201).send(`User ${userId} has left channel ${channelId}`);
 });
 
 export { channelsRouter };

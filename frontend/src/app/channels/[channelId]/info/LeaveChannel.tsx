@@ -7,6 +7,7 @@ import { SubmitButton } from "@/components/buttons";
 import { socket } from "@/lib/socket";
 import { getCurrentUser } from "@/lib/auth";
 import { useParams, useRouter } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 const LeaveChannel = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
