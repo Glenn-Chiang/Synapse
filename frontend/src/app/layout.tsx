@@ -40,7 +40,7 @@ export default async function RootLayout({
 
 function Topbar() {
   return (
-    <nav className="z-10 bg-slate-950 w-screen h-16 shadow p-4 fixed top-0 left-0 font-medium flex items-center text-xl">
+    <nav className="z-10 bg-slate-950 w-screen h-16 shadow p-4 px-8 fixed top-0 left-0 font-medium flex items-center text-xl">
       <div className="flex gap-2 items-center">
         <FontAwesomeIcon icon={faBars} />
         <Link href={'/'}>Synapse</Link>

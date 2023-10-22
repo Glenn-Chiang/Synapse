@@ -1,13 +1,15 @@
 import Link from "next/link";
+import { Navlinks } from "./NavLinks";
 
-export default function RoomsLayout({children}: {children: React.ReactNode}) {
+export default function RoomsLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <main>
-      <nav className="text-xl py-2">
-        <Link href={'/'}>Channels</Link>
-        <Link href={'/chats'}>Chats</Link>
-      </nav>
+      <Navlinks />
       {children}
     </main>
-  )
+  );
 }
