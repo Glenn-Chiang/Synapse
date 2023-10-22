@@ -19,35 +19,33 @@ export default async function ChannelInfo({
   );
 
   return (
-    <section className="flex flex-col gap-4 py-4">
-      <section className="flex gap-4 justify-center">
+    <section className="flex flex-col gap-4 py-4 sm:p-4">
+      <div>
+        <Image
+          src={
+            channel.iconUrl ||
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0UcnHUiJ0s_BfieUWxwoLDk2Ji4xCJ30WVhE5690-7JtoCO6gOrMZpiHqHk_f6ftmSJk&usqp=CAU"
+          }
+          alt=""
+          width={100}
+          height={100}
+          className="rounded-full"
+        />
+      </div>
+      <div className="flex flex-col gap-4">
         <div>
-          <Image
-            src={
-              channel.iconUrl ||
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0UcnHUiJ0s_BfieUWxwoLDk2Ji4xCJ30WVhE5690-7JtoCO6gOrMZpiHqHk_f6ftmSJk&usqp=CAU"
-            }
-            alt=""
-            width={100}
-            height={100}
-            className="rounded-full"
-          />
+          <h2 className="text-sky-500">Name</h2>
+          <p>{channel.name}</p>
         </div>
-        <div className="flex flex-col gap-4">
-          <div>
-            <h2 className="text-sky-500">Name</h2>
-            <p>{channel.name}</p>
-          </div>
-          <div>
-            <h2 className="text-sky-500">About</h2>
-            <p>{channel.about}</p>
-          </div>
-          <div className="text-slate-500">
-            Created on{" "}
-            <span>{new Date(channel.createdAt).toLocaleDateString()}</span>
-          </div>
+        <div>
+          <h2 className="text-sky-500">About</h2>
+          <p>{channel.about}</p>
         </div>
-      </section>
+        <div className="text-slate-500">
+          Created on{" "}
+          <span>{new Date(channel.createdAt).toLocaleDateString()}</span>
+        </div>
+      </div>
       <section>
         <h2 className="text-sky-500">
           Members <span>({channel.members.length})</span>
