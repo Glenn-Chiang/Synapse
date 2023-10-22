@@ -1,5 +1,5 @@
 import { ChannelIcon } from "@/components/ChannelIcon";
-import { Channel } from "@/types";
+import { Channel } from "@/lib/types";
 import { faArrowLeft, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getChannel } from "@/api/channels";
@@ -37,7 +37,10 @@ const ChannelHeader = ({ channel }: { channel: Channel }) => {
       >
         <FontAwesomeIcon icon={faArrowLeft} />
       </Link>
-      <Link href={`/channels/${channel.id}/info`} className="flex gap-4 items-center">
+      <Link
+        href={`/channels/${channel.id}/info`}
+        className="flex gap-4 items-center"
+      >
         <ChannelIcon iconUrl={channel.iconUrl} />
         <div className="flex flex-col items-center">
           <h1>{channel.name}</h1>

@@ -1,10 +1,10 @@
 import { ChannelItem } from "@/components/ChannelItem";
 import { getCurrentUser } from "@/lib/auth";
 import Link from "next/link";
-import { Channel } from "../types";
+import { Channel } from "../lib/types";
 import { ChannelPreview } from "@/components/ChannelPreview";
 
-export const revalidate = 0
+export const revalidate = 0;
 
 const getChannels = async (userId: number): Promise<Channel[]> => {
   const res = await fetch(

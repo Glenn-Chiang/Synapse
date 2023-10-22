@@ -5,6 +5,13 @@ export interface User {
   avatarUrl?: string;
 }
 
+export interface Member {
+  userId: number;
+  channelId: number;
+  dateJoined: string;
+  user: User;
+}
+
 export interface Chat {
   id: number;
   users: User[];
@@ -17,7 +24,7 @@ export interface Channel {
   iconUrl?: string;
   createdAt: string;
   creatorId: string;
-  members: User[];
+  members: Member[];
   messages: Message[];
 }
 

@@ -3,7 +3,7 @@ import { sendMessage } from "@/api/messages";
 import { getCurrentUser } from "@/lib/auth";
 import { MessageItem } from "@/components/MessageItem";
 import { getChannel } from "@/api/channels";
-import { Message } from "@/types";
+import { Message } from "@/lib/types";
 
 export default async function ChannelMain({
   params,

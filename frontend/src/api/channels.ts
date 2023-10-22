@@ -1,4 +1,4 @@
-import { Channel, User } from "@/types";
+import { Channel, User } from "@/lib/types";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -10,12 +10,4 @@ const getChannel = async (channelId: number) => {
   return channel;
 };
 
-const getChannelMembers = async (channelId: number) => {
-  const res = await fetch(`${BASE_URL}/channels/${channelId}/members`, {
-    next: { tags: [`channels/${channelId}/members`] },
-  });
-  const members: User[] = await res.json()
-  return members
-};
-
-export { getChannel, getChannelMembers };
+export { getChannel };
