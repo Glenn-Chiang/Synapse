@@ -8,6 +8,7 @@ import { socket } from "@/lib/socket";
 import { getCurrentUser } from "@/lib/auth";
 import { useParams, useRouter } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { leaveChannel } from "@/api/channels";
 
 const LeaveChannel = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -27,18 +28,20 @@ const LeaveChannel = () => {
 };
 
 const LeaveChannelModal = ({ close }: { close: () => void }) => {
-  const userId = getCurrentUser();
+  const currentUserId = getCurrentUser();
   const channelId = Number(useParams().channelId);
   const router = useRouter();
 
   const [isPending, setIsPending] = useState(false);
 
-  const handleLeaveChannel = () => {
+  const handleLeaveChannel = async () => {
     setIsPending(true);
-    socket.emit("leave-channel", userId, channelId, () => {
-      router.refresh();
-      router.push('/')
-    });
+    await leaveChannel(channelId, currentUserId)
+    // socket.emit("leave-channel", userId, channelId, () => {
+    //   router.refresh();
+    //   router.push('/')
+    // });
+    // router.push('/')
   };
 
   return (

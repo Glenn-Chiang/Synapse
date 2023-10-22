@@ -1,5 +1,6 @@
 "use client";
 
+import { joinChannel } from "@/api/channels";
 import { getCurrentUser } from "@/lib/auth";
 import { socket } from "@/lib/socket";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
@@ -15,13 +16,14 @@ const JoinChannel = () => {
   const channelId = Number(useParams().channelId)
   const router = useRouter()
 
-  const handleClick = () => {
+  const handleClick = async () => {
     setIsPending(true);
 
-    socket.emit("join-channel", currentUserId, channelId, () => {
-      console.log('joined channel')
-      router.refresh()
-    })
+    await joinChannel(channelId, currentUserId)
+    // socket.emit("join-channel", currentUserId, channelId, () => {
+    //   console.log('joined channel')
+    //   router.refresh()
+    // })
   };
 
   return (
