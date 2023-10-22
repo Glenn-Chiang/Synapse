@@ -2,6 +2,9 @@ import { getChannel } from "@/api/channels";
 import Image from "next/image";
 import Link from "next/link";
 import { Member } from "../../../../types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignOut } from "@fortawesome/free-solid-svg-icons";
+import { LeaveChannel } from "./LeaveChannel";
 
 export default async function ChannelInfo({
   params,
@@ -45,12 +48,13 @@ export default async function ChannelInfo({
         <h2 className="text-sky-500">
           Members <span>({channel.members.length})</span>
         </h2>
-        <ul className="flex flex-col py-2 gap-4">
+        <ul className="flex flex-col py-2">
           {channel.members.map((member) => (
             <MemberItem key={member.userId} member={member} />
           ))}
         </ul>
       </section>
+      <LeaveChannel/>
     </section>
   );
 }
@@ -60,7 +64,7 @@ const MemberItem = ({ member }: { member: Member }) => {
   return (
     <Link
       href={`/users/${user.id}`}
-      className="flex items-center gap-2 hover:bg-slate-900 rounded-md p-2"
+      className="flex items-center gap-2 hover:bg-slate-900 rounded-md px-2 py-4"
     >
       <Image
         src={
