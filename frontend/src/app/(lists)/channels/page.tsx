@@ -1,9 +1,7 @@
-import { ChannelItem } from "@/components/ChannelItem";
-import { getCurrentUser } from "@/lib/auth";
-import Link from "next/link";
-import { Channel } from "../../types";
 import { ChannelPreview } from "@/components/ChannelPreview";
-
+import { getCurrentUser } from '@/lib/auth';
+import Link from "next/link";
+import { Channel } from "../../../types";
 export const revalidate = 0;
 
 const getChannels = async (userId: number): Promise<Channel[]> => {
@@ -28,7 +26,7 @@ export default async function MyChannels() {
         >
           Create channel
         </Link>
-        <Link href={"/channels"} className="text-sky-500 hover:text-sky-400">
+        <Link href={"/browse"} className="text-sky-500 hover:text-sky-400">
           Browse channels
         </Link>
       </div>

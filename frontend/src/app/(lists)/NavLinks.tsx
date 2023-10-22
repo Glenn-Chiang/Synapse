@@ -7,7 +7,7 @@ const Navlinks = () => {
   const pathname = usePathname();
   return (
     <nav className="text-xl py-2 flex gap-4">
-      <Navlink href="/" currentPath={pathname}>
+      <Navlink href="/channels" currentPath={pathname}>
         Channels
       </Navlink>
       <Navlink href="/chats" currentPath={pathname}>
