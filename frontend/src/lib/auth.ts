@@ -1,5 +1,5 @@
 const getCurrentUser = () => {
-  return 1;
+  return 2;
 }
 
 export {getCurrentUser}

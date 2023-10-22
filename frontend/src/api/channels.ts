@@ -1,4 +1,4 @@
-import { Channel, User } from "@/lib/types";
+import { Channel, User } from "@/types";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 

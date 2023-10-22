@@ -1,5 +1,5 @@
 import { ChannelIcon } from "@/components/ChannelIcon";
-import { Channel } from "@/lib/types";
+import { Channel } from "@/types";
 import { faArrowLeft, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getChannel } from "@/api/channels";

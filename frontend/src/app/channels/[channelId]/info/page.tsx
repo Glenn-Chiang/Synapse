@@ -1,7 +1,7 @@
 import { getChannel } from "@/api/channels";
 import Image from "next/image";
 import Link from "next/link";
-import { Member } from "../../../../lib/types";
+import { Member } from "../../../../types";
 
 export default async function ChannelInfo({
   params,
@@ -12,8 +12,8 @@ export default async function ChannelInfo({
   const channel = await getChannel(channelId);
 
   return (
-    <section>
-      <div className="flex gap-4">
+    <section className="flex flex-col gap-4 py-4">
+      <section className="flex gap-4 justify-center">
         <div>
           <Image
             src={
@@ -26,25 +26,31 @@ export default async function ChannelInfo({
             className="rounded-full"
           />
         </div>
-        <div className="flex flex-col">
-          <h2 className="text-sky-500">Name</h2>
-          <p>{channel.name}</p>
-          <h2 className="text-sky-500">About</h2>
-          <p>{channel.about}</p>
+        <div className="flex flex-col gap-4">
+          <div>
+            <h2 className="text-sky-500">Name</h2>
+            <p>{channel.name}</p>
+          </div>
+          <div>
+            <h2 className="text-sky-500">About</h2>
+            <p>{channel.about}</p>
+          </div>
           <div className="text-slate-500">
             Created on{" "}
             <span>{new Date(channel.createdAt).toLocaleDateString()}</span>
           </div>
         </div>
-      </div>
-      <h2 className="text-sky-500">
-        Members <span>({channel.members.length})</span>
-      </h2>
-      <ul className="flex flex-col py-4 gap-4">
-        {channel.members.map((member) => (
-          <MemberItem key={member.userId} member={member} />
-        ))}
-      </ul>
+      </section>
+      <section>
+        <h2 className="text-sky-500">
+          Members <span>({channel.members.length})</span>
+        </h2>
+        <ul className="flex flex-col py-2 gap-4">
+          {channel.members.map((member) => (
+            <MemberItem key={member.userId} member={member} />
+          ))}
+        </ul>
+      </section>
     </section>
   );
 }
@@ -52,7 +58,10 @@ export default async function ChannelInfo({
 const MemberItem = ({ member }: { member: Member }) => {
   const user = member.user;
   return (
-    <Link href={`/users/${user.id}`} className="flex items-center gap-2">
+    <Link
+      href={`/users/${user.id}`}
+      className="flex items-center gap-2 hover:bg-slate-900 rounded-md p-2"
+    >
       <Image
         src={
           user.avatarUrl ||

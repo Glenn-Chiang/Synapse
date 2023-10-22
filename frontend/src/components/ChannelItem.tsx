@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Channel } from "@/lib/types";
+import { Channel } from "@/types";
 import Image from "next/image";
 import { ChannelIcon } from "./ChannelIcon";
 

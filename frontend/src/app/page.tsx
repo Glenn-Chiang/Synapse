@@ -1,7 +1,7 @@
 import { ChannelItem } from "@/components/ChannelItem";
 import { getCurrentUser } from "@/lib/auth";
 import Link from "next/link";
-import { Channel } from "../lib/types";
+import { Channel } from "../types";
 import { ChannelPreview } from "@/components/ChannelPreview";
 
 export const revalidate = 0;

@@ -1,7 +1,7 @@
 "use client";
 
 import { formatDate } from "@/lib/formatDate";
-import { Message } from "@/lib/types";
+import { Message } from "@/types";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 
