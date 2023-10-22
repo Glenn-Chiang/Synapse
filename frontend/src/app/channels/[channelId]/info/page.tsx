@@ -65,7 +65,7 @@ const MemberItem = ({ member }: { member: Member }) => {
   const user = member.user;
   return (
     <Link
-      href={`/users/${user.id}`}
+      href={`/chats/${user.id}`}
       className="flex items-center gap-2 hover:bg-slate-900 rounded-md px-2 py-4"
     >
       <Image

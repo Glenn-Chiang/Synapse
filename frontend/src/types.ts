@@ -14,7 +14,9 @@ export interface Member {
 
 export interface Chat {
   id: number;
-  users: User[];
+  messages: Message[];
+  member1: User;
+  member2: User;
 }
 
 export interface Channel {

@@ -26,7 +26,7 @@ type NavlinkProps = {
 const Navlink = ({ href, currentPath, children }: NavlinkProps) => {
   const isActive = href === currentPath;
   return (
-    <Link href={href} className={`${isActive ? "text-sky-500" : ""}`}>
+    <Link href={href} className={`${isActive ? "text-sky-500 underline underline-offset-8" : ""}`}>
       {children}
     </Link>
   );
