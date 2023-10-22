@@ -51,7 +51,7 @@ channelsRouter.get("/channels/:channelId", async (req, res) => {
           sender: true,
         },
       },
-      members: true,
+      members: true
     },
   });
 

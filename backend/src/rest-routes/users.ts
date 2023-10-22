@@ -20,6 +20,21 @@ usersRouter.get("/users/:userId", async (req, res) => {
   res.json(user);
 });
 
+// Get channel members 
+usersRouter.get("/channels/:channelId/members", async (req, res) => {
+  const channelId = Number(req.params.channelId)
+  const users = await prisma.user.findMany({
+    where: {
+      channels: {
+        some: {
+          channelId
+        }
+      }
+    }
+  })
+  res.json(users)
+})
+
 // Create new user
 usersRouter.post("/users", async (req, res) => {
   const { username } = req.body;

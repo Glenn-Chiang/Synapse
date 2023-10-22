@@ -15,7 +15,7 @@ export interface Channel {
   name: string;
   about: string;
   iconUrl?: string;
-  createdAt: Date;
+  createdAt: string;
   creatorId: string;
   members: User[];
   messages: Message[];

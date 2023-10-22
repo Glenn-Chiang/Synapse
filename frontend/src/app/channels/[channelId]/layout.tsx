@@ -20,7 +20,7 @@ export default async function ChannelLayout({
   return (
     <main className="">
       <ChannelHeader channel={channel} />
-      <div className="top-16">
+      <div className="mt-16">
         {info}
         {children}
       </div>
@@ -37,13 +37,13 @@ const ChannelHeader = ({ channel }: { channel: Channel }) => {
       >
         <FontAwesomeIcon icon={faArrowLeft} />
       </Link>
-      <div className="flex gap-4 items-center">
+      <Link href={`/channels/${channel.id}/info`} className="flex gap-4 items-center">
         <ChannelIcon iconUrl={channel.iconUrl} />
         <div className="flex flex-col items-center">
           <h1>{channel.name}</h1>
           <div className="text-slate-500">{channel.members.length} members</div>
         </div>
-      </div>
+      </Link>
       <button className="rounded-full hover:bg-slate-800 w-10 h-10">
         <FontAwesomeIcon icon={faEllipsisV} />
       </button>
