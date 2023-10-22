@@ -7,7 +7,7 @@ function ChannelItem({ channel }: { channel: Channel }) {
   return (
     <Link
       href={`/channels/${channel.id}`}
-      className="flex gap-4 items-center p-4 rounded-md bg-slate-900 hover:bg-slate-800 transition w-full sm:w-1/2"
+      className="flex gap-4 items-center p-4 rounded-md bg-slate-900 hover:bg-slate-800 transition w-full"
     >
       <ChannelIcon iconUrl={channel.iconUrl} />
       <div>

@@ -10,6 +10,7 @@ import { editChannel } from "@/api/channels";
 import { useParams } from "next/navigation";
 import { ErrorMessage } from "@/components/ErrorMessage";
 import { Channel } from "@/types";
+import { useRouter } from "next/navigation";
 
 const EditChannel = ({ channel }: { channel: Channel }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -45,16 +46,17 @@ const EditChannelModal = ({
   channel: Channel;
 }) => {
   const { register, handleSubmit } = useForm<FormFields>();
-
   const [isPending, setIsPending] = useState(false);
-
   const [error, setError] = useState("");
+
+  const router = useRouter()
 
   const onSubmit: SubmitHandler<FormFields> = async (formFields) => {
     try {
       const { about, iconUrl } = formFields;
       setIsPending(true);
       await editChannel(channel.id, about, iconUrl);
+      router.refresh()
       close();
     } catch (error) {
       setError((error as Error).message);
