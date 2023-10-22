@@ -36,6 +36,7 @@ const LeaveChannelModal = ({ close }: { close: () => void }) => {
     setIsPending(true);
     socket.emit("leave-channel", currentUserId, channelId, () => {
       router.push('/')
+      router.refresh()
     });
   };
 

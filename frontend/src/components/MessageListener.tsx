@@ -4,17 +4,16 @@ import { socket } from "@/lib/socket"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 
-const SocketProvider = () => {
+const MessageListener = () => {
   const router = useRouter()
 
   useEffect(() => {
     if (!socket.connected) {
       socket.connect()
-      console.log('Socket connected')
     }
-
     const handleMessage = (channelId: number) => {
       console.log('Message received in channel:', channelId)
+      
       router.refresh()  
     }
 
@@ -29,4 +28,4 @@ const SocketProvider = () => {
   )
 }
 
-export {SocketProvider}
+export {MessageListener}

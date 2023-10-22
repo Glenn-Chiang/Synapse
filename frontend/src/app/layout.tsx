@@ -1,14 +1,14 @@
+import { MessageListener } from '@/components/MessageListener';
+import { socket } from "@/lib/socket";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
-import "@fortawesome/fontawesome-svg-core/styles.css";
-import { config } from "@fortawesome/fontawesome-svg-core";
-config.autoAddCss = false;
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import { socket } from "@/lib/socket";
-import { SocketProvider } from '@/components/SocketProvider';
+import "./globals.css";
+config.autoAddCss = false;
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,8 +29,8 @@ export default async function RootLayout({
   }
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <SocketProvider/>
+      <body >
+        <MessageListener/>
         <Topbar />
         <div className="mt-16 p-4 max-w-full">{children}</div>
       </body>

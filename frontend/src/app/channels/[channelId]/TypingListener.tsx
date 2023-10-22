@@ -19,7 +19,7 @@ const TypingListener = () => {
       typingTimer = setTimeout(() => {
         // if user stops typing for more than 2 seconds, we consider them to have stopped typing
         setTypingUser(null);
-      }, 2000);
+      }, 1500);
     };
     socket.on("typing", handleTyping);
 
@@ -38,7 +38,7 @@ const TypingListener = () => {
     );
   }
 
-  return <></>;
+  return null;
 };
 
 export { TypingListener };
