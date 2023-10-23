@@ -30,7 +30,7 @@ const io = new Server(server, {
 })
 
 io.on('connection', async (socket) => {
-  console.log('Client connected')
+  console.log('Client connected:', socket.id)
   socket.data.userId = 1
   const userId: number = socket.data.userId
   socket.join(userId.toString()) // Each user will join a room associated with their userId. DMs will be emitted to this room.

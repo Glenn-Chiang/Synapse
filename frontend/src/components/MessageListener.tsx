@@ -10,6 +10,7 @@ const MessageListener = () => {
   useEffect(() => {
     if (!socket.connected) {
       socket.connect()
+      console.log("connected to socket.io:")
     }
   
     // Channel messages
