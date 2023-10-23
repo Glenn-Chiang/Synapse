@@ -1,7 +1,6 @@
 "use server";
 
-import { Channel, User } from "@/types";
-import { revalidatePath } from "next/cache";
+import { Channel } from "@/types";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -52,4 +51,4 @@ const editChannel = async (
   return;
 };
 
-export { getChannel, editChannel, createChannel };
+export { createChannel, editChannel, getChannel };

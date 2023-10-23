@@ -12,7 +12,7 @@ usersRouter.get("/users", async (req, res) => {
 // Get one user
 usersRouter.get("/users/:userId", async (req, res) => {
   const userId = req.params.userId;
-  const user = await prisma.user.findMany({
+  const user = await prisma.user.findUnique({
     where: {
       id: Number(userId),
     },
