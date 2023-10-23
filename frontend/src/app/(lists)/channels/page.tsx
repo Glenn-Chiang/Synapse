@@ -11,7 +11,7 @@ export default async function MyChannels() {
     <main>
       <div className="py-2 flex gap-4 items-center font-medium">
         <Link
-          href={"/channels/create"}
+          href={"/channel/create"}
           className="bg-sky-500 p-2 text-white rounded-md shadow hover:shadow-sky-500 hover:shadow"
         >
           Create channel
