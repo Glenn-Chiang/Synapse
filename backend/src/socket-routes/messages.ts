@@ -1,18 +1,19 @@
 import { Socket } from "socket.io";
 import { prisma } from "../app";
 
-interface MessageData {
+type MessageData = {
   text: string;
   channelId: number;
   senderId: number;
-}
+};
 
-type MessageCallback = () => void;
+type EventCallback = () => void;
+
 
 export const registerMessageHandlers = (socket: Socket) => {
-  const handleCreate = async (
+  const handleSend = async (
     { text, channelId, senderId }: MessageData,
-    messageCallback: MessageCallback
+    messageCallback: EventCallback
   ) => {
     const message = await prisma.message.create({
       data: {
@@ -28,7 +29,7 @@ export const registerMessageHandlers = (socket: Socket) => {
     socket.to(channelId.toString()).emit("message", channelId); // Emit event to clients in the same room as sender
     console.log("Message emitted to channel:", channelId);
   };
-  socket.on("send-message", handleCreate);
+  socket.on("send-message", handleSend);
 
   // User is typing
   socket.on("typing", async (userId: number, channelId: number) => {

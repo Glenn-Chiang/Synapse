@@ -33,8 +33,8 @@ chatsRouter.get("/chats", async (req, res) => {
   const chat = await prisma.chat.findUnique({
     where: {
       member1Id_member2Id: {
-        member1Id,
-        member2Id,
+        member1Id: Math.min(member1Id, member2Id),
+        member2Id: Math.max(member1Id, member2Id),
       },
     },
     include: {
