@@ -41,7 +41,7 @@ const ChatPreview = ({chat}: {chat: Chat}) => {
           <h2>{otherUser.username}</h2>
           {newestMessage && (
             <span className="text-slate-500">
-              {formatDate(newestMessage.timestamp)}
+              {formatDate(newestMessage.timestamp, true)}
             </span>
           )}
         </div>

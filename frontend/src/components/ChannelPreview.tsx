@@ -16,7 +16,7 @@ function ChannelPreview({ channel }: { channel: Channel }) {
           <h2>{channel.name}</h2>
           {newestMessage && (
             <span className="text-slate-500">
-              {formatDate(newestMessage.timestamp)}
+              {formatDate(newestMessage.timestamp, true)}
             </span>
           )}
         </div>
