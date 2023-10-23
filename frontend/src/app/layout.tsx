@@ -37,7 +37,7 @@ export default async function RootLayout({
 
 function Topbar() {
   return (
-    <nav className="z-10 bg-slate-950 w-screen h-16 shadow p-4 sm:px-10 fixed top-0 left-0 font-medium flex items-center text-xl">
+    <nav className="z-10 bg-slate-950 w-screen h-16 shadow p-4 fixed top-0 left-0 font-medium flex items-center text-xl">
       <Link href={"/"} className="flex gap-2 items-center">
         <Image
           src={"https://static.thenounproject.com/png/40466-200.png"}

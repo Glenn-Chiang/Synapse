@@ -1,19 +1,21 @@
 "use client";
 
 import { ChannelIcon } from "@/components/ChannelIcon";
+import { LeaveChannelModal } from "@/components/LeaveChannelModal";
 import { ActionButton, BackButton } from "@/components/buttons";
+import { getCurrentUser } from "@/lib/auth";
+import { socket } from "@/lib/socket";
 import { Channel } from "@/types";
-import { faArrowLeft, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-const ChannelHeader = ({ channel }: { channel: Channel }) => {
-  const router = useRouter();
+export const ChannelHeader = ({ channel }: { channel: Channel }) => {
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   return (
     <header className="fixed top-16 left-0 w-full flex justify-between p-2 items-center border-b border-slate-500 z-10 bg-slate-950 ">
-      <BackButton/>
+      <BackButton />
       <Link
         href={`/channel/${channel.id}/info`}
         className="flex gap-4 items-center"
@@ -24,9 +26,24 @@ const ChannelHeader = ({ channel }: { channel: Channel }) => {
           <div className="text-slate-500">{channel.members.length} members</div>
         </div>
       </Link>
-      <ActionButton/>
+      <ActionButton onClick={() => setMenuIsOpen((prev) => !prev)} />
+      {menuIsOpen && <ActionMenu />}
     </header>
   );
 };
 
-export { ChannelHeader };
+const ActionMenu = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  return (
+    <div className="absolute right-2 -bottom-8 z-20 bg-slate-900 rounded-md">
+      <button
+        onClick={() => setModalIsOpen(true)}
+        className="p-2 hover:bg-slate-800 rounded-md"
+      >
+        Leave channel
+      </button>
+      {modalIsOpen && <LeaveChannelModal close={() => setModalIsOpen(false)} />}
+    </div>
+  );
+};
