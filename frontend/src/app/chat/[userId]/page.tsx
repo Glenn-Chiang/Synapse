@@ -4,6 +4,7 @@ import { AvatarIcon } from "@/components/AvatarIcon";
 import { InputBar } from "@/components/InputBar";
 import { ActionButton, BackButton } from "@/components/buttons";
 import { getCurrentUser } from "@/lib/auth";
+import { socket } from "@/lib/socket";
 
 export default async function ChatPage({
   params,
@@ -16,12 +17,20 @@ export default async function ChatPage({
   const otherUser = await getUser(otherId); // The user whom the current user is chatting with
   const chat = await getChat(selfId, otherId);
 
-  const handleSendMessage = async () => {
+  const handleSendMessage = async (text: string) => {
     "use server";
+    socket.emit(
+      "send-direct-message",
+      { text, senderId: selfId, recipientId: otherId },
+      () => {
+        console.log("direct message acknowledged");
+      }
+    );
   };
 
   const handleTypeMessage = async () => {
     "use server";
+    // socket.emit('typing')
   };
 
   return (
