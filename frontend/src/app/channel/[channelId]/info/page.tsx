@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Member } from "../../../../types";
 import { EditChannel } from "./EditChannel";
 import { LeaveChannel } from "./LeaveChannel";
+import { AvatarIcon } from "@/components/AvatarIcon";
 
 export default async function ChannelInfo({
   params,
@@ -68,16 +69,7 @@ const MemberItem = ({ member }: { member: Member }) => {
       href={`/chat/${user.id}`}
       className="flex items-center gap-2 hover:bg-slate-900 rounded-md px-2 py-4"
     >
-      <Image
-        src={
-          user.avatarUrl ||
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqzQ_T2DGHe-3tHk9z7fqeYzLJ2Tn9vszRmH1TOpZjxynAFhO7ciB10Nh5d-b5_yUFTC8&usqp=CAU"
-        }
-        alt=""
-        width={40}
-        height={40}
-        className="rounded-full"
-      />
+      <AvatarIcon url={user.avatarUrl}/>
       <div className="">
         <div>{user.username}</div>
         <div className="text-slate-500">

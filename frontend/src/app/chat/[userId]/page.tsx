@@ -1,5 +1,6 @@
 import { getChat } from "@/api/chats";
 import { getUser } from "@/api/users";
+import { AvatarIcon } from "@/components/AvatarIcon";
 import { InputBar } from "@/components/InputBar";
 import { ActionButton, BackButton } from "@/components/buttons";
 import { getCurrentUser } from "@/lib/auth";
@@ -27,8 +28,10 @@ export default async function ChatPage({
     <main>
       <header className="fixed top-16 left-0 w-full flex justify-between p-2 items-center border-b border-slate-500 z-10 bg-slate-950 ">
         <BackButton />
-        
-        <h1>{otherUser.username}</h1>
+        <div className="flex gap-4 items-center">
+          <AvatarIcon url={otherUser.avatarUrl} />
+          <h1>{otherUser.username}</h1>
+        </div>
         <ActionButton />
       </header>
       {!chat && (
