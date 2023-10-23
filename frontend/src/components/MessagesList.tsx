@@ -3,7 +3,7 @@ import { Message } from '@/types';
 
 const MessagesList = ({ messages }: { messages: Message[] }) => {
   return (
-    <ul className="py-4 mt-16 mb-10 flex flex-col gap-4">
+    <ul className="py-4 mb-10 flex flex-col gap-4">
       {messages.map((message) => (
         <MessageItem key={message.id} message={message} />
       ))}

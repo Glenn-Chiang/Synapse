@@ -1,16 +1,15 @@
 "use client";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { Modal } from "@/components/Modal";
-import { useState } from "react";
-import { SubmitButton } from "@/components/buttons";
-import { SubmitHandler, useForm } from "react-hook-form";
 import { editChannel } from "@/api/channels";
-import { useParams } from "next/navigation";
 import { ErrorMessage } from "@/components/ErrorMessage";
+import { Modal } from "@/components/Modal";
+import { SubmitButton } from "@/components/buttons";
 import { Channel } from "@/types";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 const EditChannel = ({ channel }: { channel: Channel }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);

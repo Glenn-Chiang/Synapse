@@ -15,7 +15,7 @@ export default async function ChannelLayout({
   return (
     <main className="">
       <ChannelHeader channel={channel} />
-      <div className="mt-16">
+      <div className="mt-36">
         {children}
       </div>
     </main>
