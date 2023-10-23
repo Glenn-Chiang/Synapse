@@ -6,7 +6,16 @@ export const formatDate = (datestring: string, short: boolean = false) => {
     date < today
       ? short
         ? date.toLocaleDateString()
-        : date.toLocaleString()
-      : date.toLocaleTimeString(undefined, {hour: '2-digit', minute: '2-digit'});
+        : date.toLocaleString(undefined, {
+            year: "2-digit",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "numeric",
+            minute: "2-digit",
+          })
+      : date.toLocaleTimeString(undefined, {
+          hour: "numeric",
+          minute: "2-digit",
+        });
   return formattedDate;
 };
