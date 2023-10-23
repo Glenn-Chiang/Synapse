@@ -7,6 +7,6 @@ export const formatDate = (datestring: string, short: boolean = false) => {
       ? short
         ? date.toLocaleDateString()
         : date.toLocaleString()
-      : date.toLocaleTimeString();
+      : date.toLocaleTimeString(undefined, {hour: '2-digit', minute: '2-digit'});
   return formattedDate;
 };
