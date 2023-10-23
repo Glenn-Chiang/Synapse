@@ -23,10 +23,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // // Establish socket connection
-  // if (!socket.connected) {
-  //   socket.connect()
-  // }
+  
   return (
     <html lang="en">
       <body >

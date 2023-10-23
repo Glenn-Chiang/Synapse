@@ -6,6 +6,7 @@ import { MessagesList } from "@/components/MessagesList";
 import { ActionButton, BackButton } from "@/components/buttons";
 import { getCurrentUser } from "@/lib/auth";
 import { socket } from "@/lib/socket";
+import { ChatInput } from "./ChatInput";
 
 export default async function ChatPage({
   params,
@@ -17,22 +18,6 @@ export default async function ChatPage({
 
   const otherUser = await getUser(otherId); // The user whom the current user is chatting with
   const chat = await getChat(selfId, otherId);
-
-  const handleSendMessage = async (text: string) => {
-    "use server";
-    socket.emit(
-      "send-direct-message",
-      { text, senderId: selfId, recipientId: otherId },
-      () => {
-        console.log("direct message acknowledged");
-      }
-    );
-  };
-
-  const handleTypeMessage = async () => {
-    "use server";
-    // socket.emit('typing')
-  };
 
   return (
     <main>
@@ -51,10 +36,7 @@ export default async function ChatPage({
           Type a message and start chatting!
         </div>
       )}
-      <InputBar
-        handleSend={handleSendMessage}
-        handleChange={handleTypeMessage}
-      />
+      <ChatInput />
     </main>
   );
 }
