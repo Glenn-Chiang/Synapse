@@ -1,5 +1,12 @@
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+"use client";
+
+import {
+  faArrowLeft,
+  faEllipsisV,
+  faSpinner,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 type SubmitButtonProps = {
@@ -25,6 +32,26 @@ export const SubmitButton = ({
         <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
       )}
       {children}
+    </button>
+  );
+};
+
+export const BackButton = () => {
+  const router = useRouter();
+  return (
+    <button
+      onClick={() => router.back()}
+      className="rounded-full hover:bg-slate-800 w-10 h-10 flex justify-center items-center"
+    >
+      <FontAwesomeIcon icon={faArrowLeft} />
+    </button>
+  );
+};
+
+export const ActionButton = () => {
+  return (
+    <button className="rounded-full hover:bg-slate-800 w-10 h-10">
+      <FontAwesomeIcon icon={faEllipsisV} />
     </button>
   );
 };

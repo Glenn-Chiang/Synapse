@@ -4,7 +4,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { socket } from "@/lib/socket";
 import { Message } from "@/types";
 import { revalidatePath } from "next/cache";
-import { InputBar } from "./InputBar";
+import { InputBar } from "../../../components/InputBar";
 import { JoinChannel } from "./JoinChannel";
 import { TypingListener } from "./TypingListener";
 
@@ -16,31 +16,38 @@ export default async function ChannelMain({
   const channelId = Number(params.channelId);
   const channel = await getChannel(channelId);
   const currentUserId = getCurrentUser();
-  const userIsMember = !!channel.members.find(member => member.userId === currentUserId)
+  const userIsMember = !!channel.members.find(
+    (member) => member.userId === currentUserId
+  );
 
   const handleSendMessage = async (text: string) => {
-    "use server"
-    socket.emit("send-message", { text, channelId, senderId: currentUserId }, () => {
-      console.log("message acknowledged")
-    });
+    "use server";
+    socket.emit(
+      "send-message",
+      { text, channelId, senderId: currentUserId },
+      () => {
+        console.log("message acknowledged");
+      }
+    );
   };
 
   const handleTypeMessage = async () => {
-    "use server"
+    "use server";
     socket.emit("typing", currentUserId, channelId);
-  }
+  };
 
   if (!userIsMember) {
-    return (
-      <JoinChannel/>
-    )
+    return <JoinChannel />;
   }
 
   return (
     <section>
       <Messages messages={channel.messages} />
-      <InputBar handleSend={handleSendMessage} handleChange={handleTypeMessage}/>
-      <TypingListener/>
+      <InputBar
+        handleSend={handleSendMessage}
+        handleChange={handleTypeMessage}
+      />
+      <TypingListener />
     </section>
   );
 }

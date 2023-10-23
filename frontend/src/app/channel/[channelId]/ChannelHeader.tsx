@@ -1,6 +1,7 @@
 "use client";
 
 import { ChannelIcon } from "@/components/ChannelIcon";
+import { ActionButton, BackButton } from "@/components/buttons";
 import { Channel } from "@/types";
 import { faArrowLeft, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,12 +13,7 @@ const ChannelHeader = ({ channel }: { channel: Channel }) => {
 
   return (
     <header className="fixed top-16 left-0 w-full flex justify-between p-2 items-center border-b border-slate-500 z-10 bg-slate-950 ">
-      <button
-        onClick={() => router.back()}
-        className="rounded-full hover:bg-slate-800 w-10 h-10 flex justify-center items-center"
-      >
-        <FontAwesomeIcon icon={faArrowLeft} />
-      </button>
+      <BackButton/>
       <Link
         href={`/channel/${channel.id}/info`}
         className="flex gap-4 items-center"
@@ -28,9 +24,7 @@ const ChannelHeader = ({ channel }: { channel: Channel }) => {
           <div className="text-slate-500">{channel.members.length} members</div>
         </div>
       </Link>
-      <button className="rounded-full hover:bg-slate-800 w-10 h-10">
-        <FontAwesomeIcon icon={faEllipsisV} />
-      </button>
+      <ActionButton/>
     </header>
   );
 };
