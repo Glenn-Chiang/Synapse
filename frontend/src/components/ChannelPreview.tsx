@@ -2,8 +2,10 @@ import { Channel } from "@/types";
 import Link from "next/link";
 import { ChannelIcon } from "./ChannelIcon";
 import { formatDate } from "@/lib/formatDate";
+import { getCurrentUser } from "@/lib/auth";
 
 function ChannelPreview({ channel }: { channel: Channel }) {
+  const currentUserId = getCurrentUser();
   const newestMessage = channel.messages[channel.messages.length - 1];
   return (
     <Link
@@ -23,7 +25,10 @@ function ChannelPreview({ channel }: { channel: Channel }) {
         {newestMessage && (
           <div className="line-clamp-2 py-2">
             <span className="text-sky-500">
-              {newestMessage.sender.username}:{" "}
+              {newestMessage.senderId === currentUserId
+                ? "You"
+                : newestMessage.sender.username}
+              :{" "}
             </span>
             <span className="text-slate-500">{newestMessage.text}</span>
           </div>
