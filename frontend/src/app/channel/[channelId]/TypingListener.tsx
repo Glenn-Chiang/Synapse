@@ -4,15 +4,14 @@ import { socket } from "@/lib/socket";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const TypingListener = () => {
-  const currentChannelId = Number(useParams().channelId);
+const TypingListener = ({currentRoomId}: {currentRoomId: number}) => {
 
   const [typingUser, setTypingUser] = useState<null | number>(null);
 
   useEffect(() => {
     let typingTimer: NodeJS.Timeout | undefined = undefined;
-    const handleTyping = (userId: number, channelId: number) => {
-      if (currentChannelId !== channelId) return; // ignore typing in other channels
+    const handleTyping = (userId: number, roomId: number) => {
+      if (currentRoomId !== roomId) return; // ignore typing in other rooms
 
       setTypingUser(userId);
       clearTimeout(typingTimer);
@@ -26,7 +25,7 @@ const TypingListener = () => {
     return () => {
       socket.off("typing", handleTyping);
     };
-  }, [typingUser, currentChannelId]);
+  }, [typingUser, currentRoomId]);
 
   if (typingUser) {
     return (

@@ -23,7 +23,7 @@ export const ChatInput = () => {
   };
 
   const handleTypeMessage = () => {
-    // socket.emit('typing')
+    socket.emit('typing', currentUserId, otherUserId)
   };
 
   return (

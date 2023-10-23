@@ -27,7 +27,7 @@ export default async function ChannelMain({
     <section>
       <MessagesList messages={channel.messages} />
       <ChannelInput/>
-      <TypingListener />
+      <TypingListener currentRoomId={channelId}/>
     </section>
   );
 }

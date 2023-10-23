@@ -1,11 +1,10 @@
 import { getChat } from "@/api/chats";
 import { getUser } from "@/api/users";
+import { TypingListener } from "@/app/channel/[channelId]/TypingListener";
 import { AvatarIcon } from "@/components/AvatarIcon";
-import { InputBar } from "@/components/InputBar";
 import { MessagesList } from "@/components/MessagesList";
 import { ActionButton, BackButton } from "@/components/buttons";
 import { getCurrentUser } from "@/lib/auth";
-import { socket } from "@/lib/socket";
 import { ChatInput } from "./ChatInput";
 
 export default async function ChatPage({
@@ -37,6 +36,7 @@ export default async function ChatPage({
         </div>
       )}
       <ChatInput />
+      <TypingListener currentRoomId={otherId}/>
     </main>
   );
 }
