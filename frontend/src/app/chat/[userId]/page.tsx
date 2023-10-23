@@ -2,6 +2,7 @@ import { getChat } from "@/api/chats";
 import { getUser } from "@/api/users";
 import { AvatarIcon } from "@/components/AvatarIcon";
 import { InputBar } from "@/components/InputBar";
+import { MessagesList } from "@/components/MessagesList";
 import { ActionButton, BackButton } from "@/components/buttons";
 import { getCurrentUser } from "@/lib/auth";
 import { socket } from "@/lib/socket";
@@ -43,7 +44,9 @@ export default async function ChatPage({
         </div>
         <ActionButton />
       </header>
-      {!chat && (
+      {chat ? (
+        <MessagesList messages={chat.messages} />
+      ) : (
         <div className="fixed top-1/2 inset-x-0 flex justify-center">
           Type a message and start chatting!
         </div>

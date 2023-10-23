@@ -3,6 +3,16 @@ import { prisma } from "../app";
 
 const chatsRouter = Router();
 
+const includedData = {
+      messages: {
+        include: {
+          sender: true
+        }
+      },
+      member1: true,
+      member2: true
+    }
+
 // Get all chats involving a user
 chatsRouter.get("/users/:userId/chats", async (req, res) => {
   const userId = Number(req.params.userId);
@@ -10,7 +20,7 @@ chatsRouter.get("/users/:userId/chats", async (req, res) => {
   const chats = await prisma.chat.findMany({
     where: {
       OR: [{ member1Id: userId }, { member2Id: userId }],
-    },
+    }, include: includedData
   });
 
   res.json(chats);
@@ -37,15 +47,7 @@ chatsRouter.get("/chats", async (req, res) => {
         member2Id: Math.max(member1Id, member2Id),
       },
     },
-    include: {
-      messages: {
-        include: {
-          sender: true,
-        },
-      },
-      member1: true,
-      member2: true,
-    },
+    include: includedData
   });
 
   res.json(chat);

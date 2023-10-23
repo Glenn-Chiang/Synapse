@@ -4,6 +4,14 @@ import { Channel } from "@/types";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
+const getChannels = async (userId: number): Promise<Channel[]> => {
+  const res = await fetch(`${BASE_URL}/users/${userId}/channels`, {
+    next: { tags: ["channels"] },
+  });
+  const channels: Channel[] = await res.json();
+  return channels;
+};
+
 const getChannel = async (channelId: number) => {
   const res = await fetch(`${BASE_URL}/channels/${channelId}`, {
     cache: "no-store",
@@ -51,4 +59,4 @@ const editChannel = async (
   return;
 };
 
-export { createChannel, editChannel, getChannel };
+export { getChannels, createChannel, editChannel, getChannel };

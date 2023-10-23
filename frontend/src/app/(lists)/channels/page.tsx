@@ -1,17 +1,9 @@
+import { getChannels } from "@/api/channels";
 import { ChannelPreview } from "@/components/ChannelPreview";
 import { getCurrentUser } from '@/lib/auth';
 import Link from "next/link";
-import { Channel } from "../../../types";
 export const revalidate = 0;
 
-const getChannels = async (userId: number): Promise<Channel[]> => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/users/${userId}/channels`,
-    { next: { tags: ["channels"] } }
-  );
-  const channels: Channel[] = await res.json();
-  return channels;
-};
 
 export default async function MyChannels() {
   const userId = getCurrentUser();

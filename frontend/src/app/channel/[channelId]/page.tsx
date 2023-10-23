@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache";
 import { InputBar } from "../../../components/InputBar";
 import { JoinChannel } from "./JoinChannel";
 import { TypingListener } from "./TypingListener";
+import { MessagesList } from "@/components/MessagesList";
 
 export default async function ChannelMain({
   params,
@@ -42,7 +43,7 @@ export default async function ChannelMain({
 
   return (
     <section>
-      <Messages messages={channel.messages} />
+      <MessagesList messages={channel.messages} />
       <InputBar
         handleSend={handleSendMessage}
         handleChange={handleTypeMessage}
@@ -52,12 +53,4 @@ export default async function ChannelMain({
   );
 }
 
-const Messages = ({ messages }: { messages: Message[] }) => {
-  return (
-    <ul className="py-4 mt-16 mb-10 flex flex-col gap-4">
-      {messages.map((message) => (
-        <MessageItem key={message.id} message={message} />
-      ))}
-    </ul>
-  );
-};
+
