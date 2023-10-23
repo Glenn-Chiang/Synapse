@@ -3,7 +3,7 @@ import { Chat } from "@/types";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const getChats = async (userId: number) => {
-  const res = await fetch(`${BASE_URL}/users/${userId}/chats`)
+  const res = await fetch(`${BASE_URL}/users/${userId}/chats`, {cache: "no-store"})
   if (!res.ok) {
     const errorMessage = await res.text();
     throw new Error(errorMessage);

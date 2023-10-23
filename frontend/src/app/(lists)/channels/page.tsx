@@ -1,9 +1,7 @@
 import { getChannels } from "@/api/channels";
 import { ChannelPreview } from "@/components/ChannelPreview";
-import { getCurrentUser } from '@/lib/auth';
+import { getCurrentUser } from "@/lib/auth";
 import Link from "next/link";
-export const revalidate = 0;
-
 
 export default async function MyChannels() {
   const userId = getCurrentUser();

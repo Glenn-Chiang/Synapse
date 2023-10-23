@@ -6,7 +6,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const getChannels = async (userId: number): Promise<Channel[]> => {
   const res = await fetch(`${BASE_URL}/users/${userId}/channels`, {
-    next: { tags: ["channels"] },
+    cache: "no-store",
   });
   const channels: Channel[] = await res.json();
   return channels;
