@@ -4,7 +4,7 @@ import { editChannel } from "@/api/channels";
 import { ErrorMessage } from "@/components/ErrorMessage";
 import { Modal } from "@/components/Modal";
 import { SubmitButton } from "@/components/buttons";
-import { Channel } from "@/types";
+import { Channel } from "@/lib/types";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
@@ -48,14 +48,14 @@ const EditChannelModal = ({
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState("");
 
-  const router = useRouter()
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<FormFields> = async (formFields) => {
     try {
       const { about, iconUrl } = formFields;
       setIsPending(true);
       await editChannel(channel.id, about, iconUrl);
-      router.refresh()
+      router.refresh();
       close();
     } catch (error) {
       setError((error as Error).message);

@@ -1,4 +1,4 @@
-import { Channel } from "@/types";
+import { Channel } from "@/lib/types";
 import Link from "next/link";
 import { ChannelIcon } from "./ChannelIcon";
 
@@ -16,13 +16,10 @@ function ChannelItem({ channel }: { channel: Channel }) {
             {channel.members.length} <span>members</span>
           </div>
         </div>
-        <div className="line-clamp-3 text-slate-400">
-          {channel.about}
-        </div>
+        <div className="line-clamp-3 text-slate-400">{channel.about}</div>
       </div>
     </Link>
   );
 }
 
 export { ChannelItem };
-

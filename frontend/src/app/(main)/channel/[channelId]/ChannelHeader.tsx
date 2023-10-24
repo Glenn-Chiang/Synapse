@@ -3,7 +3,7 @@
 import { ChannelIcon } from "@/components/ChannelIcon";
 import { LeaveChannelModal } from "@/components/LeaveChannelModal";
 import { ActionButton, BackButton } from "@/components/buttons";
-import { Channel } from "@/types";
+import { Channel } from "@/lib/types";
 import Link from "next/link";
 import { useState } from "react";
 

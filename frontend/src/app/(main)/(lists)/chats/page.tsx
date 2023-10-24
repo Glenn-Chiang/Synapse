@@ -2,7 +2,7 @@ import { getChats } from "@/api/chats";
 import { AvatarIcon } from "@/components/AvatarIcon";
 import { getCurrentUser } from "@/lib/getCurrentUser";
 import { formatDate } from "@/lib/formatDate";
-import { Chat } from "@/types";
+import { Chat } from "@/lib/types";
 import Link from "next/link";
 
 export default async function MyChats() {

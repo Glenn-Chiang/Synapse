@@ -1,4 +1,4 @@
-import { User } from "../types";
+import { User } from "../lib/types";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const getUser = async (userId: number) => {

@@ -1,17 +1,18 @@
-import { User } from '@/types'
-import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies'
-import {cookies} from 'next/headers'
+import { User } from "@/lib/types";
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import { cookies } from "next/headers";
 
 const getCurrentUser = () => {
-  const cookieStore = cookies()
-  const userCookie = cookieStore.get('user') 
-  
-  if (!userCookie) {
-    throw new Error('missing user cookie')
-  }
+  const cookieStore = cookies();
+  const userCookie = cookieStore.get("user") as RequestCookie;
+  console.log(userCookie);
+  // if (!userCookie) {
+  //   throw new Error("missing user cookie");
+  // }
 
-  const currentUser: User = JSON.parse(userCookie.value)
+  const currentUser: User = JSON.parse(userCookie.value);
   return currentUser;
-}
+};
 
-export {getCurrentUser}
+export { getCurrentUser };
+

@@ -1,4 +1,4 @@
-import { Channel } from "@/types";
+import { Channel } from "@/lib/types";
 import Link from "next/link";
 import { ChannelIcon } from "./ChannelIcon";
 import { formatDate } from "@/lib/formatDate";
@@ -36,6 +36,6 @@ const ChannelPreview = ({ channel }: { channel: Channel }) => {
       </div>
     </Link>
   );
-}
+};
 
 export { ChannelPreview };

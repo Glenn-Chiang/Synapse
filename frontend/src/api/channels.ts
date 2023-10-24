@@ -1,6 +1,6 @@
 "use server";
 
-import { Channel } from "@/types";
+import { Channel } from "@/lib/types";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 

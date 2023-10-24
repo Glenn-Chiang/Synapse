@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { User } from "@/types"
-import { createContext } from "react"
+import { User } from "@/lib/types";
+import { createContext } from "react";
 
-export const UserContext = createContext<null|User>(null)
+export const UserContext = createContext<null | User>(null);

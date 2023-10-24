@@ -1,5 +1,5 @@
-import { MessageItem } from '@/components/MessageItem';
-import { Message } from '@/types';
+import { MessageItem } from "@/components/MessageItem";
+import { Message } from "@/lib/types";
 
 const MessagesList = ({ messages }: { messages: Message[] }) => {
   return (
@@ -11,4 +11,4 @@ const MessagesList = ({ messages }: { messages: Message[] }) => {
   );
 };
 
-export {MessagesList}
+export { MessagesList };

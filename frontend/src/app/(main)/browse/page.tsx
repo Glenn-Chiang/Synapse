@@ -1,5 +1,5 @@
 import { ChannelItem } from "@/components/ChannelItem";
-import { Channel } from "@/types";
+import { Channel } from "@/lib/types";
 
 export const revalidate = 0;
 

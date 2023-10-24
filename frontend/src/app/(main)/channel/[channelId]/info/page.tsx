@@ -3,7 +3,7 @@ import { AvatarIcon } from "@/components/AvatarIcon";
 import { getCurrentUser } from "@/lib/getCurrentUser";
 import Image from "next/image";
 import Link from "next/link";
-import { Member } from "../../../../types";
+import { Member } from "../../../../lib/types";
 import { EditChannel } from "./EditChannel";
 import { LeaveChannel } from "./LeaveChannel";
 
