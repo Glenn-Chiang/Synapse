@@ -10,6 +10,7 @@ authRouter.get(
 );
 
 // User will be redirected to this endpoint after successful sign-in through google
+// verifyCallback defined in the passport strategy will be run here
 authRouter.get("/auth/google/callback", passport.authenticate("google", {
   successRedirect: process.env.CLIENT_URL
 }));
