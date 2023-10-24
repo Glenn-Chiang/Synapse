@@ -1,15 +1,15 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import { prisma } from "./app";
+import { prisma } from "../app";
 
-const strategyOptions = {
+const options = {
   clientID: process.env.GOOGLE_CLIENT_ID as string,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
   callbackURL: `${process.env.BASE_URL}/auth/google/callback`,
 };
 
 const googleStrategy = new GoogleStrategy(
-  strategyOptions,
+  options,
   async (accessToken, refreshToken, profile, done) => {
     // Callback is run on successful google sign-in
     try {
@@ -36,5 +36,3 @@ const googleStrategy = new GoogleStrategy(
 );
 
 passport.use(googleStrategy);
-
-export { passport };

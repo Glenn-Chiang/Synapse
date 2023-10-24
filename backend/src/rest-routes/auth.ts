@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { passport } from "../passport-config";
 import { User } from "@prisma/client";
 import jwt from 'jsonwebtoken'
+import passport from "passport";
 
 const authRouter = Router();
 
