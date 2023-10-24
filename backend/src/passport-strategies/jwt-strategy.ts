@@ -1,4 +1,3 @@
-import passport from "passport";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 import { prisma } from "../app";
 
@@ -7,7 +6,7 @@ const options = {
   secretOrKey: process.env.JWT_SECRET as string,
 };
 
-const jwtStrategy = new JwtStrategy(options, async (payload, done) => {
+export const jwtStrategy = new JwtStrategy(options, async (payload, done) => {
   try {
     const user = await prisma.user.findUnique({
       where: {
@@ -24,4 +23,3 @@ const jwtStrategy = new JwtStrategy(options, async (payload, done) => {
   }
 });
 
-passport.use(jwtStrategy);

@@ -15,6 +15,8 @@ import { registerMessageHandlers } from "./socket-routes/messages";
 import { connectToChannels, registerChannelHandlers } from "./socket-routes/channels";
 import { registerDirectMessageHandlers } from "./socket-routes/direct-messages";
 import passport from "passport";
+import { googleStrategy } from "./passport-strategies/google-strategy";
+import { jwtStrategy } from "./passport-strategies/jwt-strategy";
 
 export const prisma = new PrismaClient()
 
@@ -23,6 +25,8 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 app.use(passport.initialize())
+passport.use(googleStrategy)
+passport.use(jwtStrategy)
 
 app.use(authRouter)
 app.use(channelsRouter, chatsRouter, messagesRouter, directMessagesRouter, usersRouter)

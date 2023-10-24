@@ -8,7 +8,7 @@ const authRouter = Router();
 // When user clicks 'sign in with google' in client app, a request is sent to this endpoint which redirects to the google sign-in page
 authRouter.get(
   "/auth/google",
-  passport.authenticate("google", { scope: ["profile"] })
+  passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
 // User will be redirected to this endpoint after successful sign-in through google
@@ -24,8 +24,8 @@ authRouter.get(
     const token = jwt.sign({id: user.id}, process.env.JWT_SECRET as string)
     res.cookie('token', token, {httpOnly: true, secure: true})
     res.redirect(process.env.CLIENT_URL as string)
+    console.log(`${user.username} has logged in`)
   }
 );
 
-authRouter.get("/login/success");
 export { authRouter };

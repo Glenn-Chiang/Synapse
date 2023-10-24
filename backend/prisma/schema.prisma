@@ -12,6 +12,7 @@ datasource db {
 
 model User {
   id Int @default(autoincrement()) @id
+  email String @unique
   username String @db.VarChar(25)
   bio String? @db.VarChar(500) @default("")
   avatarUrl String? @default("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqzQ_T2DGHe-3tHk9z7fqeYzLJ2Tn9vszRmH1TOpZjxynAFhO7ciB10Nh5d-b5_yUFTC8&usqp=CAU")

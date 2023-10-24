@@ -1,4 +1,3 @@
-import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { prisma } from "../app";
 
@@ -8,23 +7,26 @@ const options = {
   callbackURL: `${process.env.BASE_URL}/auth/google/callback`,
 };
 
-const googleStrategy = new GoogleStrategy(
+export const googleStrategy = new GoogleStrategy(
   options,
   async (accessToken, refreshToken, profile, done) => {
     // Callback is run on successful google sign-in
     try {
-      const userId = Number(profile.id);
+      if (!profile.emails) {
+        throw new Error("no emails associated with profile");
+      }
+      const email = profile.emails[0].value;
       const username = profile.username || "anonymous";
 
       // Find or create user if not exists
       // New users will automatically have their accounts created when they first sign in
       const user = await prisma.user.upsert({
         where: {
-          id: userId,
+          email,
         },
         update: {},
         create: {
-          id: userId,
+          email,
           username,
         },
       });
@@ -34,5 +36,3 @@ const googleStrategy = new GoogleStrategy(
     }
   }
 );
-
-passport.use(googleStrategy);
