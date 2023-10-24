@@ -10,6 +10,7 @@ import { chatsRouter } from "./rest-routes/chats";
 import { messagesRouter } from "./rest-routes/messages";
 import { directMessagesRouter } from "./rest-routes/direct-messages";
 import { usersRouter } from "./rest-routes/users";
+import { authRouter } from "./rest-routes/auth";
 import { registerMessageHandlers } from "./socket-routes/messages";
 import { connectToChannels, registerChannelHandlers } from "./socket-routes/channels";
 import { registerDirectMessageHandlers } from "./socket-routes/direct-messages";
@@ -20,6 +21,7 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
+app.use(authRouter)
 app.use(channelsRouter, chatsRouter, messagesRouter, directMessagesRouter, usersRouter)
 
 const server = createServer(app)
