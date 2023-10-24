@@ -22,13 +22,13 @@ usersRouter.get("/users/:userId", async (req, res) => {
 
 // Create new user
 usersRouter.post("/users", async (req, res) => {
-  const { username } = req.body;
+  const { username, email } = req.body;
   if (!username || typeof username !== "string") {
     return res.status(400).send("invalid username");
   }
   const user = await prisma.user.create({
     data: {
-      username,
+      username, email
     },
   });
   console.log("User created");
