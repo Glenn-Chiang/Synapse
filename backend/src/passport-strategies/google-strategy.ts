@@ -16,7 +16,7 @@ export const googleStrategy = new GoogleStrategy(
         throw new Error("no emails associated with profile");
       }
       const email = profile.emails[0].value;
-      const username = profile.username || "anonymous";
+      const username = profile.displayName || "anonymous";
 
       // Find or create user if not exists
       // New users will automatically have their accounts created when they first sign in
