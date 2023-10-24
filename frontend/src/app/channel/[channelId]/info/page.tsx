@@ -1,11 +1,11 @@
 import { getChannel } from "@/api/channels";
+import { AvatarIcon } from "@/components/AvatarIcon";
 import { getCurrentUser } from "@/lib/getCurrentUser";
 import Image from "next/image";
 import Link from "next/link";
 import { Member } from "../../../../types";
 import { EditChannel } from "./EditChannel";
 import { LeaveChannel } from "./LeaveChannel";
-import { AvatarIcon } from "@/components/AvatarIcon";
 
 export default async function ChannelInfo({
   params,
@@ -15,7 +15,7 @@ export default async function ChannelInfo({
   const channelId = Number(params.channelId);
   const channel = await getChannel(channelId);
 
-  const currentUserId = getCurrentUser();
+  const currentUserId = getCurrentUser().id;
   const userIsMember = !!channel.members.find(
     (member) => member.userId === currentUserId
   );

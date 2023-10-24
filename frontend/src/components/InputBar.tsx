@@ -1,10 +1,5 @@
 "use client";
 
-import { getCurrentUser } from "@/lib/getCurrentUser";
-import { socket } from "@/lib/socket";
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useParams } from "next/navigation";
 import React from "react";
 
 type InputBarProps = {
@@ -39,3 +34,4 @@ const InputBar = ({ handleSend, handleChange }: InputBarProps) => {
 };
 
 export { InputBar };
+

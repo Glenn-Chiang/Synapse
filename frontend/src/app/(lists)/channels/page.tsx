@@ -4,7 +4,7 @@ import { getCurrentUser } from "@/lib/getCurrentUser";
 import Link from "next/link";
 
 export default async function MyChannels() {
-  const userId = getCurrentUser();
+  const userId = getCurrentUser().id;
   const channels = await getChannels(userId);
 
   return (

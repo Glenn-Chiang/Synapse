@@ -1,16 +1,16 @@
 "use client";
 
-import { getCurrentUser } from "@/lib/getCurrentUser";
+import { UserContext } from "@/lib/UserContext";
 import { socket } from "@/lib/socket";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useContext, useState } from 'react';
 
 const JoinChannel = () => {
   const [isPending, setIsPending] = useState(false);
 
-  const currentUserId = getCurrentUser();
+  const currentUserId = useContext(UserContext);
   const channelId = Number(useParams().channelId);
   const router = useRouter();
 
@@ -45,3 +45,4 @@ const JoinChannel = () => {
 };
 
 export { JoinChannel };
+

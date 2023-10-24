@@ -4,8 +4,8 @@ import { ChannelIcon } from "./ChannelIcon";
 import { formatDate } from "@/lib/formatDate";
 import { getCurrentUser } from "@/lib/getCurrentUser";
 
-function ChannelPreview({ channel }: { channel: Channel }) {
-  const currentUserId = getCurrentUser();
+const ChannelPreview = ({ channel }: { channel: Channel }) => {
+  const currentUserId = getCurrentUser().id;
   const newestMessage = channel.messages[channel.messages.length - 1];
   return (
     <Link

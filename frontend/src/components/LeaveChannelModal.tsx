@@ -1,12 +1,15 @@
+"use client"
+
 import { SubmitButton } from "@/components/buttons";
 import { getCurrentUser } from "@/lib/getCurrentUser";
 import { socket } from "@/lib/socket";
 import { useParams, useRouter } from "next/navigation";
 import { Modal } from "@/components/Modal";
-import { useState } from "react";
+import { useState, useContext } from 'react';
+import { UserContext } from "@/lib/UserContext";
 
 export const LeaveChannelModal = ({ close }: { close: () => void }) => {
-  const currentUserId = getCurrentUser();
+  const currentUserId = useContext(UserContext)?.id;
   const channelId = Number(useParams().channelId);
   const router = useRouter();
 

@@ -1,11 +1,9 @@
 import { getChannel } from "@/api/channels";
 import { MessagesList } from "@/components/MessagesList";
 import { getCurrentUser } from "@/lib/getCurrentUser";
-import { socket } from "@/lib/socket";
-import { InputBar } from "../../../components/InputBar";
+import { ChannelInput } from "./ChannelInput";
 import { JoinChannel } from "./JoinChannel";
 import { TypingListener } from "./TypingListener";
-import { ChannelInput } from "./ChannelInput";
 
 export default async function ChannelMain({
   params,
@@ -14,7 +12,7 @@ export default async function ChannelMain({
 }) {
   const channelId = Number(params.channelId);
   const channel = await getChannel(channelId);
-  const currentUserId = getCurrentUser();
+  const currentUserId = getCurrentUser().id;
   const userIsMember = !!channel.members.find(
     (member) => member.userId === currentUserId
   );

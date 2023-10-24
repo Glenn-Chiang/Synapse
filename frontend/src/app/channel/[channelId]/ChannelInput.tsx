@@ -1,13 +1,15 @@
 "use client";
 
 import { InputBar } from "@/components/InputBar";
+import { UserContext } from "@/lib/UserContext";
 import { getCurrentUser } from "@/lib/getCurrentUser";
 import { socket } from "@/lib/socket";
 import { useParams, useRouter } from "next/navigation";
+import {useContext} from 'react'
 
 export const ChannelInput = () => {
   const channelId = Number(useParams().channelId);
-  const currentUserId = getCurrentUser();
+  const currentUserId = useContext(UserContext)?.id
 
   const router = useRouter();
 

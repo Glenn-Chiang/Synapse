@@ -6,7 +6,7 @@ import { Chat } from "@/types";
 import Link from "next/link";
 
 export default async function MyChats() {
-  const currentUserId = getCurrentUser();
+  const currentUserId = getCurrentUser().id;
   const chats = await getChats(currentUserId);
 
   return (
@@ -26,7 +26,7 @@ export default async function MyChats() {
 
 const ChatPreview = ({ chat }: { chat: Chat }) => {
   const newestMessage = chat.messages[chat.messages.length - 1];
-  const currentUserId = getCurrentUser();
+  const currentUserId = getCurrentUser().id;
   const otherUser =
     chat.member1.id === currentUserId ? chat.member2 : chat.member1;
   return (

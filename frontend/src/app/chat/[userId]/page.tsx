@@ -12,7 +12,7 @@ export default async function ChatPage({
 }: {
   params: { userId: string };
 }) {
-  const selfId = getCurrentUser();
+  const selfId = getCurrentUser().id;
   const otherId = Number(params.userId);
 
   const otherUser = await getUser(otherId); // The user whom the current user is chatting with
@@ -26,7 +26,7 @@ export default async function ChatPage({
           <AvatarIcon url={otherUser.avatarUrl} />
           <h1>{otherUser.username}</h1>
         </div>
-        <ActionButton />
+        <ActionButton onClick={() => {}}/>
       </header>
       {chat ? (
         <MessagesList messages={chat.messages} />
