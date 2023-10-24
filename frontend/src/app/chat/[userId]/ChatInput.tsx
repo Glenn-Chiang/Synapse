@@ -1,15 +1,15 @@
 "use client";
 
 import { InputBar } from "@/components/InputBar";
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/getCurrentUser";
 import { socket } from "@/lib/socket";
 import { useParams, useRouter } from "next/navigation";
 
 export const ChatInput = () => {
-  const otherUserId = Number(useParams().userId)
-  const currentUserId = getCurrentUser()
+  const otherUserId = Number(useParams().userId);
+  const currentUserId = getCurrentUser();
 
-  const router = useRouter()
+  const router = useRouter();
 
   const handleSendMessage = (text: string) => {
     socket.emit(
@@ -17,13 +17,13 @@ export const ChatInput = () => {
       { text, senderId: currentUserId, recipientId: otherUserId },
       () => {
         console.log("direct message acknowledged");
-        router.refresh()
+        router.refresh();
       }
     );
   };
 
   const handleTypeMessage = () => {
-    socket.emit('typing', currentUserId, otherUserId)
+    socket.emit("typing", currentUserId, otherUserId);
   };
 
   return (

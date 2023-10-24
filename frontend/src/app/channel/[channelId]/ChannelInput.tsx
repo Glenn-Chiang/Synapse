@@ -1,7 +1,7 @@
 "use client";
 
 import { InputBar } from "@/components/InputBar";
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/getCurrentUser";
 import { socket } from "@/lib/socket";
 import { useParams, useRouter } from "next/navigation";
 
@@ -9,7 +9,7 @@ export const ChannelInput = () => {
   const channelId = Number(useParams().channelId);
   const currentUserId = getCurrentUser();
 
-  const router = useRouter()
+  const router = useRouter();
 
   const handleSendMessage = (text: string) => {
     socket.emit(
@@ -17,7 +17,7 @@ export const ChannelInput = () => {
       { text, channelId, senderId: currentUserId },
       () => {
         console.log("message acknowledged");
-        router.refresh()
+        router.refresh();
       }
     );
   };

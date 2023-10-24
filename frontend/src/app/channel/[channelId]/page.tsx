@@ -1,6 +1,6 @@
 import { getChannel } from "@/api/channels";
 import { MessagesList } from "@/components/MessagesList";
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/getCurrentUser";
 import { socket } from "@/lib/socket";
 import { InputBar } from "../../../components/InputBar";
 import { JoinChannel } from "./JoinChannel";
@@ -26,10 +26,8 @@ export default async function ChannelMain({
   return (
     <section>
       <MessagesList messages={channel.messages} />
-      <ChannelInput/>
-      <TypingListener currentRoomId={channelId}/>
+      <ChannelInput />
+      <TypingListener currentRoomId={channelId} />
     </section>
   );
 }
-
-

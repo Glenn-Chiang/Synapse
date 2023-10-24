@@ -1,5 +1,5 @@
 import { SubmitButton } from "@/components/buttons";
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/getCurrentUser";
 import { socket } from "@/lib/socket";
 import { useParams, useRouter } from "next/navigation";
 import { Modal } from "@/components/Modal";

@@ -1,5 +1,5 @@
 import { getChannel } from "@/api/channels";
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/getCurrentUser";
 import Image from "next/image";
 import Link from "next/link";
 import { Member } from "../../../../types";
@@ -19,7 +19,7 @@ export default async function ChannelInfo({
   const userIsMember = !!channel.members.find(
     (member) => member.userId === currentUserId
   );
-  const userIsCreator = currentUserId === channel.creatorId
+  const userIsCreator = currentUserId === channel.creatorId;
 
   return (
     <section className="flex flex-col gap-4 py-4 sm:p-4">
@@ -44,7 +44,7 @@ export default async function ChannelInfo({
             <span>{new Date(channel.createdAt).toLocaleDateString()}</span>
           </div>
         </div>
-        {userIsCreator && <EditChannel channel={channel}/>}
+        {userIsCreator && <EditChannel channel={channel} />}
       </section>
 
       <section>
@@ -69,7 +69,7 @@ const MemberItem = ({ member }: { member: Member }) => {
       href={`/chat/${user.id}`}
       className="flex items-center gap-2 hover:bg-slate-900 rounded-md px-2 py-4"
     >
-      <AvatarIcon url={user.avatarUrl}/>
+      <AvatarIcon url={user.avatarUrl} />
       <div className="">
         <div>{user.username}</div>
         <div className="text-slate-500">

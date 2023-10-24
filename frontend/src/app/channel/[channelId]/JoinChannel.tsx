@@ -1,6 +1,6 @@
 "use client";
 
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/getCurrentUser";
 import { socket } from "@/lib/socket";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,16 +10,16 @@ import { useState } from "react";
 const JoinChannel = () => {
   const [isPending, setIsPending] = useState(false);
 
-  const currentUserId = getCurrentUser()
-  const channelId = Number(useParams().channelId)
-  const router = useRouter()
+  const currentUserId = getCurrentUser();
+  const channelId = Number(useParams().channelId);
+  const router = useRouter();
 
   const handleClick = async () => {
     setIsPending(true);
 
     socket.emit("join-channel", currentUserId, channelId, () => {
-      router.refresh()
-    })
+      router.refresh();
+    });
   };
 
   return (
@@ -45,4 +45,3 @@ const JoinChannel = () => {
 };
 
 export { JoinChannel };
-

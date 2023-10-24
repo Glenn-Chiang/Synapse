@@ -3,7 +3,7 @@
 import { ChannelIcon } from "@/components/ChannelIcon";
 import { LeaveChannelModal } from "@/components/LeaveChannelModal";
 import { ActionButton, BackButton } from "@/components/buttons";
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/getCurrentUser";
 import { socket } from "@/lib/socket";
 import { Channel } from "@/types";
 import Link from "next/link";

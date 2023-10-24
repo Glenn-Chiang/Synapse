@@ -10,7 +10,7 @@ export const jwtStrategy = new JwtStrategy(options, async (payload, done) => {
   try {
     const user = await prisma.user.findUnique({
       where: {
-        id: Number(payload.id),
+        id: Number(payload.id), // payload contains decoded jwt
       },
     });
     if (user) {

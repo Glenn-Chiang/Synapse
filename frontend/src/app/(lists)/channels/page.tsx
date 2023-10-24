@@ -1,6 +1,6 @@
 import { getChannels } from "@/api/channels";
 import { ChannelPreview } from "@/components/ChannelPreview";
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/getCurrentUser";
 import Link from "next/link";
 
 export default async function MyChannels() {
