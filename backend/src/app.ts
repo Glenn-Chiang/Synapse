@@ -14,12 +14,15 @@ import { authRouter } from "./rest-routes/auth";
 import { registerMessageHandlers } from "./socket-routes/messages";
 import { connectToChannels, registerChannelHandlers } from "./socket-routes/channels";
 import { registerDirectMessageHandlers } from "./socket-routes/direct-messages";
+import passport from "passport";
 
 export const prisma = new PrismaClient()
 
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
+
+app.use(passport.initialize())
 
 app.use(authRouter)
 app.use(channelsRouter, chatsRouter, messagesRouter, directMessagesRouter, usersRouter)

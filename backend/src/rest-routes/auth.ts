@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { passport } from "../passport-config";
+import { User } from "@prisma/client";
+import jwt from 'jsonwebtoken'
 
 const authRouter = Router();
 
@@ -11,9 +13,19 @@ authRouter.get(
 
 // User will be redirected to this endpoint after successful sign-in through google
 // verifyCallback defined in the passport strategy will be run here
-authRouter.get("/auth/google/callback", passport.authenticate("google", {
-  successRedirect: process.env.CLIENT_URL
-}));
+authRouter.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: '/auth/google',
+    session: false
+  }),
+  (req, res) => {
+    const user = req.user as User
+    const token = jwt.sign({id: user.id}, process.env.JWT_SECRET as string)
+    res.cookie('token', token, {httpOnly: true, secure: true})
+    res.redirect(process.env.CLIENT_URL as string)
+  }
+);
 
-authRouter.get('/login/success')
+authRouter.get("/login/success");
 export { authRouter };
