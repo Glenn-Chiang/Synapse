@@ -7,10 +7,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
-import "./globals.css";
+import "../globals.css";
 import Image from "next/image";
 import { UserContext } from "@/lib/UserContext";
 import { getCurrentUser } from "@/lib/getCurrentUser";
+import { UserProvider } from "@/components/UserProvider";
 config.autoAddCss = false;
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,17 +27,16 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  
   const currentUser = getCurrentUser();
 
   return (
     <html lang="en">
       <body>
-        <UserContext.Provider value={currentUser}>
+        <UserProvider user={currentUser}>
           <MessageListener />
           <Topbar />
           <div className="mt-16 p-4 py-0 sm:px-10">{children}</div>
-        </UserContext.Provider>
+        </UserProvider>
       </body>
     </html>
   );

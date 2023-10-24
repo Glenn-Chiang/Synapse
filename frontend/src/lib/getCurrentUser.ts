@@ -4,11 +4,13 @@ import { cookies } from "next/headers";
 
 const getCurrentUser = () => {
   const cookieStore = cookies();
-  const userCookie = cookieStore.get("user") as RequestCookie;
-  console.log(userCookie);
-  // if (!userCookie) {
-  //   throw new Error("missing user cookie");
-  // }
+  const userCookie = cookieStore.get("user");
+  // console.log(userCookie);
+
+  // TODO: how to properly handle this?
+  if (!userCookie) {
+    throw new Error("missing user cookie");
+  }
 
   const currentUser: User = JSON.parse(userCookie.value);
   return currentUser;
