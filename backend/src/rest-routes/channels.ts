@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { prisma } from "../app";
+import { User } from "@prisma/client";
 
 const channelsRouter = Router();
 
@@ -78,7 +79,7 @@ channelsRouter.post("/channels", async (req, res) => {
     return res.status(400).send("invalid about");
   }
 
-  const userId = 1; //todo
+  const userId = (req.user as User).id
 
   const channel = await prisma.channel.create({
     data: {

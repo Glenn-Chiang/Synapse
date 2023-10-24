@@ -1,12 +1,14 @@
 "use server";
 
 import { Channel } from "@/lib/types";
+import { cookies } from "next/headers";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const getChannels = async (userId: number): Promise<Channel[]> => {
   const res = await fetch(`${BASE_URL}/users/${userId}/channels`, {
     cache: "no-store",
+    headers: { Cookie: cookies().toString() },
   });
   const channels: Channel[] = await res.json();
   return channels;
@@ -15,6 +17,7 @@ const getChannels = async (userId: number): Promise<Channel[]> => {
 const getChannel = async (channelId: number) => {
   const res = await fetch(`${BASE_URL}/channels/${channelId}`, {
     cache: "no-store",
+    headers: { Cookie: cookies().toString() },
   });
   if (!res.ok) {
     const errorMessage = await res.text();
@@ -31,7 +34,10 @@ const createChannel = async (formFields: {
 }) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/channels`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: cookies().toString(),
+    },
     body: JSON.stringify(formFields),
   });
 
@@ -49,7 +55,10 @@ const editChannel = async (
 ) => {
   const res = await fetch(`${BASE_URL}/channels/${channelId}`, {
     method: "PATCH",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: cookies().toString(),
+    },
     body: JSON.stringify({ about, iconUrl }),
   });
   if (!res.ok) {

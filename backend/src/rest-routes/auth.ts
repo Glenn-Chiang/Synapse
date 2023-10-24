@@ -24,8 +24,8 @@ authRouter.get(
     const token = jwt.sign({id: user.id}, process.env.JWT_SECRET as string)
 
     // Store jwt and user object in cookies
-    res.cookie('token', token, {httpOnly: true, secure: true})
-    res.cookie('user', JSON.stringify(user), {httpOnly: true, secure: true}) 
+    res.cookie('token', token, {httpOnly: true, secure: false}) // secure:false allows cookies to be set on both https and http
+    res.cookie('user', JSON.stringify(user), {httpOnly: true, secure: false}) 
 
     res.redirect(process.env.CLIENT_URL as string)
     console.log(`${user.username} has logged in`)
