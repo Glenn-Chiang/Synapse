@@ -1,7 +1,11 @@
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+"use server"
 
-export const signInWithGoogle = async () => {
-  const res = await fetch(`${BASE_URL}/auth/google`, {cache: 'no-store'})
-  console.log(res.headers)
+import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
+
+export const logout = () => {
+  cookies().delete('token')
+  cookies().delete('user')
+  redirect('/login')
 }
 
