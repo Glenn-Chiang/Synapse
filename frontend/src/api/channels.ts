@@ -10,6 +10,10 @@ const getChannels = async (userId: number): Promise<Channel[]> => {
     cache: "no-store",
     headers: { Cookie: cookies().toString() },
   });
+  if (!res.ok) {
+    const errorMessage = await res.text();
+    throw new Error(errorMessage);
+  }
   const channels: Channel[] = await res.json();
   return channels;
 };

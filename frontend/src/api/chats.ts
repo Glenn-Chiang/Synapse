@@ -1,10 +1,12 @@
 import { Chat } from "@/lib/types";
+import { cookies } from "next/headers";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const getChats = async (userId: number) => {
   const res = await fetch(`${BASE_URL}/users/${userId}/chats`, {
     cache: "no-store",
+    headers: { Cookie: cookies().toString() },
   });
   if (!res.ok) {
     const errorMessage = await res.text();
@@ -17,7 +19,7 @@ export const getChats = async (userId: number) => {
 export const getChat = async (member1Id: number, member2Id: number) => {
   const res = await fetch(
     `${BASE_URL}/chats?member1Id=${member1Id}&member2Id=${member2Id}`,
-    { cache: "no-store" }
+    { cache: "no-store", headers: { Cookie: cookies().toString() } }
   );
   if (!res.ok) {
     const errorMessage = await res.text();
