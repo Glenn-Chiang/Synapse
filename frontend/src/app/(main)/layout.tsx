@@ -5,8 +5,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
-import Image from "next/image";
-import Link from "next/link";
+import { Topbar } from "@/components/Topbar";
 import "../../globals.css";
 config.autoAddCss = false;
 
@@ -32,22 +31,5 @@ export default async function RootLayout({
         </UserProvider>
       </body>
     </html>
-  );
-}
-
-function Topbar() {
-  return (
-    <nav className="z-10 bg-slate-950 w-screen h-16 shadow p-4 fixed top-0 left-0 font-medium flex items-center text-xl">
-      <Link href={"/"} className="flex gap-2 items-center">
-        <Image
-          src={"https://static.thenounproject.com/png/40466-200.png"}
-          alt=""
-          width={40}
-          height={40}
-          className="invert"
-        />
-        Synapse
-      </Link>
-    </nav>
   );
 }
