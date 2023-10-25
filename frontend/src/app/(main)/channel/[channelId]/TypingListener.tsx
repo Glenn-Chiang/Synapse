@@ -6,14 +6,16 @@ import { useEffect, useState } from "react";
 
 const TypingListener = ({currentRoomId}: {currentRoomId: number}) => {
 
-  const [typingUser, setTypingUser] = useState<null | number>(null);
+  const [typingUser, setTypingUser] = useState<null | string>(null);
 
   useEffect(() => {
     let typingTimer: NodeJS.Timeout | undefined = undefined;
-    const handleTyping = (userId: number, roomId: number) => {
+    const handleTyping = (userId: number, username: string, roomId: number) => {
       if (currentRoomId !== roomId) return; // ignore typing in other rooms
 
-      setTypingUser(userId);
+      console.log(username, "is typing")
+
+      setTypingUser(username);
       clearTimeout(typingTimer);
       typingTimer = setTimeout(() => {
         // if user stops typing for more than 2 seconds, we consider them to have stopped typing

@@ -9,23 +9,27 @@ import {useContext} from 'react'
 
 export const ChannelInput = () => {
   const channelId = Number(useParams().channelId);
-  const currentUserId = useContext(UserContext)?.id
+  const currentUser = useContext(UserContext)
 
   const router = useRouter();
 
   const handleSendMessage = (text: string) => {
-    socket.emit(
-      "send-message",
-      { text, channelId, senderId: currentUserId },
-      () => {
-        console.log("message acknowledged");
-        router.refresh();
-      }
-    );
+    try {
+      socket.emit(
+        "send-message",
+        { text, channelId, senderId: currentUser?.id },
+        () => {
+          console.log("message acknowledged");
+          router.refresh();
+        }
+      );
+    } catch (error) {
+      console.log('Failed to send message:', (error as Error).message)
+    }
   };
 
   const handleTypeMessage = () => {
-    socket.emit("typing", currentUserId, channelId);
+    socket.emit("typing", currentUser?.id, currentUser?.username, channelId);
   };
 
   return (

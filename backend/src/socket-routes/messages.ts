@@ -32,8 +32,8 @@ export const registerMessageHandlers = (socket: Socket) => {
   socket.on("send-message", handleSend);
 
   // User is typing
-  socket.on("typing", async (userId: number, roomId: number) => {
+  socket.on("typing", async (userId: number, username: string, roomId: number) => {
     // console.log(`User ${userId} is typing in room ${roomId}`);
-    socket.to(roomId.toString()).emit("typing", userId, roomId); // Room could either be a channel or a user
+    socket.to(roomId.toString()).emit("typing", userId, username, roomId); // Room could either be a channel or a user
   });
 };

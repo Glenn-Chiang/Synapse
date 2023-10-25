@@ -9,14 +9,14 @@ import { useContext } from "react";
 
 export const ChatInput = () => {
   const otherUserId = Number(useParams().userId);
-  const currentUserId = useContext(UserContext)?.id;
+  const currentUser = useContext(UserContext);
 
   const router = useRouter();
 
   const handleSendMessage = (text: string) => {
     socket.emit(
       "send-direct-message",
-      { text, senderId: currentUserId, recipientId: otherUserId },
+      { text, senderId: currentUser?.id, recipientId: otherUserId },
       () => {
         console.log("direct message acknowledged");
         router.refresh();
@@ -25,7 +25,7 @@ export const ChatInput = () => {
   };
 
   const handleTypeMessage = () => {
-    socket.emit("typing", currentUserId, otherUserId);
+    socket.emit("typing", currentUser?.id, currentUser?.username, otherUserId);
   };
 
   return (
