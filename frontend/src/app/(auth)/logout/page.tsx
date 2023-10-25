@@ -16,7 +16,7 @@ export default function Logout() {
     <section className="flex flex-col gap-4 justify-center items-center h-screen">
       Are you sure you want to logout?
       <SubmitButton isPending={isPending} onClick={handleClick}>Logout</SubmitButton>
-      <Link href={'/'}>Back to Synapse</Link>
+      <Link href={'/'} className="text-sky-500 hover:underline underline-offset-8">Back to Synapse</Link>
     </section>
   );
 }
