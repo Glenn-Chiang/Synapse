@@ -5,6 +5,21 @@ import { cookies } from "next/headers";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
+const getAllChannels = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/channels`, {
+    cache: "no-store",
+    headers: { Cookie: cookies().toString() },
+  });
+  if (!res.ok) {
+    const errorMessage = await res.text();
+    throw new Error(errorMessage);
+  }
+
+  const channels: Channel[] = await res.json();
+  return channels;
+};
+
+// Get channels user is a member of
 const getChannels = async (userId: number): Promise<Channel[]> => {
   const res = await fetch(`${BASE_URL}/users/${userId}/channels`, {
     cache: "no-store",
@@ -72,4 +87,4 @@ const editChannel = async (
   return;
 };
 
-export { getChannels, createChannel, editChannel, getChannel };
+export { getAllChannels, getChannels, createChannel, editChannel, getChannel };

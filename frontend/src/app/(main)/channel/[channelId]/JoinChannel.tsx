@@ -10,7 +10,7 @@ import { useContext, useState } from 'react';
 const JoinChannel = () => {
   const [isPending, setIsPending] = useState(false);
 
-  const currentUserId = useContext(UserContext);
+  const currentUserId = useContext(UserContext)?.id;
   const channelId = Number(useParams().channelId);
   const router = useRouter();
 
