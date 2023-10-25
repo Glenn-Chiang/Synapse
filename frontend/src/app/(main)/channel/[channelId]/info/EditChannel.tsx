@@ -75,7 +75,6 @@ const EditChannelModal = ({
                 message: "Channel about cannot be longer than 500 characters",
               },
             })}
-            className="bg-slate-950"
             defaultValue={channel.about}
           />
         </div>
@@ -83,7 +82,6 @@ const EditChannelModal = ({
           <label>Icon URL</label>
           <input
             {...register("iconUrl")}
-            className="bg-slate-950"
             defaultValue={channel.iconUrl}
           />
         </div>

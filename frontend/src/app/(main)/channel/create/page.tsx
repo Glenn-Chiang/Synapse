@@ -37,7 +37,7 @@ export default function CreateChannelPage() {
   const router = useRouter();
 
   return (
-    <section className="flex flex-col gap-4 sm:p-4 relative">
+    <section className="flex flex-col gap-4 sm:p-4 relative sm:w-2/3 m-auto lg:w-1/2">
       <div className="flex justify-between">
         <h1>Create a channel</h1>
         <button

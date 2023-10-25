@@ -1,6 +1,7 @@
 "use server";
 
 import { Channel } from "@/lib/types";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -61,6 +62,8 @@ const createChannel = async (formFields: {
     const errorMessage = await res.text();
     throw new Error(errorMessage);
   }
+
+  revalidatePath('/')
   return;
 };
 

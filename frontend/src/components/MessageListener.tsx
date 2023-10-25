@@ -11,7 +11,7 @@ const MessageListener = ({ token }: { token: string | undefined }) => {
     if (!socket.connected) {
       socket.auth = { token };
       socket.connect();
-      console.log("connected to socket.io:");
+      console.log("connected to socket.io");
     }
 
     // Channel messages
