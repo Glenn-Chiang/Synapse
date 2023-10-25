@@ -51,7 +51,7 @@ export default async function ChannelInfo({
         <h2 className="text-sky-500">
           Members <span>({channel.members.length})</span>
         </h2>
-        <ul className="flex flex-col py-2">
+        <ul className="flex flex-col py-2 ">
           {channel.members.map((member) => (
             <MemberItem key={member.userId} member={member} />
           ))}

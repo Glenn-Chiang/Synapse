@@ -6,6 +6,7 @@ import { MessagesList } from "@/components/MessagesList";
 import { ActionButton, BackButton } from "@/components/buttons";
 import { getCurrentUser } from "@/lib/getCurrentUser";
 import { ChatInput } from "./ChatInput";
+import { DirectMessage } from "@/components/DirectMessage";
 
 export default async function ChatPage({
   params,
@@ -29,16 +30,19 @@ export default async function ChatPage({
         <ActionButton />
       </header>
       <section className="mt-32">
-      {chat ? (
-        <MessagesList messages={chat.messages} />
-      ) : (
-        <div className="fixed top-1/2 inset-x-0 flex justify-center">
-          Type a message and start chatting!
-        </div>
-      )}
-      <ChatInput />
-      <TypingListener currentRoomId={otherId} />
-
+        {chat ? (
+          <ul className="py-4 mb-16 flex flex-col gap-4">
+            {chat.messages.map((message) => (
+              <DirectMessage key={message.id} message={message} />
+            ))}
+          </ul>
+        ) : (
+          <div className="fixed top-1/2 inset-x-0 flex justify-center">
+            Type a message and start chatting!
+          </div>
+        )}
+        <ChatInput />
+        <TypingListener currentRoomId={otherId} />
       </section>
     </main>
   );
