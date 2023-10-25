@@ -8,6 +8,7 @@ import { Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import "../globals.css";
+import { cookies } from "next/headers";
 config.autoAddCss = false;
 
 const inter = Inter({ subsets: ["latin"] });
@@ -24,12 +25,13 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const currentUser = getCurrentUser();
+  const token = cookies().get('token')?.value
 
   return (
     <html lang="en">
       <body>
         <UserProvider user={currentUser}>
-          <MessageListener />
+          <MessageListener token={token}/>
           <Topbar />
           <div className="mt-16 p-4 py-0 sm:px-10">{children}</div>
         </UserProvider>

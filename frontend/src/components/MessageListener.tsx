@@ -1,39 +1,38 @@
-'use client'
+"use client";
 
-import { socket } from "@/lib/socket"
-import { useRouter } from "next/navigation"
-import { useEffect } from "react"
+import { socket } from "@/lib/socket";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-const MessageListener = () => {
-  const router = useRouter()
+const MessageListener = ({ token }: { token: string | undefined }) => {
+  const router = useRouter();
 
   useEffect(() => {
     if (!socket.connected) {
-      socket.connect()
-      console.log("connected to socket.io:")
+      socket.auth = { token };
+      socket.connect();
+      console.log("connected to socket.io:");
     }
-  
+
     // Channel messages
     const handleMessage = (channelId: number) => {
-      console.log('Message received in channel:', channelId)
-      router.refresh()  
-    }
-    socket.on('message', handleMessage)
+      console.log("Message received in channel:", channelId);
+      router.refresh();
+    };
+    socket.on("message", handleMessage);
 
     // Direct messages
     const handleDirectMessage = () => {
-      console.log('Direct message received')
-      router.refresh()
-    }
-    socket.on('direct-message', handleDirectMessage)
+      console.log("Direct message received");
+      router.refresh();
+    };
+    socket.on("direct-message", handleDirectMessage);
 
     return () => {
-      socket.off('message', handleMessage)
-    }
-  }, [router])
-  return (
-    <></>
-  )
-}
+      socket.off("message", handleMessage);
+    };
+  }, [router]);
+  return <></>;
+};
 
-export {MessageListener}
+export { MessageListener };

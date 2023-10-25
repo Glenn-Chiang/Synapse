@@ -21,6 +21,7 @@ import passport from "passport";
 import { googleStrategy } from "./passport-strategies/google-strategy";
 import { jwtStrategy } from "./passport-strategies/jwt-strategy";
 import cookieParser from "cookie-parser";
+import jwt, { JwtPayload } from 'jsonwebtoken';
 
 export const prisma = new PrismaClient();
 
@@ -51,10 +52,25 @@ const io = new Server(server, {
   },
 });
 
+io.use((socket, next) => {
+  const token = socket.handshake.auth.token
+  if (token) {
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as JwtPayload
+      const userId = decoded.id
+      socket.data.userId = userId
+      next()
+    } catch (error) {
+      next(new Error('Error authenticating socket client'))
+    }
+  } else {
+    next(new Error('Socket client unauthenticated'))
+  }
+})
+
 io.on("connection", async (socket) => {
-  console.log("Client connected:", socket.id);
-  socket.data.userId = 1;
   const userId: number = socket.data.userId;
+  console.log('Client connected:', userId)
   socket.join(userId.toString()); // Each user will join a room associated with their userId. DMs will be emitted to this room.
   await connectToChannels(socket);
   registerMessageHandlers(socket);

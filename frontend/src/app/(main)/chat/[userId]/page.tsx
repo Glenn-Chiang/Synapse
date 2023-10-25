@@ -28,7 +28,7 @@ export default async function ChatPage({
         </div>
         <ActionButton />
       </header>
-      <section className="mt-36">
+      <section className="mt-32">
       {chat ? (
         <MessagesList messages={chat.messages} />
       ) : (
