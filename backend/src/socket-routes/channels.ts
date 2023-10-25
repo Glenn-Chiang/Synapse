@@ -3,8 +3,7 @@ import { prisma } from "../app";
 
 // Connect client to all channels which the associated user is a member of
 export const connectToChannels = async (socket: Socket) => {
-  // const userId = socket.data.userId as number
-  const userId = 1;
+  const userId: number = socket.data.userId
   const channels = await prisma.channel.findMany({
     where: {
       members: {

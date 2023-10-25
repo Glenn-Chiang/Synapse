@@ -31,7 +31,7 @@ const MessageListener = ({ token }: { token: string | undefined }) => {
     return () => {
       socket.off("message", handleMessage);
     };
-  }, [router]);
+  }, [router, token]);
   return <></>;
 };
 
