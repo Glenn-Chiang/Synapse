@@ -23,7 +23,7 @@ const InputBar = ({ handleSend, handleChange }: InputBarProps) => {
         autoFocus
         onKeyDown={handleKeydown}
         onChange={() => handleChange()}
-        className=" w-4/5 rounded-full px-4 "
+        className=" w-4/5 rounded-full px-4 border-none bg-slate-900"
         placeholder="Type a message..."
       />
       {/* <button className="bg-sky-500 w-10 h-10 rounded-full">
