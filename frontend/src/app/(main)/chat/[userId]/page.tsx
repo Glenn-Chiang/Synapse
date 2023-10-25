@@ -1,6 +1,6 @@
 import { getChat } from "@/api/chats";
 import { getUser } from "@/api/users";
-import { TypingListener } from "@/app/channel/[channelId]/TypingListener";
+import { TypingListener } from "../../channel/[channelId]/TypingListener";
 import { AvatarIcon } from "@/components/AvatarIcon";
 import { MessagesList } from "@/components/MessagesList";
 import { ActionButton, BackButton } from "@/components/buttons";
@@ -26,8 +26,9 @@ export default async function ChatPage({
           <AvatarIcon url={otherUser.avatarUrl} />
           <h1>{otherUser.username}</h1>
         </div>
-        <ActionButton onClick={() => {}}/>
+        <ActionButton />
       </header>
+      <section className="mt-36">
       {chat ? (
         <MessagesList messages={chat.messages} />
       ) : (
@@ -37,6 +38,8 @@ export default async function ChatPage({
       )}
       <ChatInput />
       <TypingListener currentRoomId={otherId} />
+
+      </section>
     </main>
   );
 }

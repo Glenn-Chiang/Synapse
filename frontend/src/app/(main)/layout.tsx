@@ -1,17 +1,13 @@
 import { MessageListener } from "@/components/MessageListener";
-import { socket } from "@/lib/socket";
+import { UserProvider } from "@/components/UserProvider";
+import { getCurrentUser } from "@/lib/getCurrentUser";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Image from "next/image";
 import Link from "next/link";
 import "../globals.css";
-import Image from "next/image";
-import { UserContext } from "@/lib/UserContext";
-import { getCurrentUser } from "@/lib/getCurrentUser";
-import { UserProvider } from "@/components/UserProvider";
 config.autoAddCss = false;
 
 const inter = Inter({ subsets: ["latin"] });

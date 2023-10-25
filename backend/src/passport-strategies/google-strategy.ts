@@ -17,6 +17,7 @@ export const googleStrategy = new GoogleStrategy(
       }
       const email = profile.emails[0].value;
       const username = profile.displayName || "anonymous";
+      const avatarUrl = profile.photos ? profile.photos[0].value : undefined
 
       // Find or create user if not exists
       // New users will automatically have their accounts created when they first sign in
@@ -28,6 +29,7 @@ export const googleStrategy = new GoogleStrategy(
         create: {
           email,
           username,
+          avatarUrl
         },
       });
       return done(null, user);

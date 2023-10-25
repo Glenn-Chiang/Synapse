@@ -22,7 +22,7 @@ const getAllChannels = async () => {
 // Get channels user is a member of
 const getChannels = async (userId: number): Promise<Channel[]> => {
   const res = await fetch(`${BASE_URL}/users/${userId}/channels`, {
-    cache: "no-store",
+    // cache: "no-store",
     headers: { Cookie: cookies().toString() },
   });
   if (!res.ok) {

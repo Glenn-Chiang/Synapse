@@ -48,7 +48,7 @@ export const BackButton = () => {
   );
 };
 
-export const ActionButton = ({onClick}: {onClick: () => void}) => {
+export const ActionButton = ({onClick}: {onClick?: () => void}) => {
   return (
     <button onClick={onClick} className="rounded-full hover:bg-slate-800 w-10 h-10">
       <FontAwesomeIcon icon={faEllipsisV} />
