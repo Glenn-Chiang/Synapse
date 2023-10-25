@@ -7,7 +7,6 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const getAllChannels = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/channels`, {
-    cache: "no-store",
     headers: { Cookie: cookies().toString() },
   });
   if (!res.ok) {
@@ -22,7 +21,6 @@ const getAllChannels = async () => {
 // Get channels user is a member of
 const getChannels = async (userId: number): Promise<Channel[]> => {
   const res = await fetch(`${BASE_URL}/users/${userId}/channels`, {
-    // cache: "no-store",
     headers: { Cookie: cookies().toString() },
   });
   if (!res.ok) {
@@ -35,7 +33,6 @@ const getChannels = async (userId: number): Promise<Channel[]> => {
 
 const getChannel = async (channelId: number) => {
   const res = await fetch(`${BASE_URL}/channels/${channelId}`, {
-    cache: "no-store",
     headers: { Cookie: cookies().toString() },
   });
   if (!res.ok) {

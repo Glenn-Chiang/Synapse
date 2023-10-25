@@ -4,16 +4,11 @@ import { getCurrentUser } from "@/lib/getCurrentUser";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
-import "../globals.css";
-import { cookies } from "next/headers";
+import "../../globals.css";
 config.autoAddCss = false;
-
-const inter = Inter({ subsets: ["latin"] });
-
-export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: "Synapse",
