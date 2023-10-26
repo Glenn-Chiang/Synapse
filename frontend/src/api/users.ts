@@ -33,7 +33,7 @@ const editProfile = async (
     const errorMessage = await res.text();
     throw new Error(errorMessage);
   }
-  revalidatePath(`/profile/${userId}`);
+  revalidatePath("/");
 };
 
 export { getUser, editProfile };

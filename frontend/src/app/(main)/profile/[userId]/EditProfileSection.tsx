@@ -6,24 +6,22 @@ import { Modal } from "@/components/Modal";
 import { CancelButton, SubmitButton } from "@/components/buttons";
 import { UserContext } from "@/lib/UserContext";
 import { User } from "@/lib/types";
-import { useState, useContext } from "react";
+import { useContext, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { isPending } from "@reduxjs/toolkit";
-import { userAgent } from "next/server";
 
-export const EditProfileSection = () => {
+export const EditProfileSection = ({user}: {user: User}) => {
   const [modalIsVisible, setModalIsVisible] = useState(false);
 
   return (
-    <section>
+    <section className="flex justify-center">
       <button
         onClick={() => setModalIsVisible(true)}
-        className="text-sky-500 hover:bg-slate-900 py-2 px-4 rounded-md"
+        className="text-sky-500 bg-slate-900 hover:bg-slate-800 py-2 px-4 rounded-md"
       >
         Edit
       </button>
       {modalIsVisible && (
-        <EditProfileModal close={() => setModalIsVisible(false)} />
+        <EditProfileModal user={user} close={() => setModalIsVisible(false)} />
       )}
     </section>
   );
@@ -35,9 +33,7 @@ type FormFields = {
   avatarUrl: string;
 };
 
-const EditProfileModal = ({ close }: { close: () => void }) => {
-  const user = useContext(UserContext) as User;
-
+const EditProfileModal = ({ close, user }: { close: () => void, user: User }) => {
   const {
     register,
     handleSubmit,

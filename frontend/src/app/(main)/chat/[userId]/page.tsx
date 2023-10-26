@@ -21,7 +21,7 @@ export default async function ChatPage({
 
   return (
     <main>
-      <header className="fixed top-16 left-0 w-full flex justify-between p-2 items-center border-b border-slate-500 z-10 bg-slate-950 ">
+      <header className="fixed top-16 left-0 w-full flex justify-between p-2 items-center border-b border-slate-500 bg-slate-950 ">
         <BackButton />
         <div className="flex gap-4 items-center">
           <AvatarIcon url={otherUser.avatarUrl} />
