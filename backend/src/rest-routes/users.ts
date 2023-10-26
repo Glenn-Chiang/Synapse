@@ -20,19 +20,34 @@ usersRouter.get("/users/:userId", async (req, res) => {
   res.json(user);
 });
 
-// Create new user
-usersRouter.post("/users", async (req, res) => {
-  const { username, email } = req.body;
-  if (!username || typeof username !== "string") {
+// Edit user profile
+usersRouter.patch("/users/:userId/profile", async (req, res) => {
+  const { username, bio, avatarUrl } = req.body;
+  console.log("request body", req.body)
+
+  if (!username || typeof username !== "string" || username.length > 25) {
     return res.status(400).send("invalid username");
   }
-  const user = await prisma.user.create({
+  if (typeof bio !== "string" || bio.length > 500) {
+    return res.status(400).send("invalid bio");
+  }
+  if (typeof avatarUrl !== "string") {
+    return res.status(400).send("invalid avatarUrl");
+  }
+
+  const userId = Number(req.params.userId);
+  const updatedUser = await prisma.user.update({
+    where: {
+      id: userId,
+    },
     data: {
-      username, email
+      username,
+      bio,
+      avatarUrl,
     },
   });
-  console.log("User created");
-  res.json(user)
+
+  res.json(updatedUser)
 });
 
 export { usersRouter };

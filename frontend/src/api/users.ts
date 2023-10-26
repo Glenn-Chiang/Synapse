@@ -21,8 +21,11 @@ const editProfile = async (
   userId: number,
   data: { username: string; bio: string; avatarUrl: string }
 ) => {
-  const res = await fetch(`${BASE_URL}/users/${userId}`, {
-    headers: { Cookie: cookies().toString() },
+  const res = await fetch(`${BASE_URL}/users/${userId}/profile`, {
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: cookies().toString(),
+    },
     method: "PATCH",
     body: JSON.stringify(data),
   });

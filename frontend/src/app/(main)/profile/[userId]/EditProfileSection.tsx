@@ -8,7 +8,8 @@ import { UserContext } from "@/lib/UserContext";
 import { User } from "@/lib/types";
 import { useState, useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { isPending } from '@reduxjs/toolkit';
+import { isPending } from "@reduxjs/toolkit";
+import { userAgent } from "next/server";
 
 export const EditProfileSection = () => {
   const [modalIsVisible, setModalIsVisible] = useState(false);
@@ -21,7 +22,9 @@ export const EditProfileSection = () => {
       >
         Edit
       </button>
-      {modalIsVisible && <EditProfileModal close={() => setModalIsVisible(false)}/>}
+      {modalIsVisible && (
+        <EditProfileModal close={() => setModalIsVisible(false)} />
+      )}
     </section>
   );
 };
@@ -32,8 +35,8 @@ type FormFields = {
   avatarUrl: string;
 };
 
-const EditProfileModal = ({close}: {close: () => void}) => {
-  const currentUser = useContext(UserContext) as User;
+const EditProfileModal = ({ close }: { close: () => void }) => {
+  const user = useContext(UserContext) as User;
 
   const {
     register,
@@ -41,12 +44,18 @@ const EditProfileModal = ({close}: {close: () => void}) => {
     formState: { errors },
   } = useForm<FormFields>();
 
-  const [isPending, setIsPending] = useState(false)
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState<null | string>(null);
 
   const onSubmit: SubmitHandler<FormFields> = async (formFields) => {
-    setIsPending(true)
-    await editProfile(currentUser.id, formFields)
-    close()
+    try {
+      setIsPending(true);
+      await editProfile(user.id, formFields);
+      close();
+    } catch (error) {
+      setError((error as Error).message);
+    }
+    setIsPending(false);
   };
 
   return (
@@ -67,6 +76,7 @@ const EditProfileModal = ({close}: {close: () => void}) => {
                 message: "Username cannot be longer than 25 characters",
               },
             })}
+            defaultValue={user.username}
           />
           {errors.username && (
             <ErrorMessage>{errors.username.message}</ErrorMessage>
@@ -82,16 +92,24 @@ const EditProfileModal = ({close}: {close: () => void}) => {
                 message: "Bio cannot be longer than 500 characters",
               },
             })}
+            defaultValue={user.bio}
           />
           {errors.bio && <ErrorMessage>{errors.bio.message}</ErrorMessage>}
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="avatarUrl">Avatar URL</label>
-          <input id="avatarUrl" {...register("avatarUrl")} />
+          <input
+            id="avatarUrl"
+            {...register("avatarUrl")}
+            defaultValue={user.avatarUrl}
+          />
         </div>
+
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+
         <div className="flex gap-4">
-          <SubmitButton>Save</SubmitButton>
-          <CancelButton onClick={close}/>
+          <SubmitButton isPending={isPending}>Save</SubmitButton>
+          <CancelButton onClick={close} />
         </div>
       </form>
     </Modal>
