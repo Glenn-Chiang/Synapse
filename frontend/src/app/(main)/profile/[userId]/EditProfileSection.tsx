@@ -1,11 +1,14 @@
 "use client";
 
+import { editProfile } from "@/api/users";
 import { ErrorMessage } from "@/components/ErrorMessage";
 import { Modal } from "@/components/Modal";
 import { CancelButton, SubmitButton } from "@/components/buttons";
 import { UserContext } from "@/lib/UserContext";
+import { User } from "@/lib/types";
 import { useState, useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { isPending } from '@reduxjs/toolkit';
 
 export const EditProfileSection = () => {
   const [modalIsVisible, setModalIsVisible] = useState(false);
@@ -30,7 +33,7 @@ type FormFields = {
 };
 
 const EditProfileModal = ({close}: {close: () => void}) => {
-  const currentUser = useContext(UserContext);
+  const currentUser = useContext(UserContext) as User;
 
   const {
     register,
@@ -38,7 +41,13 @@ const EditProfileModal = ({close}: {close: () => void}) => {
     formState: { errors },
   } = useForm<FormFields>();
 
-  const onSubmit: SubmitHandler<FormFields> = (formFields) => {};
+  const [isPending, setIsPending] = useState(false)
+
+  const onSubmit: SubmitHandler<FormFields> = async (formFields) => {
+    setIsPending(true)
+    await editProfile(currentUser.id, formFields)
+    close()
+  };
 
   return (
     <Modal>
