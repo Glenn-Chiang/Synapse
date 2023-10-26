@@ -36,6 +36,20 @@ export const SubmitButton = ({
   );
 };
 
+
+export const CancelButton = ({ onClick }: { onClick: () => void }) => {
+  return (
+    <button
+      onClick={onClick}
+      type="button"
+      className="text-slate-500 hover:text-sky-500"
+    >
+      Cancel
+    </button>
+  );
+};
+
+
 export const BackButton = () => {
   const router = useRouter();
   return (

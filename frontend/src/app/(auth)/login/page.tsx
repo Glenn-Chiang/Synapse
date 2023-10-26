@@ -6,7 +6,7 @@ export default function Login() {
       <h1 className="text-2xl">Welcome to Synapse</h1>
       <a
         href={`${process.env.NEXT_PUBLIC_BASE_URL}/auth/google`}
-        className="bg-slate-900 p-2 rounded-md flex gap-2 items-center"
+        className="bg-slate-800 hover:bg-slate-700 transition p-2 rounded-md flex gap-2 items-center"
       >
         <Image
           src={"https://www.google.com/favicon.ico"}

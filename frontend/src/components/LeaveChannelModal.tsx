@@ -1,6 +1,6 @@
 "use client"
 
-import { SubmitButton } from "@/components/buttons";
+import { CancelButton, SubmitButton } from "@/components/buttons";
 import { getCurrentUser } from "@/lib/getCurrentUser";
 import { socket } from "@/lib/socket";
 import { useParams, useRouter } from "next/navigation";
@@ -30,9 +30,7 @@ export const LeaveChannelModal = ({ close }: { close: () => void }) => {
         <SubmitButton isPending={isPending} onClick={handleLeaveChannel}>
           Confirm
         </SubmitButton>
-        <button onClick={close} className="text-slate-500 hover:text-sky-500">
-          Cancel
-        </button>
+        <CancelButton onClick={close}/>
       </div>
     </Modal>
   );

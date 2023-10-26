@@ -3,7 +3,7 @@
 import { editChannel } from "@/api/channels";
 import { ErrorMessage } from "@/components/ErrorMessage";
 import { Modal } from "@/components/Modal";
-import { SubmitButton } from "@/components/buttons";
+import { CancelButton, SubmitButton } from "@/components/buttons";
 import { Channel } from "@/lib/types";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -80,16 +80,11 @@ const EditChannelModal = ({
         </div>
         <div className="flex flex-col gap-2">
           <label>Icon URL</label>
-          <input
-            {...register("iconUrl")}
-            defaultValue={channel.iconUrl}
-          />
+          <input {...register("iconUrl")} defaultValue={channel.iconUrl} />
         </div>
         <div className="flex gap-4">
           <SubmitButton isPending={isPending}>Save</SubmitButton>
-          <button onClick={close} className="text-slate-500 hover:text-sky-500">
-            Cancel
-          </button>
+          <CancelButton onClick={close} />
         </div>
         {error && <ErrorMessage>{error}</ErrorMessage>}
       </form>
