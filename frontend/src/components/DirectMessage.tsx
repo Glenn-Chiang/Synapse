@@ -3,9 +3,7 @@
 import { UserContext } from "@/lib/UserContext";
 import { formatDate } from "@/lib/formatDate";
 import { Message } from "@/lib/types";
-import Image from "next/image";
 import { useContext, useEffect, useRef } from "react";
-import { AvatarIcon } from "./AvatarIcon";
 
 const DirectMessage = ({ message }: { message: Message }) => {
   const messageRef = useRef<HTMLElement>(null);
@@ -34,3 +32,4 @@ const DirectMessage = ({ message }: { message: Message }) => {
 };
 
 export { DirectMessage };
+

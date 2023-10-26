@@ -7,6 +7,7 @@ import { ActionButton, BackButton } from "@/components/buttons";
 import { getCurrentUser } from "@/lib/getCurrentUser";
 import { ChatInput } from "./ChatInput";
 import { DirectMessage } from "@/components/DirectMessage";
+import Link from "next/link";
 
 export default async function ChatPage({
   params,
@@ -23,10 +24,10 @@ export default async function ChatPage({
     <main>
       <header className="fixed top-16 left-0 w-full flex justify-between p-2 items-center border-b border-slate-500 bg-slate-950 ">
         <BackButton />
-        <div className="flex gap-4 items-center">
+        <Link href={`/profile/${otherId}`} className="flex gap-4 items-center">
           <AvatarIcon url={otherUser.avatarUrl} />
           <h1>{otherUser.username}</h1>
-        </div>
+        </Link>
         <ActionButton />
       </header>
       <section className="mt-32">

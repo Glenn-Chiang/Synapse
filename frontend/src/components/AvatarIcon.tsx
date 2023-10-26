@@ -1,6 +1,12 @@
 import Image from "next/image";
 
-const AvatarIcon = ({url, large=false}: {url: string | undefined, large?: boolean}) => {
+type AvatarIconProps = {
+  url: string | undefined, 
+  large?: boolean,
+  isSelf?: boolean
+}
+
+const AvatarIcon = ({url, large=false, isSelf=false}: AvatarIconProps) => {
   return (
     <Image
       src={
@@ -10,7 +16,7 @@ const AvatarIcon = ({url, large=false}: {url: string | undefined, large?: boolea
       alt=""
       width={large? 80 : 40}
       height={large ? 80 : 40}
-      className={`rounded-full ${large && "border-2 border-sky-500"}`}
+      className={`rounded-full ${isSelf && "border-2 border-sky-500"}`}
     />
   );
 }

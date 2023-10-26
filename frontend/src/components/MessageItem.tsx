@@ -1,18 +1,26 @@
 "use client";
 
+import { UserContext } from "@/lib/UserContext";
 import { formatDate } from "@/lib/formatDate";
 import { Message } from "@/lib/types";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useContext } from "react";
+import { AvatarIcon } from "./AvatarIcon";
 
 const MessageItem = ({ message }: { message: Message }) => {
+  const currentUser = useContext(UserContext);
   const messageRef = useRef<HTMLElement>(null);
+
   useEffect(() => {
     messageRef.current?.scrollIntoView();
   }, []);
+
   return (
     <article ref={messageRef} className="flex gap-2 items-start p-2 max-w-full">
-      <AvatarIcon url={message.sender.avatarUrl} />
+      <AvatarIcon
+        url={message.sender.avatarUrl}
+        isSelf={currentUser?.id === message.senderId}
+      />
       <div className="max-w-full">
         <div className="flex gap-2 items-center">
           <span className="text-sky-500">{message.sender.username}</span>
@@ -27,18 +35,3 @@ const MessageItem = ({ message }: { message: Message }) => {
 };
 
 export { MessageItem };
-
-const AvatarIcon = ({ url }: { url: string | undefined }) => {
-  return (
-    <Image
-      className="rounded-full"
-      src={
-        url ||
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0UcnHUiJ0s_BfieUWxwoLDk2Ji4xCJ30WVhE5690-7JtoCO6gOrMZpiHqHk_f6ftmSJk&usqp=CAU"
-      }
-      alt=""
-      width={40}
-      height={40}
-    />
-  );
-};

@@ -20,7 +20,7 @@ export default async function Profile({
         <BackButton />
       </div>
       <div className="flex gap-4 items-start  bg-slate-900 rounded-md p-4 ">
-        <AvatarIcon url={user.avatarUrl} large={true} />
+        <AvatarIcon url={user.avatarUrl} large={true} isSelf={isOwnProfile}/>
         <div className="flex flex-col gap-4 ">
           <div className="flex justify-between items-start">
             <div className="flex flex-col gap-2 ">

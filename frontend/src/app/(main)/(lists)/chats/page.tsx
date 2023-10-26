@@ -34,7 +34,7 @@ const ChatPreview = ({ chat }: { chat: Chat }) => {
       href={`/chat/${otherUser.id}`}
       className="flex gap-4 items-start p-4 rounded-md bg-slate-900 hover:bg-slate-800 transition w-full"
     >
-      <AvatarIcon url={otherUser.avatarUrl} />
+      <AvatarIcon url={otherUser.avatarUrl}/>
       <div className="w-full">
         <div className="flex justify-between">
           <h2>{otherUser.username}</h2>

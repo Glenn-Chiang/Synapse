@@ -2,7 +2,7 @@
 
 import { createChannel } from "@/api/channels";
 import { ErrorMessage } from "@/components/ErrorMessage";
-import { SubmitButton } from "@/components/buttons";
+import { CancelButton, SubmitButton } from "@/components/buttons";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
@@ -37,9 +37,9 @@ export default function CreateChannelPage() {
   const router = useRouter();
 
   return (
-    <section className="flex flex-col gap-4 sm:p-4 relative sm:w-2/3 m-auto lg:w-1/2">
+    <section className="flex flex-col gap-4 p-4 relative sm:w-2/3 m-auto lg:w-1/2 bg-slate-900 rounded-md ">
       <div className="flex justify-between">
-        <h1>Create a channel</h1>
+        <h1 className="text-sky-500 ">Create a channel</h1>
         <button
           onClick={() => router.back()}
           className="rounded-full hover:bg-slate-900 w-10 h-10 -mr-2 -mt-2"
@@ -49,7 +49,9 @@ export default function CreateChannelPage() {
       </div>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-2">
-          <label htmlFor="name">Name</label>
+          <label className="font-medium text-sky-500 " htmlFor="name">
+            Name
+          </label>
           <input
             id="name"
             {...register("name", {
@@ -62,7 +64,9 @@ export default function CreateChannelPage() {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="about">About</label>
+          <label className="font-medium text-sky-500 " htmlFor="about">
+            About
+          </label>
           <textarea
             id="about"
             {...register("about", {
@@ -75,11 +79,16 @@ export default function CreateChannelPage() {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="icon">Icon URL</label>
+          <label className="font-medium text-sky-500 " htmlFor="icon">
+            Icon URL
+          </label>
           <input id="icon" {...register("iconUrl")} />
         </div>
-        <SubmitButton isPending={isPending}>Create</SubmitButton>
         {error && <ErrorMessage>{error}</ErrorMessage>}
+        <div className="flex gap-4 ">
+          <SubmitButton isPending={isPending}>Create</SubmitButton>
+          <CancelButton onClick={() => router.back()} />
+        </div>
       </form>
     </section>
   );

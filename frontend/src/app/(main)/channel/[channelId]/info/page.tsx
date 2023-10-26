@@ -63,13 +63,15 @@ export default async function ChannelInfo({
 }
 
 const MemberItem = ({ member }: { member: Member }) => {
+  const currentUser = getCurrentUser()
   const user = member.user;
+  const isSelf = currentUser.id === user.id
   return (
     <Link
       href={`/chat/${user.id}`}
       className="flex items-center gap-2 hover:bg-slate-900 rounded-md px-2 py-4"
     >
-      <AvatarIcon url={user.avatarUrl} />
+      <AvatarIcon url={user.avatarUrl} isSelf={isSelf}/>
       <div className="">
         <div>{user.username}</div>
         <div className="text-slate-500">
