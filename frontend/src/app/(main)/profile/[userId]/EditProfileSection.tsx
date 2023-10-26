@@ -4,20 +4,22 @@ import { editProfile } from "@/api/users";
 import { ErrorMessage } from "@/components/ErrorMessage";
 import { Modal } from "@/components/Modal";
 import { CancelButton, SubmitButton } from "@/components/buttons";
-import { UserContext } from "@/lib/UserContext";
 import { User } from "@/lib/types";
-import { useContext, useState } from "react";
+import { faUserEdit } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-export const EditProfileSection = ({user}: {user: User}) => {
+export const EditProfileSection = ({ user }: { user: User }) => {
   const [modalIsVisible, setModalIsVisible] = useState(false);
 
   return (
-    <section className="flex justify-center">
+    <section className="flex justify-center ">
       <button
         onClick={() => setModalIsVisible(true)}
-        className="text-sky-500 bg-slate-900 hover:bg-slate-800 py-2 px-4 rounded-md"
+        className="text-sky-500 bg-slate-900 hover:bg-sky-950 p-2 rounded-md -mr-2 -mt-2 flex gap-1 items-center"
       >
+        <FontAwesomeIcon icon={faUserEdit} />
         Edit
       </button>
       {modalIsVisible && (
@@ -33,7 +35,13 @@ type FormFields = {
   avatarUrl: string;
 };
 
-const EditProfileModal = ({ close, user }: { close: () => void, user: User }) => {
+const EditProfileModal = ({
+  close,
+  user,
+}: {
+  close: () => void;
+  user: User;
+}) => {
   const {
     register,
     handleSubmit,
@@ -60,9 +68,14 @@ const EditProfileModal = ({ close, user }: { close: () => void, user: User }) =>
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-4 px-2"
       >
-        <h2 className="text-center text-sky-500">Edit your profile</h2>
+        <h2 className="justify-center text-sky-500 flex gap-2 items-center">
+          <FontAwesomeIcon icon={faUserEdit} />
+          Edit your profile
+        </h2>
         <div className="flex flex-col gap-2">
-          <label htmlFor="username">Username</label>
+          <label className="text-sky-500 font-medium" htmlFor="username">
+            Username
+          </label>
           <input
             id="username"
             {...register("username", {
@@ -79,7 +92,9 @@ const EditProfileModal = ({ close, user }: { close: () => void, user: User }) =>
           )}
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="bio">Bio</label>
+          <label className="text-sky-500 font-medium" htmlFor="bio">
+            Bio
+          </label>
           <input
             id="bio"
             {...register("bio", {
@@ -93,7 +108,9 @@ const EditProfileModal = ({ close, user }: { close: () => void, user: User }) =>
           {errors.bio && <ErrorMessage>{errors.bio.message}</ErrorMessage>}
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="avatarUrl">Avatar URL</label>
+          <label className="text-sky-500 font-medium" htmlFor="avatarUrl">
+            Avatar URL
+          </label>
           <input
             id="avatarUrl"
             {...register("avatarUrl")}

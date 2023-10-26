@@ -10,7 +10,7 @@ const AvatarIcon = ({url, large=false}: {url: string | undefined, large?: boolea
       alt=""
       width={large? 80 : 40}
       height={large ? 80 : 40}
-      className="rounded-full"
+      className={`rounded-full ${large && "border-2 border-sky-500"}`}
     />
   );
 }

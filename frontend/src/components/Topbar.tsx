@@ -65,7 +65,7 @@ const ProfileMenu = () => {
   const currentUser = useContext(UserContext);
 
   return (
-    <div className="absolute -bottom-20 right-4 flex flex-col w-max rounded-md bg-slate-900 z-20">
+    <div className="absolute -bottom-20 right-4 flex flex-col w-max rounded-md bg-slate-900 z-20 border border-slate-500">
       <Link
         className="hover:bg-slate-800 p-2 flex gap-2 items-center rounded-t-md"
         href={`/profile/${currentUser?.id}`}
