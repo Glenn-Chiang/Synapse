@@ -1,5 +1,5 @@
 import { Socket } from "socket.io";
-import { prisma } from "../app";
+import { prisma } from "../app.js";
 
 // Connect client to all channels which the associated user is a member of
 export const connectToChannels = async (socket: Socket) => {

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { prisma } from "../app";
+import { prisma } from "../app.js";
 
 const directMessagesRouter = Router();
 

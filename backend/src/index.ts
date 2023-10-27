@@ -1,4 +1,4 @@
-import server from './app'
+import server from './app.js'
 import {configDotenv} from 'dotenv'
 configDotenv()
 

@@ -1,5 +1,5 @@
 import { Socket } from "socket.io";
-import { prisma } from "../app";
+import { prisma } from "../app.js";
 
 type MessageData = {
   text: string;

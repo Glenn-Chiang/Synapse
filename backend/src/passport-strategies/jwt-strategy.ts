@@ -1,5 +1,5 @@
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
-import { prisma } from "../app";
+import { prisma } from "../app.js";
 import { Request } from "express";
 
 const cookieExtractor = (req: Request) => {

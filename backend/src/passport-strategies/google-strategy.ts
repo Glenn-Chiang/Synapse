@@ -1,10 +1,10 @@
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import { prisma } from "../app";
+import { prisma } from "../app.js";
 
 const options = {
   clientID: process.env.GOOGLE_CLIENT_ID as string,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-  callbackURL: `${process.env.BASE_URL}/auth/google/callback`,
+  callbackURL: `/auth/google/callback`,
 };
 
 export const googleStrategy = new GoogleStrategy(
