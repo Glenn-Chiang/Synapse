@@ -2,7 +2,6 @@
 
 import { logout } from "@/api/auth";
 import { SubmitButton } from "@/components/buttons";
-import { isPending } from "@reduxjs/toolkit";
 import Link from "next/link";
 import { useState } from 'react';
 
