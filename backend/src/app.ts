@@ -25,7 +25,11 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 
 export const prisma = new PrismaClient();
 
-app.use(cors());
+app.use(cors({
+  origin: process.env.CLIENT_URL as string,
+  credentials: true,
+}));
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(morgan("dev"));
@@ -48,7 +52,7 @@ app.use(
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000", //frontend server
+    origin: [process.env.CLIENT_URL as string], //frontend server
   },
 });
 

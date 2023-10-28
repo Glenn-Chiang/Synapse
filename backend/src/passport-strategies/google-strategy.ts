@@ -4,7 +4,7 @@ import { prisma } from "../app.js";
 const options = {
   clientID: process.env.GOOGLE_CLIENT_ID as string,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-  callbackURL: `/auth/google/callback`,
+  callbackURL: `${process.env.BASE_URL}/auth/google/callback`,
 };
 
 export const googleStrategy = new GoogleStrategy(

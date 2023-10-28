@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { User } from "@prisma/client";
-import jwt from 'jsonwebtoken'
+import jwt from "jsonwebtoken";
 import passport from "passport";
 
 const authRouter = Router();
@@ -16,19 +16,26 @@ authRouter.get(
 authRouter.get(
   "/auth/google/callback",
   passport.authenticate("google", {
-    failureRedirect: '/auth/google',
-    session: false
+    successRedirect: process.env.CLIENT_URL as string,
+    failureRedirect: "/auth/google",
+    session: false,
   }),
   (req, res) => {
-    const user = req.user as User
-    const token = jwt.sign({id: user.id}, process.env.JWT_SECRET as string)
+    const user = req.user as User;
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string);
 
     // Store jwt and user object in cookies
-    res.cookie('token', token, {httpOnly: true, secure: false}) // secure:false allows cookies to be set on both https and http
-    res.cookie('user', JSON.stringify(user), {httpOnly: true, secure: false}) 
-
-    res.redirect(process.env.CLIENT_URL as string)
-    console.log(`${user.username} has logged in`)
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+    }); // secure:false allows cookies to be set on both https and http
+    res.cookie("user", JSON.stringify(user), {
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+    });
+    console.log(`${user.username} has logged in`);
   }
 );
 

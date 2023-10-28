@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 export default function Login() {
+  const base_url = process.env.NEXT_PUBLIC_BASE_URL
   return (
     <section className="flex flex-col items-center gap-4 w-full">
       <h1 className="text-2xl">Welcome to Synapse</h1>
