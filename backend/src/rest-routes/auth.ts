@@ -16,7 +16,7 @@ authRouter.get(
 authRouter.get(
   "/auth/google/callback",
   passport.authenticate("google", {
-    successRedirect: process.env.CLIENT_URL as string,
+    // successRedirect: process.env.CLIENT_URL as string,
     failureRedirect: "/auth/google",
     session: false,
   }),
@@ -29,12 +29,15 @@ authRouter.get(
       httpOnly: true,
       sameSite: "none",
       secure: true,
+      path: '/'
     }); // secure:false allows cookies to be set on both https and http
     res.cookie("user", JSON.stringify(user), {
-      httpOnly: true,
+      httpOnly: false,
       sameSite: "none",
       secure: true,
+      path: '/'
     });
+    res.redirect(process.env.CLIENT_URL as string)
     console.log(`${user.username} has logged in`);
   }
 );
