@@ -1,12 +1,12 @@
 import { MessageListener } from "@/components/MessageListener";
 import { UserProvider } from "@/components/UserProvider";
 import { getCurrentUser } from "@/lib/getCurrentUser";
-import { config } from "@fortawesome/fontawesome-svg-core";
-import "@fortawesome/fontawesome-svg-core/styles.css";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { Topbar } from "@/components/Topbar";
 import "../../globals.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 config.autoAddCss = false;
 
 export const metadata: Metadata = {
