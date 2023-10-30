@@ -14,10 +14,10 @@ export const EditProfileSection = ({ user }: { user: User }) => {
   const [modalIsVisible, setModalIsVisible] = useState(false);
 
   return (
-    <section className="flex justify-center ">
+    <section className="absolute right-2 top-2">
       <button
         onClick={() => setModalIsVisible(true)}
-        className="text-sky-500 bg-slate-900 hover:bg-sky-950 p-2 rounded-md -mr-2 -mt-2 flex gap-1 items-center"
+        className="text-sky-500 bg-slate-900 hover:bg-sky-950 p-2 rounded-md flex gap-1 items-center"
       >
         <FontAwesomeIcon icon={faUserEdit} />
         Edit
