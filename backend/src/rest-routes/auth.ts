@@ -5,6 +5,7 @@ import passport from "passport";
 
 const authRouter = Router();
 
+// Login with local strategy i.e. username and password
 authRouter.get(
   "/auth/login",
   passport.authenticate("local", { session: false }),
@@ -27,6 +28,7 @@ authRouter.get(
   }
 );
 
+// Login with google
 // When user clicks 'sign in with google' in client app, a request is sent to this endpoint which redirects to the google sign-in page
 authRouter.get(
   "/auth/google",

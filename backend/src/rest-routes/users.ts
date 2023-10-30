@@ -26,11 +26,21 @@ usersRouter.post("/users", async (req, res) => {
   const { username, password } = req.body;
 
   if (!username || typeof username !== "string") {
-    return res.status(400).send("invalid username");
+    return res.status(400).send("Invalid username");
   }
   if (!password || typeof password !== "string") {
     // todo: check for password strength?
-    return res.status(400).send("invalid password");
+    return res.status(400).send("Invalid password");
+  }
+
+  // Check if username is already taken
+  const existingUser = await prisma.user.findUnique({
+    where: {
+      username
+    }
+  })
+  if (existingUser) {
+    return res.status(409).send("Username is already taken")
   }
 
   const passwordHash = await bcrypt.hash(password, 10);
