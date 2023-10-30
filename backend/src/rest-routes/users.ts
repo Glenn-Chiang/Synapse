@@ -21,39 +21,6 @@ usersRouter.get("/users/:userId", async (req, res) => {
   res.json(user);
 });
 
-// Register user with username and password
-usersRouter.post("/users", async (req, res) => {
-  const { username, password } = req.body;
-
-  if (!username || typeof username !== "string") {
-    return res.status(400).send("Invalid username");
-  }
-  if (!password || typeof password !== "string") {
-    // todo: check for password strength?
-    return res.status(400).send("Invalid password");
-  }
-
-  // Check if username is already taken
-  const existingUser = await prisma.user.findUnique({
-    where: {
-      username
-    }
-  })
-  if (existingUser) {
-    return res.status(409).send("Username is already taken")
-  }
-
-  const passwordHash = await bcrypt.hash(password, 10);
-
-  const user = await prisma.user.create({
-    data: {
-      username,
-      passwordHash,
-    },
-  });
-
-  res.json(user);
-});
 
 // Edit user profile
 usersRouter.patch("/users/:userId/profile", async (req, res) => {

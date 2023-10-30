@@ -27,6 +27,9 @@ export const localStrategy = new LocalStrategy(
         return done(null, false, {message: "Incorrect password"})
       }
 
+      // Authenticated
+      return done(null, user)
+      
     } catch (error) {
       return done(error);
     }
