@@ -17,7 +17,9 @@ import {
   registerChannelHandlers,
 } from "./socket-routes/channels.js";
 import { registerDirectMessageHandlers } from "./socket-routes/direct-messages.js";
+
 import passport from "passport";
+import { localStrategy } from "./passport-strategies/local-strategy.js";
 import { googleStrategy } from "./passport-strategies/google-strategy.js";
 import { jwtStrategy } from "./passport-strategies/jwt-strategy.js";
 import cookieParser from "cookie-parser";
@@ -35,6 +37,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 app.use(passport.initialize());
+passport.use(localStrategy)
 passport.use(googleStrategy);
 passport.use(jwtStrategy);
 
