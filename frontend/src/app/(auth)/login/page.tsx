@@ -6,6 +6,7 @@ import { SubmitButton } from "@/components/buttons";
 import { faLock, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -24,6 +25,8 @@ export default function Login() {
     formState: { errors },
   } = useForm<FormFields>();
 
+  const router = useRouter()
+
   const onSubmit: SubmitHandler<FormFields> = async (credentials) => {
     setIsPending(true);
     try {
@@ -32,6 +35,7 @@ export default function Login() {
       setError((error as Error).message);
     }
     setIsPending(false)
+    router.push('/')
   };
 
   return (
@@ -59,7 +63,7 @@ export default function Login() {
               Password
             </label>
             <input
-            type="pas"
+            type="password"
               {...register("password", { required: "Password is required" })}
               className="bg-slate-900"
             />

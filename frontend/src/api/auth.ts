@@ -15,6 +15,7 @@ export const login = async (credentials: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(credentials),
+    cache: 'no-store',
   });
 
   if (!res.ok) {
@@ -22,9 +23,11 @@ export const login = async (credentials: {
     throw new Error(errorMessage)
   }
 
-  const data = await res.json()
-  console.log(data)
-  redirect('/')
+  const payload = await res.json()
+  console.log(payload)
+  cookies().set('token', payload.token)
+  cookies().set('user', JSON.stringify(payload.user))
+  // redirect('/')
 };
 
 // Register

@@ -24,5 +24,6 @@ export const config = {
     "/channel/:path*",
     "/chat/:path*",
     "/profile/:path*",
+    "/logout"
   ],
 };

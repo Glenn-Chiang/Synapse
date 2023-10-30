@@ -47,7 +47,6 @@ authRouter.post(
   "/auth/login",
   passport.authenticate("local", { session: false }),
   (req, res) => {
-    console.log('what the fuck do you want')
     const user = req.user as User;
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string);
 
