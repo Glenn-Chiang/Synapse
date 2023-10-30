@@ -35,7 +35,7 @@ authRouter.get(
       httpOnly: false,
       sameSite: "none",
       secure: true,
-      path: '/'
+      path: '/' 
     });
     res.redirect(process.env.CLIENT_URL as string)
     console.log(`${user.username} has logged in`);
