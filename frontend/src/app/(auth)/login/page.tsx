@@ -58,12 +58,15 @@ export default function Login() {
               Password
             </label>
             <input
+            type="pas"
               {...register("password", { required: "Password is required" })}
               className="bg-slate-900"
             />
           </div>
         </div>
+
         {error && <ErrorMessage>{error}</ErrorMessage>}
+        
         <SubmitButton isPending={isPending}>Login</SubmitButton>
       </form>
 

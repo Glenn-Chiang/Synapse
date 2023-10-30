@@ -17,6 +17,25 @@ const getUser = async (userId: number) => {
   return user;
 };
 
+// Register
+const createUser = async (credentials: {
+  username: string;
+  password: string;
+}) => {
+  const res = await fetch(`${BASE_URL}/users`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(credentials),
+  });
+  if (!res.ok) {
+    const errorMessage = await res.text();
+    throw new Error(errorMessage);
+  }
+  console.log("Registered");
+};
+
 const editProfile = async (
   userId: number,
   data: { username: string; bio: string; avatarUrl: string }
@@ -36,4 +55,4 @@ const editProfile = async (
   revalidatePath("/");
 };
 
-export { getUser, editProfile };
+export { getUser, createUser, editProfile };
