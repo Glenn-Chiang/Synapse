@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 
 export default function Login() {
-  const base_url = process.env.NEXT_PUBLIC_BASE_URL;
   return (
     <section className="flex flex-col items-center gap-10 w-full p-4">
       <h1 className="text-2xl">Welcome to Synapse</h1>
