@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { prisma } from "../app.js";
+import bcrypt from "bcrypt";
 
 const usersRouter = Router();
 
@@ -20,10 +21,34 @@ usersRouter.get("/users/:userId", async (req, res) => {
   res.json(user);
 });
 
+// Register user with username and password
+usersRouter.post("/users", async (req, res) => {
+  const { username, password } = req.body;
+
+  if (!username || typeof username !== "string") {
+    return res.status(400).send("invalid username");
+  }
+  if (!password || typeof password !== "string") {
+    // todo: check for password strength?
+    return res.status(400).send("invalid password");
+  }
+
+  const passwordHash = await bcrypt.hash(password, 10);
+
+  const user = await prisma.user.create({
+    data: {
+      username,
+      passwordHash,
+    },
+  });
+
+  res.json(user);
+});
+
 // Edit user profile
 usersRouter.patch("/users/:userId/profile", async (req, res) => {
   const { username, bio, avatarUrl } = req.body;
-  console.log("request body", req.body)
+  console.log("request body", req.body);
 
   if (!username || typeof username !== "string" || username.length > 25) {
     return res.status(400).send("invalid username");
@@ -47,7 +72,7 @@ usersRouter.patch("/users/:userId/profile", async (req, res) => {
     },
   });
 
-  res.json(updatedUser)
+  res.json(updatedUser);
 });
 
 export { usersRouter };
