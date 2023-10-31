@@ -38,8 +38,8 @@ export default function Register() {
       }
     } catch (error) {
       setError((error as Error).message);
+      setIsPending(false);
     }
-    setIsPending(false);
   };
 
   return (

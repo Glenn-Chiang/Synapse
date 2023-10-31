@@ -40,8 +40,8 @@ export default function Login() {
 
     } catch (error) {
       setError((error as Error).message);
+      setIsPending(false);
     }
-    setIsPending(false);
   };
 
   return (
