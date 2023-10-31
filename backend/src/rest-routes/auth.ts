@@ -52,7 +52,7 @@ authRouter.post("/auth/login", (req, res, next) => {
       return res.status(401).send(info.message)
     }
 
-    // If authenticated, send jwt and user object to client
+    // If authenticated, send jwt and user object to clienty
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string);
   
     res.cookie("token", token, {

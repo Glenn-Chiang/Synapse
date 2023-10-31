@@ -15,19 +15,19 @@ export const login = async (credentials: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(credentials),
-    cache: 'no-store',
+    cache: "no-store",
   });
 
   if (!res.ok) {
-    const errorMessage = await res.text()
-    throw new Error(errorMessage)
+    const errorMessage = await res.text();
+    return { status: res.status, message: errorMessage };
   }
 
-  const payload = await res.json()
-  console.log(payload)
-  cookies().set('token', payload.token)
-  cookies().set('user', JSON.stringify(payload.user))
-  // redirect('/')
+  const payload = await res.json();
+  console.log(payload);
+  cookies().set("token", payload.token);
+  cookies().set("user", JSON.stringify(payload.user));
+  return { status: 200, message: "success" };
 };
 
 // Register
@@ -42,12 +42,13 @@ export const registerUser = async (credentials: {
     },
     body: JSON.stringify(credentials),
   });
+
   if (!res.ok) {
     const errorMessage = await res.text();
-    throw new Error(errorMessage);
+    return { status: res.status, message: errorMessage };
   }
-  console.log("Registered");
-  redirect('/login')
+
+  return { status: 200, message: "success" };
 };
 
 export const logout = () => {

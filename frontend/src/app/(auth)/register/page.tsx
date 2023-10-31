@@ -6,6 +6,7 @@ import { SubmitButton } from "@/components/buttons";
 import { faLock, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -24,14 +25,21 @@ export default function Register() {
     formState: { errors },
   } = useForm<FormFields>();
 
+  const router = useRouter();
+
   const onSubmit: SubmitHandler<FormFields> = async (credentials) => {
     setIsPending(true);
     try {
-      await registerUser(credentials);
+      const res = await registerUser(credentials);
+      if (res.status === 200) {
+        router.push("/login");
+      } else {
+        setError(res.message);
+      }
     } catch (error) {
       setError((error as Error).message);
     }
-    setIsPending(false)
+    setIsPending(false);
   };
 
   return (
@@ -52,7 +60,9 @@ export default function Register() {
               {...register("username", { required: "Username is required" })}
               className="bg-slate-900"
             />
-            {errors.username && <ErrorMessage>{errors.username.message}</ErrorMessage>}
+            {errors.username && (
+              <ErrorMessage>{errors.username.message}</ErrorMessage>
+            )}
           </div>
           <div className="flex flex-col gap-2">
             <label className="flex gap-2 items-center text-slate-400">
@@ -64,7 +74,9 @@ export default function Register() {
               {...register("password", { required: "Password is required" })}
               className="bg-slate-900"
             />
-            {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
+            {errors.password && (
+              <ErrorMessage>{errors.password.message}</ErrorMessage>
+            )}
           </div>
         </div>
 

@@ -6,7 +6,7 @@ import { SubmitButton } from "@/components/buttons";
 import { faLock, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -25,17 +25,23 @@ export default function Login() {
     formState: { errors },
   } = useForm<FormFields>();
 
-  const router = useRouter()
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<FormFields> = async (credentials) => {
     setIsPending(true);
     try {
-      await login(credentials);
-      router.push('/')
+      const res = await login(credentials);
+
+      if (res.status === 200) {
+        router.push("/"); // Redirect to home on successful login
+      } else {
+        setError(res.message); // Show 400 or 500 errors
+      }
+
     } catch (error) {
       setError((error as Error).message);
     }
-    setIsPending(false)
+    setIsPending(false);
   };
 
   return (
@@ -63,7 +69,7 @@ export default function Login() {
               Password
             </label>
             <input
-            type="password"
+              type="password"
               {...register("password", { required: "Password is required" })}
               className="bg-slate-900"
             />
@@ -71,7 +77,7 @@ export default function Login() {
         </div>
 
         {error && <ErrorMessage>{error}</ErrorMessage>}
-        
+
         <SubmitButton isPending={isPending}>Login</SubmitButton>
       </form>
 
