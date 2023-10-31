@@ -48,11 +48,11 @@ export const Topbar = () => {
       </Link>
       <button
         onClick={() => setMenuIsOpen((prev) => !prev)}
-        className="p-2 relative z-20"
+        className="p-2 relative "
       >
         <AvatarIcon url={currentUser?.avatarUrl} />
         {menuIsOpen && (
-          <div ref={menuRef} className="z-20">
+          <div ref={menuRef} className="absolute z-20">
             <ProfileMenu />
           </div>
         )}
@@ -65,7 +65,7 @@ const ProfileMenu = () => {
   const currentUser = useContext(UserContext);
 
   return (
-    <div className="absolute -bottom-20 right-4 flex flex-col w-max rounded-md bg-slate-900 z-20 border border-slate-500">
+    <div className="z-20 absolute -bottom-20 right-0 flex flex-col w-max rounded-md bg-slate-900 border border-slate-500">
       <Link
         className="hover:bg-slate-800 p-2 flex gap-2 items-center rounded-t-md"
         href={`/profile/${currentUser?.id}`}

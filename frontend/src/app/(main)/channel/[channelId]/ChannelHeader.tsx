@@ -33,7 +33,7 @@ export const ChannelHeader = ({ channel }: { channel: Channel }) => {
   }, [menuIsOpen]);
 
   return (
-    <header className="z-10 fixed top-16 left-0 w-full flex justify-between p-2 items-center border-b border-slate-500 bg-slate-950 ">
+    <header className=" fixed top-16 left-0 w-full flex justify-between p-2 items-center border-b border-slate-500 bg-slate-950 ">
       <BackButton />
       <Link
         href={`/channel/${channel.id}/info`}
