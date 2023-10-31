@@ -1,5 +1,5 @@
 import { getChannels } from "@/api/channels";
-import { ChannelPreview } from "@/components/ChannelPreview";
+import { ChannelPreview } from "./ChannelPreview";
 import { getCurrentUser } from "@/lib/getCurrentUser";
 import Link from "next/link";
 

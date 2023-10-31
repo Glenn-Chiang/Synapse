@@ -1,6 +1,6 @@
 import { Channel } from "@/lib/types";
 import Link from "next/link";
-import { ChannelIcon } from "./ChannelIcon";
+import { ChannelIcon } from "../../../components/ChannelIcon";
 
 function ChannelItem({ channel }: { channel: Channel }) {
   return (

@@ -1,5 +1,5 @@
 import { getAllChannels } from "@/api/channels";
-import { ChannelItem } from "@/components/ChannelItem";
+import { ChannelItem } from "./ChannelItem";
 
 export default async function ExploreChannels() {
   const channels = await getAllChannels();

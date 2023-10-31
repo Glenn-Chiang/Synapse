@@ -1,12 +1,11 @@
-"use client"
+"use client";
 
+import { UserContext } from "@/lib/UserContext";
+import { formatDate } from "@/lib/formatDate";
 import { Channel } from "@/lib/types";
 import Link from "next/link";
-import { ChannelIcon } from "./ChannelIcon";
-import { formatDate } from "@/lib/formatDate";
-import { getCurrentUser } from "@/lib/getCurrentUser";
 import { useContext } from "react";
-import { UserContext } from "@/lib/UserContext";
+import { ChannelIcon } from "../../../../components/ChannelIcon";
 
 const ChannelPreview = ({ channel }: { channel: Channel }) => {
   const currentUserId = useContext(UserContext)?.id;
