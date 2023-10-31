@@ -1,3 +1,5 @@
+"use client"
+
 import { Channel } from "@/lib/types";
 import Link from "next/link";
 import { ChannelIcon } from "./ChannelIcon";

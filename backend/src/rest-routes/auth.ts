@@ -45,7 +45,7 @@ authRouter.post("/auth/register", async (req, res) => {
 // Login with local strategy i.e. username and password
 authRouter.post(
   "/auth/login",
-  passport.authenticate("local", { session: false }),
+  passport.authenticate("local", { session: false } ),
   (req, res) => {
     const user = req.user as User;
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string);

@@ -5,7 +5,7 @@ export const formatDate = (datestring: string, short: boolean = false) => {
   const formattedDate =
     date < today
       ? short
-        ? date.toLocaleDateString()
+        ? date.toLocaleDateString() // if message was sent before today, show full datetime in message but only show date in preview
         : date.toLocaleString(undefined, {
             year: "2-digit",
             month: "2-digit",
@@ -13,7 +13,7 @@ export const formatDate = (datestring: string, short: boolean = false) => {
             hour: "numeric",
             minute: "2-digit",
           })
-      : date.toLocaleTimeString(undefined, {
+      : date.toLocaleTimeString(undefined, { // if message was sent today, show time without date
           hour: "numeric",
           minute: "2-digit",
         });
