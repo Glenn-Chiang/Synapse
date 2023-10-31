@@ -12,7 +12,7 @@ export const localStrategy = new LocalStrategy(
       });
 
       if (!user) {
-        return done(null, false, { message: "User not found" });
+        return done(null, false, { message: "Username not found" });
       }
       if (!user.passwordHash) {
         return done(null, false, {

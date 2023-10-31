@@ -31,10 +31,11 @@ export default function Login() {
     setIsPending(true);
     try {
       await login(credentials);
+      router.push('/')
     } catch (error) {
       setError((error as Error).message);
     }
-    router.push('/')
+    setIsPending(false)
   };
 
   return (

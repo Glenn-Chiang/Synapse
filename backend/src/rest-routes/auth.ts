@@ -3,7 +3,8 @@ import { User } from "@prisma/client";
 import jwt from "jsonwebtoken";
 import passport from "passport";
 import { prisma } from "../app.js";
-import bcrypt from 'bcrypt';
+import bcrypt from "bcrypt";
+import { IVerifyOptions } from "passport-local";
 
 const authRouter = Router();
 
@@ -22,11 +23,11 @@ authRouter.post("/auth/register", async (req, res) => {
   // Check if username is already taken
   const existingUser = await prisma.user.findUnique({
     where: {
-      username
-    }
-  })
+      username,
+    },
+  });
   if (existingUser) {
-    return res.status(409).send("Username is already taken")
+    return res.status(409).send("Username is already taken");
   }
 
   const passwordHash = await bcrypt.hash(password, 10);
@@ -39,17 +40,21 @@ authRouter.post("/auth/register", async (req, res) => {
   });
 
   res.json(user);
-  console.log("Registered user:", user)
+  console.log("Registered user:", user);
 });
 
 // Login with local strategy i.e. username and password
-authRouter.post(
-  "/auth/login",
-  passport.authenticate("local", { session: false } ),
-  (req, res) => {
-    const user = req.user as User;
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string);
+authRouter.post("/auth/login", (req, res, next) => {
+  passport.authenticate("local", { session: false }, (err: Error, user: User | false, info: IVerifyOptions) => {
+    if (err) return next(err)
 
+    if (!user) {
+      return res.status(401).send(info.message)
+    }
+
+    // If authenticated, send jwt and user object to client
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string);
+  
     res.cookie("token", token, {
       httpOnly: true,
       sameSite: "none",
@@ -60,10 +65,10 @@ authRouter.post(
       sameSite: "none",
       secure: true,
     });
-
+  
     res.json({ user, token });
-  }
-);
+  })(req, res);
+});
 
 // Login with google
 // When user clicks 'sign in with google' in client app, a request is sent to this endpoint which redirects to the google sign-in page

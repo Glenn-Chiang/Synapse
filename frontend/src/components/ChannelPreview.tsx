@@ -5,9 +5,11 @@ import Link from "next/link";
 import { ChannelIcon } from "./ChannelIcon";
 import { formatDate } from "@/lib/formatDate";
 import { getCurrentUser } from "@/lib/getCurrentUser";
+import { useContext } from "react";
+import { UserContext } from "@/lib/UserContext";
 
 const ChannelPreview = ({ channel }: { channel: Channel }) => {
-  const currentUserId = getCurrentUser().id;
+  const currentUserId = useContext(UserContext)?.id;
   const newestMessage = channel.messages[channel.messages.length - 1];
   return (
     <Link
