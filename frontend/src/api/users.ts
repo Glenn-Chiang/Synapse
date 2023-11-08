@@ -6,6 +6,18 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
+const getAllUsers = async () => {
+  const res = await fetch(`${BASE_URL}/users`, {
+    headers: { Cookie: cookies().toString()}
+  })
+  if (!res.ok) {
+    const errorMessage = await res.text();
+    throw new Error(errorMessage);
+  }
+  const users: User[] = await res.json()
+  return users
+}
+
 const getUser = async (userId: number) => {
   const res = await fetch(`${BASE_URL}/users/${userId}`, {
     headers: { Cookie: cookies().toString() },
@@ -37,4 +49,4 @@ const editProfile = async (
   revalidatePath("/");
 };
 
-export { getUser, editProfile };
+export { getAllUsers, getUser, editProfile };

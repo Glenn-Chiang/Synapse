@@ -27,7 +27,7 @@ export default async function RootLayout({
         <UserProvider user={currentUser}>
           <MessageListener token={token}/>
           <Topbar />
-          <div className="mt-16 p-4 py-0 sm:px-10">{children}</div>
+          <div className="mt-16 p-4 pt-0 sm:px-10">{children}</div>
         </UserProvider>
       </body>
     </html>
