@@ -5,16 +5,25 @@ import { User } from "@/lib/types";
 import { faSearch, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+import { Searchbar } from "./Searchbar";
 
-export default async function Users() {
+export default async function Users({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const searchTerm = searchParams.search
   const users = await getAllUsers();
   return (
-    <main className="flex flex-col gap-4 items-center">
-      <h1 className="flex justify-center items-center gap-2 h-16 fixed z-10 bg-slate-950 w-full">
-        Users
-        <FontAwesomeIcon icon={faUsers}/>
-      </h1>
-      <ul className="mt-16 flex flex-col gap-4 items-center sm:w-1/2">
+    <main className="flex flex-col gap-4 m-auto w-full">
+      <div className="flex flex-col items-center gap-2 h-32 fixed z-10 bg-slate-950 w-full">
+        <h1 className="flex justify-center items-center gap-2">
+          Users
+          <FontAwesomeIcon icon={faUsers} />
+        </h1>
+        <Searchbar />
+      </div>
+      <ul className="mt-32 flex flex-col gap-4 ">
         {users.map((user) => (
           <UserItem key={user.id} user={user} />
         ))}
