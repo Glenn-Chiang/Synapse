@@ -1,8 +1,8 @@
-import { getAllUsers } from "@/api/users";
+import { getUsers } from "@/api/users";
 import { AvatarIcon } from "@/components/AvatarIcon";
 import { getCurrentUser } from "@/lib/getCurrentUser";
 import { User } from "@/lib/types";
-import { faSearch, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { Searchbar } from "./Searchbar";
@@ -12,22 +12,28 @@ export default async function Users({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const searchTerm = searchParams.search
-  const users = await getAllUsers();
+  const searchTerm = searchParams.search;
+  const users = await getUsers(searchTerm);
   return (
     <main className="flex flex-col gap-4 m-auto w-full">
-      <div className="flex flex-col items-center gap-2 h-32 fixed z-10 bg-slate-950 w-full">
+      <div className="flex flex-col items-center justify-center gap-2 h-32 fixed z-10 bg-slate-950 left-0 w-screen">
         <h1 className="flex justify-center items-center gap-2">
           Users
           <FontAwesomeIcon icon={faUsers} />
         </h1>
         <Searchbar />
       </div>
-      <ul className="mt-32 flex flex-col gap-4 ">
-        {users.map((user) => (
-          <UserItem key={user.id} user={user} />
-        ))}
-      </ul>
+      <div className="mt-32 flex justify-center">
+        {users.length > 0 ? (
+          <ul className="flex flex-col gap-4 w-full">
+            {users.map((user) => (
+              <UserItem key={user.id} user={user} />
+            ))}
+          </ul>
+        ) : (
+          <div className="flex justify-center text-slate-500">No users with username matching &quot;{searchTerm}&quot;</div>
+        )}
+      </div>
     </main>
   );
 }

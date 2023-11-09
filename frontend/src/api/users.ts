@@ -6,8 +6,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-const getAllUsers = async () => {
-  const res = await fetch(`${BASE_URL}/users`, {
+const getUsers = async (searchTerm: string | string[] | undefined) => {
+  const res = await fetch(`${BASE_URL}/users?search=${searchTerm}`, {
     headers: { Cookie: cookies().toString()}
   })
   if (!res.ok) {
@@ -49,4 +49,4 @@ const editProfile = async (
   revalidatePath("/");
 };
 
-export { getAllUsers, getUser, editProfile };
+export { getUsers, getUser, editProfile };

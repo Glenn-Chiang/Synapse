@@ -8,8 +8,10 @@ export const Searchbar = () => {
   const handleKeydown:React.KeyboardEventHandler<HTMLInputElement> = (event) => {
     if (event.key !== "Enter") return; // Fire on enter
     const searchTerm = event.currentTarget.value;
-    if (!searchTerm) return; // don't send empty input
-
+    if (!searchTerm) {
+      router.push('/users')
+      return
+    }
     router.push(`/users?search=${searchTerm}`)
   }
 

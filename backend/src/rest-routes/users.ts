@@ -4,9 +4,29 @@ import bcrypt from "bcrypt";
 
 const usersRouter = Router();
 
-// Get all users
+// Get users matching search term
 usersRouter.get("/users", async (req, res) => {
-  const users = await prisma.user.findMany({});
+  const searchTerm = req.query.search;
+
+  // Return all users if no search term is given
+  if (!searchTerm || searchTerm === "undefined") {
+    const users = await prisma.user.findMany({});
+    console.log('users:', users)
+    return res.json(users);
+  }
+
+  if (typeof searchTerm !== "string") {
+    return res.status(400).send("invalid search term");
+  }
+
+  const users = await prisma.user.findMany({
+    where: {
+      username: {
+        startsWith: searchTerm,
+        mode: 'insensitive' // case-insensitive 
+      },
+    },
+  });
   return res.json(users);
 });
 
@@ -20,7 +40,6 @@ usersRouter.get("/users/:userId", async (req, res) => {
   });
   res.json(user);
 });
-
 
 // Edit user profile
 usersRouter.patch("/users/:userId/profile", async (req, res) => {
