@@ -12,7 +12,7 @@ export default async function MyChats() {
   return (
     <main>
       <div className="py-2">
-        <Link href={"/users"} className="text-sky-500 hover:text-sky-400 flex gap-2 items-center">
+        <Link href={"/users"} className="text-sky-500 hover:text-sky-400 flex gap-2 items-center font-medium w-max transition">
           Find users
           <FontAwesomeIcon icon={faSearch}/>
         </Link>
