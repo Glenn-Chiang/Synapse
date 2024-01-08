@@ -36,12 +36,14 @@ export default function Login() {
         router.push("/"); // Redirect to home on successful login
       } else {
         setError(res.message); // Show 400 or 500 errors
+        setIsPending(false);
       }
 
     } catch (error) {
       setError((error as Error).message);
       setIsPending(false);
     }
+    
   };
 
   return (

@@ -49,7 +49,7 @@ export default function CreateChannelPage() {
       </div>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-2">
-          <label className="font-medium text-sky-500 " htmlFor="name">
+          <label className="font-medium text-white" htmlFor="name">
             Name
           </label>
           <input
@@ -64,7 +64,7 @@ export default function CreateChannelPage() {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label className="font-medium text-sky-500 " htmlFor="about">
+          <label className="font-medium text-white" htmlFor="about">
             About
           </label>
           <textarea
@@ -79,7 +79,7 @@ export default function CreateChannelPage() {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label className="font-medium text-sky-500 " htmlFor="icon">
+          <label className="font-medium text-white" htmlFor="icon">
             Icon URL
           </label>
           <input id="icon" {...register("iconUrl")} />

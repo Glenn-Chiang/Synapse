@@ -35,6 +35,7 @@ export default function Register() {
         router.push("/login");
       } else {
         setError(res.message);
+        setIsPending(false);
       }
     } catch (error) {
       setError((error as Error).message);
